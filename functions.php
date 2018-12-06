@@ -152,10 +152,21 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
+
+/**
+ * CPTs
+ */
+require get_template_directory() . '/inc/custom-post-types.php';
+
+
+/**
+ * Custom Metaboxes
+ */
+require get_template_directory() . '/inc/events-metabox.php';
+
 /**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
-

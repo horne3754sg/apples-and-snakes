@@ -1,8 +1,9 @@
+#primary-menu {
+	display: none;
+}
+
 .main-navigation {
 	clear: both;
-	display: block;
-	float: left;
-	width: 100%;
 
 	ul {
 		display: none;
@@ -59,8 +60,18 @@
 	}
 
 	a {
-		display: block;
+		display: flex;
 		text-decoration: none;
+		padding: 10px 0;
+		color: #fff;
+
+		svg {
+			margin-left: 15px;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	.current_page_item > a,
@@ -78,9 +89,6 @@
 
 @media screen and (min-width: 37.5em) {
 	.menu-toggle {
-		display: none;
-	}
-	.main-navigation ul {
 		display: block;
 	}
 }
@@ -88,7 +96,6 @@
 .comment-navigation,
 .posts-navigation,
 .post-navigation {
-
 	.site-main & {
 		margin: 0 0 1.5em;
 		overflow: hidden;

@@ -1,3 +1,91 @@
+@font-face {
+	font-family: 'clanproBook';
+	src: url('#{$path}fonts/clanpro/ClanPro-Book.woff2') format('woff2'),
+	url('#{$path}fonts/clanpro/ClanPro-Book.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'clanpro';
+	src: url('#{$path}fonts/clanpro/ClanPro-Medium.woff2') format('woff2'),
+	url('#{$path}fonts/clanpro/ClanPro-Medium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'clanpro';
+	src: url('#{$path}fonts/clanpro/ClanPro-Bold.woff2') format('woff2'),
+	url('#{$path}fonts/clanpro/ClanPro-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'prohibitionw00-linesregular';
+	src: url('#{$path}fonts/Prohibition Font Family/prohibitionw00-lines-webfont.woff2') format('woff2'),
+	url('#{$path}fonts/Prohibition Font Family/prohibitionw00-lines-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'prohibitionw00-linesoblRg';
+	src: url('#{$path}fonts/Prohibition Font Family/prohibitionw00-linesobl-webfont.woff2') format('woff2'),
+	url('#{$path}fonts/Prohibition Font Family/prohibitionw00-linesobl-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'prohibitionw00-obliqueregular';
+	src: url('#{$path}fonts/Prohibition Font Family/prohibitionw00-oblique-webfont.woff2') format('woff2'),
+	url('#{$path}fonts/Prohibition Font Family/prohibitionw00-oblique-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'prohibitionw00-regularregular';
+	src: url('#{$path}fonts/Prohibition Font Family/prohibitionw00-regular-webfont.woff2') format('woff2'),
+	url('#{$path}fonts/Prohibition Font Family/prohibitionw00-regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'prohibitionw00-roughregular';
+	src: url('#{$path}fonts/Prohibition Font Family//fonts/Prohibition Font Family/prohibitionw00-rough-webfont.woff2') format('woff2'),
+	url('#{$path}fonts/Prohibition Font Family/prohibitionw00-rough-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'prohibitionw00-roughoblRg';
+	src: url('#{$path}fonts/Prohibition Font Family/prohibitionw00-roughobl-webfont.woff2') format('woff2'),
+	url('#{$path}fonts/Prohibition Font Family/prohibitionw00-roughobl-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'prohibitionw00-roundregular';
+	src: url('#{$path}fonts/Prohibition Font Family/prohibitionw00-round-webfont.woff2') format('woff2'),
+	url('#{$path}fonts/Prohibition Font Family/prohibitionw00-round-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'prohibitionw00-roundoblRg';
+	src: url('#{$path}fonts/Prohibition Font Family/prohibitionw00-roundobl-webfont.woff2') format('woff2'),
+	url('#{$path}fonts/Prohibition Font Family/prohibitionw00-roundobl-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body,
 button,
 input,
@@ -6,10 +94,9 @@ optgroup,
 textarea {
 	color: $color__text-main;
 	font-family: $font__main;
-	@include font-size(1);
-	line-height: $font__line-height-body;
+	font-size: 14px;
+	line-height: 18px;
 }
 
 @import "headings";
-
 @import "copy";

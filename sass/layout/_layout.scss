@@ -1,0 +1,301 @@
+.section {
+	width: 100%;
+
+	.container {
+		width: 100%;
+		max-width: $site_width;
+		margin: 0 auto;
+		&.narrow {
+			max-width: $breakpoint1;
+		}
+	}
+
+	.header-container {
+		display: flex;
+		height: 50vh;
+		min-height: 400px;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+
+		.header-content {
+			position: relative;
+			left: calc((100% - #{$site_width}) / 2);
+			display: flex;
+			align-items: center;
+			max-width: $site_width;
+			width: calc(#{$site_width} - 300px);
+			margin: auto 0;
+			height: calc(50vh - 60px);
+			min-height: inherit;
+			color: #fff;
+			padding: 30px;
+
+			.entry-header {
+				position: absolute;
+				bottom: 30px;
+				right: 30px;
+
+				h1, h2 {
+					font-size: 64px;
+					line-height: 1;
+					margin: 0;
+
+					a {
+						text-decoration: none;
+						color: #fff;
+					}
+				}
+
+				h2 {
+					font-size: 36px;
+				}
+			}
+
+			&:before {
+				content: '';
+				width: 100%;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				background-color: rgba(190, 55, 70, 1);
+				mix-blend-mode: multiply;
+			}
+		}
+
+		.entry-header {
+			h1 {
+				color: #fff;
+			}
+		}
+
+		@media (max-width: $site_width) {
+			.header-content {
+				left: 0;
+			}
+		}
+		@media (max-width: $breakpoint1) {
+			.header-content {
+				left: 0;
+				margin-right: 40px;
+			}
+		}
+	}
+
+	&.header {
+		position: absolute;
+		padding: 30px 0;
+		z-index: 100;
+
+		.container {
+			display: flex;
+			padding: 30px;
+		}
+
+		.site-title {
+			display: none;
+		}
+
+		.main-navigation {
+			margin-left: auto;
+		}
+
+		@media (max-width: $breakpoint1) {
+			position: relative;
+			.main-navigation a svg g {
+				fill: #111;
+				stroke: #111;
+			}
+		}
+	}
+
+	&.footer {
+		.container {
+			max-width: 920px;
+		}
+
+		background: $c1;
+		color: #fff;
+		padding: 4rem 0;
+
+		.cols {
+			display: flex;
+
+			.col {
+				margin-left: 2%;
+				margin-right: 2%;
+
+				&:nth-child(1) {
+					margin-left: 0;
+				}
+
+				&:nth-child(4) {
+					margin-right: 0;
+				}
+			}
+
+			@media (max-width: $breakpoint1) {
+				display: block;
+				.col {
+					width: 100%;
+					margin: 0 30px 30px !important;
+				}
+			}
+		}
+
+		h3 {
+			font-family: $font__main;
+			font-weight: 300;
+			font-size: 14px;
+			margin-top: 0;
+		}
+
+		.footer-logo {
+			margin-bottom: 4rem;
+		}
+
+		.address {
+			margin-bottom: 4rem;
+
+			span {
+				display: block;
+				font-family: $font__secondary;
+
+				&.heading {
+					font-family: $font__main;
+				}
+			}
+		}
+
+		.button {
+			margin-bottom: 3rem;
+		}
+
+		.social_info {
+			.social_icon {
+				margin-right: 10px;
+				width: 40px;
+				display: inline-block;
+			}
+		}
+	}
+}
+
+body.home {
+	.section {
+		.header-container {
+			height: 100vh;
+
+			.header-content {
+				left: calc((100% - 1400px) / 2);
+				height: calc(100vh - 60px);
+
+				.entry-header {
+					position: relative;
+					bottom: unset;
+					right: unset;
+
+					h1 {
+						font-size: 64px;
+						line-height: 1;
+						margin: 0;
+					}
+				}
+
+				&:after {
+					content: url("#{$path}images/NO WORD UNSPOKEN.png");
+					position: absolute;
+					left: calc(100% - 25px);
+					bottom: 60px;
+				}
+			}
+		}
+	}
+}
+
+.highlight-header-container {
+	display: flex;
+	height: 0;
+	padding-bottom: 56.25%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	.header-content {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin: 30px auto auto;
+		height: 0;
+		color: #fff;
+		padding-bottom: calc(56.25% - 60px);
+		width: calc(100% - 60px);
+
+		.entry-header {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+
+			h1, h2 {
+				font-size: 64px;
+				line-height: 1;
+				margin: 0;
+
+				a {
+					text-decoration: none;
+					color: #fff;
+				}
+			}
+
+			h2 {
+				font-size: 36px;
+			}
+		}
+
+		&:before {
+			content: '';
+			width: 100%;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background-color: rgba(190, 55, 70, 1);
+			mix-blend-mode: multiply;
+		}
+	}
+
+	.entry-header {
+		h1 {
+			color: #fff;
+		}
+	}
+
+	@media (max-width: $site_width) {
+		.header-content {
+			left: 0;
+		}
+	}
+	@media (max-width: $breakpoint1) {
+		.header-content {
+			left: 0;
+			margin-right: 40px;
+		}
+	}
+}
+
+.columns {
+	display: flex;
+
+	.content-column {
+		width: 100%;
+		max-width: 700px;
+		margin-left: 10%;
+		@media (max-width: $breakpoint1) {
+			left: 0;
+			margin-left: 30px;
+			margin-right: 30px;
+		}
+	}
+}
