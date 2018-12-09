@@ -25,31 +25,32 @@ function aas_events_location()
 	// Nonce field to validate form request came from current site
 	wp_nonce_field(basename(__FILE__), 'event_fields');
 	
-	// Get the location data if it's already been entered
+	// Get the when data if it's already been entered
 	$when = get_post_meta($post->ID, 'when', true);
-	// Output the field
-	echo '<div><label>When</label><input type="text" name="when" value="' . esc_textarea($when) . '" class="widefat" placeholder="When?"></div></br>';
+	echo '<div><label>When (Sidebar)</label><input type="text" name="when" value="' . esc_textarea($when) . '" class="widefat" placeholder="When?"></div></br>';
 	
-	// Get the location data if it's already been entered
+	// Get the time data if it's already been entered
 	$time = get_post_meta($post->ID, 'time', true);
-	// Output the field
-	echo '<div><label>Time</label><input type="text" name="time" value="' . esc_textarea($time) . '" class="widefat" placeholder="time"></div></br>';
+	echo '<div><label>Time (Sidebar)</label><input type="text" name="time" value="' . esc_textarea($time) . '" class="widefat" placeholder="time"></div></br>';
 	
-	// Get the location data if it's already been entered
+	// Get the when data if it's already been entered
+	$when_featured = get_post_meta($post->ID, 'when_featured', true);
+	echo '<div><label>When (Featured)</label><input type="text" name="when_featured" value="' . esc_textarea($when_featured) . '" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018"></div></br>';
+	
+	// Get the where data if it's already been entered
 	$where = get_post_meta($post->ID, 'where', true);
-	$address = get_post_meta($post->ID, 'address', true);
-	// Output the field
 	echo '<div><label>Where</label><input type="text" name="where" value="' . esc_textarea($where) . '" class="widefat" placeholder="Where?"></div></br>';
+	
+	// Get the address data if it's already been entered
+	$address = get_post_meta($post->ID, 'address', true);
 	echo '<div><label>Address</label><input type="text" name="address" value="' . esc_textarea($address) . '" class="widefat" placeholder="Address"></div></br>';
 	
-	// Get the location data if it's already been entered
+	// Get the tickets data if it's already been entered
 	$tickets = get_post_meta($post->ID, 'tickets', true);
-	// Output the field
 	echo '<div><label>Tickets</label><input type="text" name="tickets" value="' . esc_textarea($tickets) . '" class="widefat" placeholder="Tickets?"></div></br>';
 	
-	// Get the location data if it's already been entered
+	// Get the other data if it's already been entered
 	$other = get_post_meta($post->ID, 'other', true);
-	// Output the field
 	echo '<div><label>Other</label><textarea type="text" name="other" class="widefat" placeholder="Other info">' . esc_textarea($other) . '</textarea></div></br>';
 }
 
@@ -58,6 +59,12 @@ function aas_events_location()
  */
 function aas_save_events_meta($post_id, $post)
 {
+	$post_type = get_post_type($post_id);
+	
+	// If this isn't a 'book' post, don't update it.
+	if ("event" != $post_type)
+		return;
+	
 	// Return if the user doesn't have edit permissions.
 	if (!current_user_can('edit_post', $post_id))
 	{
@@ -65,7 +72,7 @@ function aas_save_events_meta($post_id, $post)
 	}
 	// Verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times.
-	if (!wp_verify_nonce($_POST['event_fields'], basename(__FILE__)))
+	if (!empty($_POST['event_fields']) && !wp_verify_nonce($_POST['event_fields'], basename(__FILE__)))
 	{
 		return $post_id;
 	}
@@ -73,6 +80,8 @@ function aas_save_events_meta($post_id, $post)
 	// This sanitizes the data from the field and saves it into an array $events_meta.
 	$events_meta['when'] = esc_textarea($_POST['when']);
 	$events_meta['where'] = esc_textarea($_POST['where']);
+	$events_meta['address'] = esc_textarea($_POST['address']);
+	$events_meta['when_featured'] = esc_textarea($_POST['when_featured']);
 	$events_meta['time'] = esc_textarea($_POST['time']);
 	$events_meta['tickets'] = esc_textarea($_POST['tickets']);
 	$events_meta['other'] = esc_textarea($_POST['other']);

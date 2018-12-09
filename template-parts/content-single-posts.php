@@ -17,21 +17,13 @@ $header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnai
 		</div>
 		<div class="content-col">
 			<div class="entry-content">
+				<span class="meta-category"><?php the_category('/'); ?></span>
 				<?php
-					$locations = wp_get_post_terms(get_the_ID(), 'event_location');
-					if(!empty($locations)) :
-						echo '<span class="event-location">' . __('Event') . '/' . $locations[0]->name . '</span>';
-					endif;
 					
 					if (is_singular()) :
 						the_title('<h1 class="entry-title">', '</h1>');
 					else :
 						the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
-					endif;
-					
-					$when_featured = get_post_meta(get_the_ID(), 'when_featured', true);
-					if(!empty($when_featured)) :
-						echo '<span class="event-featured-time">' . $when_featured . '</span>';
 					endif;
 					
 					echo '<p class="excerpt">' . get_the_excerpt() . '</p>';

@@ -35,7 +35,7 @@ function events()
 	);
 	$args = array(
 		'label'                => __('Event', 'aas'),
-		'description'          => __('Events post type', 'aas'),
+		'description'          => __('Mauris non tempor quam, et lacinia sapien. Mauris accumsan eros eget libero posuere vulputate. Etiam elit elit, elementum sed varius at, adipiscing vitae est. Sed nec felis pellentesque, lacinia dui sed, ultricies.', 'aas'),
 		'labels'               => $labels,
 		'supports'             => array('title', 'editor', 'thumbnail'),
 		'taxonomies'           => array('category', 'post_tag'),
@@ -54,6 +54,32 @@ function events()
 		'register_meta_box_cb' => 'aas_add_event_metaboxes',
 	);
 	register_post_type('event', $args);
+	
+	// Add new taxonomy, make it hierarchical (like categories)
+	$labels = array(
+		'name'              => _x('Event Location', 'taxonomy general name', 'aas'),
+		'singular_name'     => _x('Event Locations', 'taxonomy singular name', 'aas'),
+		'search_items'      => __('Search Event Locations', 'aas'),
+		'all_items'         => __('All Event Locations', 'aas'),
+		'parent_item'       => __('Parent Event Locations', 'aas'),
+		'parent_item_colon' => __('Parent Event Locations:', 'aas'),
+		'edit_item'         => __('Edit Event Locations', 'aas'),
+		'update_item'       => __('Update Event Locations', 'aas'),
+		'add_new_item'      => __('Add New Event Locations', 'aas'),
+		'new_item_name'     => __('New City Event Locations', 'aas'),
+		'menu_name'         => __('Event Locations', 'aas'),
+	);
+	
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array('slug' => 'event_location'),
+	);
+	
+	register_taxonomy('event_location', array('event'), $args);
 }
 
 add_action('init', 'events', 0);

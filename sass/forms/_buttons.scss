@@ -1,15 +1,19 @@
-button, .button,
+button, .button, a.button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-	@include font-size(0.75);
+	color: #fff;
+	font-size: 14px;
 	line-height: 1;
 	padding: 1em 2em;
 	display: inline-block;
 	text-decoration: none;
 	border: 2px solid #fff;
-	color: #fff;
+	text-transform: uppercase;
 	background-color: transparent;
+	font-family: $font__main;
+	min-width: 120px;
+	text-align: center;
 
 	&:hover {
 		cursor: pointer;
@@ -18,6 +22,5 @@ input[type="submit"] {
 
 	&:active,
 	&:focus {
-
 	}
 }

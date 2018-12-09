@@ -56,6 +56,11 @@
 			</div>
 		</div>
 	</div>
+	<div class="section after-footer">
+		<div class="container">
+			<img src="<?php echo get_template_directory_uri(); ?>/images/NO%20WORD%20UNSPOKEN.svg" alt="">
+		</div>
+	</div>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

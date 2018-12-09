@@ -15,10 +15,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 		<div class="header-container" <?php echo $header_image; ?>>
 			<div class="header-content">
 				<header class="entry-header">
-					<?php
-					if (is_post_type_archive('event')) : ?>
-						<h1 class="entry-title"><?php echo __("What's On") ?></h1>
-					<?php endif; ?>
+					<h1 class="entry-title"><?php echo __("Read") ?></h1>
 				</header><!-- .entry-header -->
 			</div>
 		</div>
@@ -42,23 +39,12 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						<div class="category-nav">
 
 						</div>
-						<?php ?>
 						<?php
-						$count = 0;
 						/* Start the Loop */
 						while (have_posts()) :
 							the_post();
-							
-							if ($count == 0)
-							{
-								get_template_part('template-parts/content', 'archive-highlight');
-							}
-							else
-							{
-								get_template_part('template-parts/content', 'archive-posts');
-							}
-							
-							$count++;
+						
+							get_template_part('template-parts/content', 'single-posts');
 							
 						endwhile;
 						
