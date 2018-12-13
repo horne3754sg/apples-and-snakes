@@ -142,6 +142,22 @@ function aas_scripts()
 
 add_action('wp_enqueue_scripts', 'aas_scripts');
 
+if (!function_exists('fix_no_editor_on_posts_page'))
+{
+	
+	function fix_no_editor_on_posts_page($post_type, $post)
+	{
+		if (isset($post) && $post->ID != get_option('page_for_posts'))
+		{
+			return;
+		}
+		
+		remove_action('edit_form_after_title', '_wp_posts_page_notice');
+		add_post_type_support('page', 'editor');
+	}
+	
+	add_action('add_meta_boxes', 'fix_no_editor_on_posts_page', 0, 2);
+}
 
 function custom_excerpt_length($length)
 {

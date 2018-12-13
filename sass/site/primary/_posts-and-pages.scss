@@ -1,24 +1,26 @@
-.sticky {
-	display: block;
-}
+.site-content {
+	.sticky {
+		display: block;
+	}
 
-.post,
-.page {
-	margin: 0 0 1.5em;
-}
+	.post,
+	.page {
+		margin: 0 0 1.5em;
+	}
 
-.updated:not(.published) {
-	display: none;
-}
+	.updated:not(.published) {
+		display: none;
+	}
 
-.page-content,
-.entry-content,
-.entry-summary {
-	margin: 1.5em 0 0;
-	font-family: $font__secondary;
-}
+	.page-content,
+	.entry-content,
+	.entry-summary {
+		margin: 1.5em 0 0;
+		font-family: $font__secondary;
+	}
 
-.page-links {
-	clear: both;
-	margin: 0 0 1.5em;
+	.page-links {
+		clear: both;
+		margin: 0 0 1.5em;
+	}
 }

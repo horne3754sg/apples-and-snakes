@@ -38,8 +38,8 @@
 						<a href="#" class="social_icon"><img src="<?php echo get_template_directory_uri(); ?>/images/You%20tube.png" alt=""></a>
 					</div>
 				</div>
-				<div class="col">
-					<img src="<?php echo get_template_directory_uri(); ?>/images/support-us.png" alt="">
+				<div class="col  no-mobile">
+					<a href="/support-us/" title="support us"><img src="<?php echo get_template_directory_uri(); ?>/images/support-us.png" alt=""></a>
 				</div>
 				<div class="col">
 					<h3>KEEP UP TO DATE!</h3>

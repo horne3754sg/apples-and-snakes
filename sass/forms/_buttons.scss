@@ -23,4 +23,34 @@ input[type="submit"] {
 	&:active,
 	&:focus {
 	}
+
+	&.red {
+		color: $c1;
+		border-color: $c1;
+
+		&:hover {
+			color: #404040;
+			border-color: #404040;
+		}
+	}
+
+	&.orange {
+		color: $c2;
+		border-color: $c2;
+
+		&:hover {
+			color: #404040;
+			border-color: #404040;
+		}
+	}
+}
+
+.button-wrap {
+	display: flex;
+
+	.button {
+		&.right {
+			margin-left: auto;
+		}
+	}
 }

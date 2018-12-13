@@ -1,7 +1,3 @@
-#primary-menu {
-	display: none;
-}
-
 .main-navigation {
 	clear: both;
 
@@ -51,7 +47,7 @@
 	}
 
 	li {
-		float: left;
+		padding: 10px;
 		position: relative;
 
 		&:hover > a,
@@ -79,17 +75,22 @@
 	.current_page_ancestor > a,
 	.current-menu-ancestor > a {
 	}
-}
 
-/* Small menu. */
-.menu-toggle,
-.main-navigation.toggled ul {
-	display: block;
-}
-
-@media screen and (min-width: 37.5em) {
-	.menu-toggle {
+	.main-navigation.toggled ul {
 		display: block;
+	}
+
+	.menu-toggle {
+		display: none;
+		@media (max-width: $breakpoint1) {
+			display: block;
+		}
+	}
+
+	@media (min-width: $breakpoint1) {
+		ul {
+			display: flex;
+		}
 	}
 }
 

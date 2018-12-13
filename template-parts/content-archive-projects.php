@@ -7,27 +7,21 @@
  * @package apples-and-snakes
  */
 
-//$header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : '';
+$header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : '';
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<div class="archive-post-columns">
+	<div class="archive-project-posts">
 		<div class="image-col">
-			<?php
-			if (has_post_thumbnail())
-			{
-				the_post_thumbnail();
-			}
-			?>
-			<!--			<img src="--><?php //echo $header_image_src; ?><!--" alt="">-->
+			<img src="<?php echo $header_image_src; ?>" alt="">
 		</div>
 		<div class="content-col">
 			<div class="entry-content">
 				<?php
-				if (is_post_type_archive('event')) :
+				if (is_post_type_archive('project')) :
 					$locations = wp_get_post_terms(get_the_ID(), 'event_location');
 					if (!empty($locations)) :
-						echo '<span class="event-location">' . __('Event') . '/' . $locations[0]->name . '</span>';
+						echo '<span class="event-location">' . __('Project') . '/' . $locations[0]->name . '</span>';
 					endif;
 				else : ?>
 					<span class="meta-category"><?php the_category("/"); ?></span>
@@ -46,8 +40,6 @@
 						echo '<span class="event-featured-time">' . $when_featured . '</span>';
 					endif;
 				endif;
-				
-				echo '<p class="excerpt">' . get_the_excerpt() . '</p>';
 				
 				echo '<a href="' . get_the_permalink() . '" class="button">' . __('More') . '</a>';
 				?>

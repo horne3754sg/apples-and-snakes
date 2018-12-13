@@ -9,13 +9,17 @@
 
 get_header();
 
-$header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image: url(' . get_the_post_thumbnail_url() . ');"' : '';
+$header_image = get_template_directory_uri() . '/images/default-banner-image.jpg';
+
+$blog_id = get_option('page_for_posts');
+$title = get_the_title($blog_id);
+$content = wpautop(get_post_field('post_content', $blog_id));
 ?>
 	<div class="section">
-		<div class="header-container" <?php echo $header_image; ?>>
+		<div class="header-container" style="background-image: url(<?php echo $header_image; ?>);">
 			<div class="header-content">
 				<header class="entry-header">
-					<h1 class="entry-title"><?php echo __("Read") ?></h1>
+					<h1 class="entry-title"><?php echo $title; ?></h1>
 				</header><!-- .entry-header -->
 			</div>
 		</div>
@@ -27,20 +31,35 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 					<?php if (have_posts()) : ?>
 
 						<header class="page-header">
-							<?php the_archive_description('<div class="archive-description">', '</div>'); ?>
+							<div class="archive-description"><?php echo $content; ?></div>
 						</header><!-- .page-header -->
-						
-						<?php
-						
+
+						<div class="blog-post-types">
+							<?php
+							$article_type = get_terms('article_type');
+							if ($article_type) :
+								foreach ($article_type as $type) : ?>
+									<a class="post-type-block" href="<?php echo get_term_link($type->slug, 'article_type'); ?>">
+										<span><?php echo $type->name; ?></span>
+									</a>
+								<?php
+								endforeach;
+							endif
+							
+							?>
+
+						</div>
+					<?php
 						//$locations = wp_get_post_terms(get_the_ID(), 'event_location');
 						//var_dump($locations);
 						
+						/*
 						?>
 						<div class="category-nav">
 
 						</div>
 						<?php
-						/* Start the Loop */
+						// Start the Loop
 						while (have_posts()) :
 							the_post();
 						
@@ -53,7 +72,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 					else :
 						
 						get_template_part('template-parts/content', 'none');
-					
+					*/
 					endif;
 					?>
 				</div>
