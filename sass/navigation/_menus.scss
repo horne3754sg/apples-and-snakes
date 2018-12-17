@@ -81,10 +81,7 @@
 	}
 
 	.menu-toggle {
-		display: none;
-		@media (max-width: $breakpoint1) {
-			display: block;
-		}
+
 	}
 
 	@media (min-width: $breakpoint1) {

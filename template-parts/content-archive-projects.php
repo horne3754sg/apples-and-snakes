@@ -23,6 +23,11 @@ $header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnai
 					if (!empty($locations)) :
 						echo '<span class="event-location">' . __('Project') . '/' . $locations[0]->name . '</span>';
 					endif;
+				elseif (is_post_type_archive('case_studies')) :
+					$cs_location = wp_get_post_terms(get_the_ID(), 'case_study_location');
+					if (!empty($cs_location)) :
+						echo '<span class="event-location">' . __('Case Study') . '/' . $cs_location[0]->name . '</span>';
+					endif;
 				else : ?>
 					<span class="meta-category"><?php the_category("/"); ?></span>
 				<?php

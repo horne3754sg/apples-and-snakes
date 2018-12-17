@@ -21,7 +21,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 			</div>
 		</div>
 
-		<div class="container <?php echo (is_page('about') ? ' narrow' : '') ?>">
+		<div class="container narrow">
 			<div class="entry-content">
 				<?php
 				the_content();

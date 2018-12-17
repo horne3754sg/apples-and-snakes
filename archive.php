@@ -28,6 +28,10 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 
 						<h1 class="entry-title"><?php echo __("Case Studies") ?></h1>
 					
+					<?php elseif (is_post_type_archive('opportunities')) : ?>
+
+						<h1 class="entry-title"><?php echo __("Artists Opportunities") ?></h1>
+					
 					<?php else : ?>
 
 						<h1 class="entry-title"><?php echo single_cat_title('', false); ?></h1>
@@ -54,7 +58,63 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 						
 						?>
 						<div class="category-nav">
-
+							<?php
+							if (is_post_type_archive(array('opportunities')))
+							{
+								$opportunities_type = get_terms('opportunities_type', array(
+									'hide_empty' => true,
+									'orderby'    => 'name',
+									'order'      => 'DESC'
+								));
+								
+								if ($opportunities_type)
+								{ ?>
+									<ul class="cat_nav">
+									<li>
+										<a href="<?php echo get_post_type_archive_link('opportunities'); ?>">All</a>
+									</li>
+									<?php
+									foreach ($opportunities_type as $type)
+									{
+										//var_dump($type);
+										?>
+										<li>
+											<a href="<?php echo get_term_link($type->term_id); ?>"><?php echo $type->name; ?></a>
+										</li>
+										<?php
+									}
+									echo '</ul>';
+								}
+							}
+							
+							if (is_post_type_archive(array('event')) || is_tax('event_location'))
+							{
+								$event_location = get_terms('event_location', array(
+									'hide_empty' => true,
+									'orderby'    => 'name',
+									'order'      => 'DESC'
+								));
+								
+								if ($event_location)
+								{ ?>
+									<ul class="cat_nav">
+									<li>
+										<a href="<?php echo get_post_type_archive_link('event'); ?>">All</a>
+									</li>
+									<?php
+									foreach ($event_location as $location)
+									{
+										//var_dump($type);
+										?>
+										<li>
+											<a href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
+										</li>
+										<?php
+									}
+									echo '</ul>';
+								}
+							}
+							?>
 						</div>
 						<?php ?>
 						<?php
@@ -71,8 +131,10 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 								{
 									get_template_part('template-parts/content', 'archive-posts');
 								}
-							elseif (is_post_type_archive('project')) :
+							elseif (is_post_type_archive(array('project', 'case_studies'))) :
 								get_template_part('template-parts/content', 'archive-projects');
+							elseif (is_post_type_archive(array('opportunities'))) :
+								get_template_part('template-parts/content', 'archive-opportunities');
 							else :
 								get_template_part('template-parts/content', 'archive-posts');
 							endif;

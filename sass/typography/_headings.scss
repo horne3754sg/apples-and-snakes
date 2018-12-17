@@ -5,11 +5,16 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: $font_header_round;
 }
 
-
 .entry-content {
 	h2 {
-		font-size: 26px;
-		line-height: 28px;
+		font-size: 52px;
+		line-height: 64px;
+		color: $c1;
+	}
+
+	h3 {
+		font-size: 36px;
+		line-height: 45px;
 		color: $c1;
 	}
 }

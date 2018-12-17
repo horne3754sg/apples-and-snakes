@@ -196,9 +196,11 @@ require get_template_directory() . '/inc/custom-post-types.php';
 
 
 /**
- * Custom Metaboxes
+ * Custom Metaboxes & shortcodes
  */
+require get_template_directory() . '/inc/aas-metaboxes.php';
 require get_template_directory() . '/inc/events-metabox.php';
+require get_template_directory() . '/inc/shortcodes.php';
 
 /**
  * Load Jetpack compatibility file.

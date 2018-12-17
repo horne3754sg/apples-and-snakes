@@ -12,7 +12,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	
 	<div class="highlight-header-container" <?php echo $header_image; ?>>
-		<div class="header-content">
+		<a href="<?php echo esc_url( get_permalink() ); ?>" class="header-content">
 			<span class="highlight">Highlight</span>
 			<header class="entry-header">
 				<?php
@@ -24,7 +24,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 				if ( is_singular() ) :
 					the_title( '<h1 class="entry-title">', '</h1>' );
 				else :
-					the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+					the_title( '<h2 class="entry-title">', '</h2>' );
 				endif;
 				
 				$when_featured = get_post_meta(get_the_ID(), 'when_featured', true);
@@ -33,6 +33,6 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 				endif;
 				?>
 			</header><!-- .entry-header -->
-		</div>
+		</a>
 	</div>
 </article><!-- #post-<?php the_ID(); ?> -->
