@@ -26,7 +26,7 @@
 				if (is_post_type_archive('event')) :
 					$locations = wp_get_post_terms(get_the_ID(), 'event_location');
 					if ( !empty($locations)) :
-						echo '<span class="event-location">' . __('Event') . '/' . $locations[0]->name . '</span>';
+						echo '<span class="event-location">' . $locations[0]->name . '</span>';
 					endif;
 				else : ?>
                     <span class="meta-category"><?php the_category("/"); ?></span>

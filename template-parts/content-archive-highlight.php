@@ -18,7 +18,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 				<?php
 				$locations = wp_get_post_terms(get_the_ID(), 'event_location');
 				if(!empty($locations)) :
-					echo '<span class="event-location">' . __('Event') . '/' . $locations[0]->name . '</span>';
+					echo '<span class="event-location">' . $locations[0]->name . '</span>';
 				endif;
 		
 				if ( is_singular() ) :

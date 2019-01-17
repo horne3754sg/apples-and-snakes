@@ -15,7 +15,7 @@
 
 	.slideover_content {
 		position: fixed;
-		padding: 60px 40px;
+		padding: 30px 40px;
 		width: inherit;
 		max-width: inherit;
 	}
@@ -115,7 +115,7 @@
 		.social_icon {
 			width: 40px;
 			height: 40px;
-			margin-right: 8px;
+			margin-left: 10px;
 
 			&:last-child {
 				margin-right: 0;
@@ -144,6 +144,10 @@
 
 		.page-header {
 			padding-top: 60px;
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 
@@ -244,7 +248,6 @@
 
 	&.header {
 		position: absolute;
-		padding: 30px 0;
 		z-index: 100;
 
 		.container {
@@ -253,6 +256,7 @@
 		}
 
 		.site-branding {
+			padding-top: 30px;
 			position: relative;
 			left: 0;
 
@@ -265,25 +269,56 @@
 			}
 			@media (max-width: $breakpoint1) {
 				left: 0;
+				padding-top: 0;
 			}
+		}
+
+		.header_wrap {
+			margin-left: auto;
+		}
+
+		.menu_wrap {
+			display: flex;
+			align-items: center;
 		}
 
 		.site-title {
 			display: none;
 		}
 
-		.main-navigation {
-			margin-left: auto;
+		.button.donate {
+			background: $c3;
+			border: none;
+			padding: 0 1em;
+			color: #fff;
+			margin: 0 20px;
+			height: 45px;
+			line-height: 45px;
+		}
+
+		.social_info {
+			display: flex;
+			align-items: baseline;
+
+			.social_icon {
+				width: 45px;
+				margin-right: 5px;
+				line-height: 0;
+				margin-left: auto;
+			}
 		}
 
 		@media (max-width: $breakpoint1) {
 			position: relative;
+			.social_info, .donate_button_wrap {
+				display: none;
+			}
 		}
 	}
 
 	&.footer {
 		.container {
-			max-width: 960px;
+			max-width: 1024px;
 		}
 
 		background: $c1;
@@ -294,9 +329,9 @@
 			display: flex;
 
 			.col {
-				flex: 0 1 calc(33.333% - 40px);
-				margin-left: 20px;
-				margin-right: 20px;
+				flex: 0 1 calc(33.333% - 20px);
+				margin-left: 10px;
+				margin-right: 10px;
 			}
 		}
 
@@ -308,11 +343,11 @@
 		}
 
 		.footer-logo {
-			margin-bottom: 4rem;
+			margin-bottom: 3rem;
 		}
 
 		.address {
-			margin-bottom: 4rem;
+			margin-bottom: 3rem;
 
 			span {
 				display: block;
@@ -386,7 +421,6 @@ body.home {
 
 				.entry-header {
 					position: relative;
-					left: 30px;
 					bottom: unset;
 					right: unset;
 					padding-top: 100px;
@@ -396,17 +430,13 @@ body.home {
 						line-height: 1;
 						margin: 0;
 					}
-
-					@media (max-width: $site_width) {
-						left: 60px;
-					}
 				}
 
 				&:after {
 					content: url("#{$path}images/NO WORD UNSPOKEN.png");
 					position: absolute;
 					left: calc(100% - 50px);
-					bottom: 60px;
+					bottom: 0;
 				}
 			}
 		}
@@ -422,7 +452,8 @@ body.home {
 
 	li {
 		display: flex;
-		margin-bottom: 10px;
+		margin-top: 5px;
+		margin-bottom: 5px;
 
 		a {
 			padding: 6px 20px;
@@ -453,6 +484,7 @@ body.post-type-archive-case_studies {
 	.main-navigation a.menu-toggle .menu-icon {
 		background-color: $c2;
 	}
+
 	.section {
 		.header-container {
 			&:before {
@@ -558,6 +590,7 @@ body.post-type-archive-opportunities {
 	.main-navigation a.menu-toggle .menu-icon {
 		background-color: $c4;
 	}
+
 	.section {
 		.header-container {
 			&:before {
@@ -674,6 +707,7 @@ body.post-type-archive-opportunities {
 		color: #fff;
 		padding-bottom: calc(56.25% - 60px);
 		width: calc(100% - 60px);
+		text-decoration: none;
 
 		.entry-header {
 			position: absolute;
@@ -1311,6 +1345,8 @@ body.blog {
 	}
 
 	.quote-text {
+		display: flex;
+		flex-direction: column;
 		padding: 30px;
 		position: relative;
 		flex: 0 1 calc(33.33333333% - 10px);
@@ -1375,6 +1411,16 @@ body.blog {
 
 .highlight_section {
 	padding-bottom: 100px;
+
+	.columns {
+		.col-25 {
+			display: flex;
+			flex-direction: column;
+			flex: 0 0 25%;
+			padding-right: 30px;
+		}
+	}
+
 	@media (max-width: 1050px) {
 		.columns {
 			display: block;
@@ -1425,9 +1471,8 @@ body.blog {
 	}
 
 	.quote-text {
-		flex: 0 1 330px;
-		padding-right: 30px;
 		position: relative;
+		margin-bottom: 30px;
 
 		span {
 			font-size: 60px;
@@ -1451,6 +1496,10 @@ body.blog {
 		@media (max-width: 1050px) {
 			margin-bottom: 100px;
 		}
+	}
+
+	.support-us {
+		margin-top: auto;
 	}
 
 	.content {
@@ -1495,6 +1544,50 @@ body.blog {
 					}
 				}
 			}
+		}
+	}
+
+	.section_content {
+		background: #F5DBDB;
+		height: 0;
+		padding-bottom: 100%;
+		position: relative;
+
+		.inner-wrap {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			bottom: 20px;
+			left: 20px;
+			padding: 20px;
+			background: #200956;
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+
+	.section_spotlight-header {
+		display: flex;
+		align-items: center;
+		margin-bottom: 30px;
+
+		h3 {
+			color: $c3;
+			font-size: 26px;
+			line-height: 1;
+			flex: 0 0 auto;
+			margin-bottom: 0;
+			margin-left: 20px;
+			font-family: $font_header_round;
+		}
+
+		&:before {
+			content: '';
+			width: 100%;
+			height: 3px;
+			background: $c3;
 		}
 	}
 }
@@ -1824,13 +1917,14 @@ body.blog {
 		margin-top: -1px;
 	}
 
+	&.quote {
+		line-height: 0;
+	}
+
 	&.legal {
+		background: $c1;
 		color: rgba(255, 255, 255, 0.6);
 		padding: 10px 0;
-
-		.copyright {
-			margin-right: 10px;
-		}
 
 		a {
 			color: rgba(255, 255, 255, 0.6);

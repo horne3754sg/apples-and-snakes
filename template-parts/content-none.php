@@ -10,9 +10,7 @@
 ?>
 
 <section class="no-results not-found">
-	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'aas' ); ?></h1>
-	</header><!-- .page-header -->
+	<header class="page-header"><h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'aas' ); ?></h1></header><!-- .page-header -->
 
 	<div class="page-content">
 		<?php

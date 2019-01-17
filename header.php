@@ -46,13 +46,36 @@
 				<?php endif; ?>
 			</div><!-- .site-branding -->
 
-			<nav id="site-navigation" class="main-navigation">
-				<a class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-					<span class="menu-icon">
-						<img src="<?php echo get_template_directory_uri(); ?>/images/menu-icon.svg" alt="">
-					</span>
-				</a>
-			</nav><!-- #site-navigation -->
+			<div class="header_wrap">
+				<div class="menu_wrap">
+					<div class="social_info">
+						<a href="https://www.facebook.com/applesandsnakes/" target="_blank" rel="noopener noopener"
+						   class="social_icon"><img src="<?php echo get_template_directory_uri(); ?>/images/facebook.png"
+						                            alt=""></a>
+						<a href="https://twitter.com/applesandsnakes" target="_blank" rel="noopener noopener"
+						   class="social_icon"><img src="<?php echo get_template_directory_uri(); ?>/images/twitter.png"
+						                            alt=""></a>
+						<a href="https://www.instagram.com/applesandsnakes/" target="_blank" rel="noopener noopener"
+						   class="social_icon"><img src="<?php echo get_template_directory_uri(); ?>/images/instagram.png"
+						                            alt=""></a>
+						<a href="https://www.youtube.com/user/applesandsnakes/" target="_blank" rel="noopener noopener"
+						   class="social_icon"><img src="<?php echo get_template_directory_uri(); ?>/images/You%20tube.png"
+						                            alt=""></a>
+					</div>
+
+					<div class="donate_button_wrap">
+						<a href="/donate/" class="button donate">DONATE</a>
+					</div>
+
+					<nav id="site-navigation" class="main-navigation">
+						<a class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+						<span class="menu-icon">
+							<img src="<?php echo get_template_directory_uri(); ?>/images/menu-icon.svg" alt="">
+						</span>
+						</a>
+					</nav><!-- #site-navigation -->
+				</div>
+			</div>
 		</div>
 	</div>
 

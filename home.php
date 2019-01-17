@@ -30,9 +30,7 @@ $content = wpautop(get_post_field('post_content', $blog_id));
 				<div class="container narrow">
 					<?php if (have_posts()) : ?>
 
-						<header class="page-header">
-							<div class="archive-description"><?php echo $content; ?></div>
-						</header><!-- .page-header -->
+						<header class="page-header"><div class="archive-description"><?php echo $content; ?></div></header><!-- .page-header -->
 
 						<div class="blog-post-types">
 							<a class="post-type-block" href="/articles/read/">

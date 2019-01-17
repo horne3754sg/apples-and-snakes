@@ -51,9 +51,7 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
                 <div class="container narrow">
 					<?php if (have_posts()) : ?>
 
-                        <header class="page-header">
-							<?php the_archive_description('<div class="archive-description">', '</div>'); ?>
-                        </header><!-- .page-header -->
+                        <header class="page-header"><?php the_archive_description('<div class="archive-description">', '</div>'); ?></header><!-- .page-header -->
 						
 						<?php
 						
