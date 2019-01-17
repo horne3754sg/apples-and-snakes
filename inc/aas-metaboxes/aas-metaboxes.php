@@ -264,7 +264,7 @@ if (!class_exists('AT_Meta_Box')) :
 			
 			if ($this->has_field('date') && $this->is_edit_page())
 			{
-				// Enqueu JQuery UI, use proper version.
+				// Enqueue JQuery UI, use proper version.
 				$plugin_path = $this->SelfPath;
 				wp_enqueue_style('at-jquery-ui-css', $plugin_path . '/js/jquery-ui/jquery-ui.css');
 				wp_enqueue_script('jquery-ui');
@@ -284,7 +284,7 @@ if (!class_exists('AT_Meta_Box')) :
 			if ($this->has_field('time') && $this->is_edit_page())
 			{
 				$plugin_path = $this->SelfPath;
-				// Enqueu JQuery UI, use proper version.
+				// Enqueue JQuery UI, use proper version.
 				wp_enqueue_style('at-jquery-ui-css', $plugin_path . '/js/jquery-ui/jquery-ui.css');
 				wp_enqueue_script('jquery-ui');
 				wp_enqueue_script('at-timepicker', $plugin_path . '/js/jquery-ui/jquery-ui-timepicker-addon.js', array(
@@ -305,7 +305,7 @@ if (!class_exists('AT_Meta_Box')) :
 			if ($this->has_field('code') && $this->is_edit_page())
 			{
 				$plugin_path = $this->SelfPath;
-				// Enqueu codemirror js and css
+				// Enqueue codemirror js and css
 				wp_enqueue_style('at-code-css', $plugin_path . '/js/codemirror/codemirror.css', array(), null);
 				wp_enqueue_style('at-code-css-dark', $plugin_path . '/js/codemirror/solarizedDark.css', array(), null);
 				wp_enqueue_style('at-code-css-light', $plugin_path . '/js/codemirror/solarizedLight.css', array(), null);
@@ -347,6 +347,7 @@ if (!class_exists('AT_Meta_Box')) :
 			
 			wp_nonce_field(basename(__FILE__), 'at_meta_box_nonce');
 			echo '<table class="form-table">';
+			
 			foreach ($this->_fields as $field)
 			{
 				$field['multiple'] = isset($field['multiple']) ? $field['multiple'] : false;
@@ -465,8 +466,10 @@ if (!class_exists('AT_Meta_Box')) :
 			
 			echo '<div class="button add_new" id="add-' . $field['id'] . '">Add new</div><br/></div>';
 			
-			//create all fields once more for js function and catch with object buffer
+			// create all fields once more for js function and catch with object buffer
 			ob_start();
+			ob_clean();
+			$js_code = null;
 			echo '<div class="at-repeater-block">';
 			echo '<div class="control-header">';
 			echo '<span class="re-control"><span class="dashicons dashicons-trash" id="remove-' . $field['id'] . '"></span></span>';
@@ -501,6 +504,7 @@ if (!class_exists('AT_Meta_Box')) :
 			}
 			echo '</table></div>';
 			$counter = 'countadd_' . $field['id'];
+			
 			$js_code = ob_get_clean();
 			$js_code = str_replace("\n", "", $js_code);
 			$js_code = str_replace("\r", "", $js_code);
@@ -1030,7 +1034,7 @@ if (!class_exists('AT_Meta_Box')) :
 			{
 				$checked = true;
 			}
-			echo "<input type='checkbox' class='conditinal_control' name='{$field['id']}[enabled]' id='{$field['id']}'" . checked($checked, true, false) . " />";
+			echo "<input type='checkbox' class='conditional_control' name='{$field['id']}[enabled]' id='{$field['id']}'" . checked($checked, true, false) . " />";
 			//start showing the fields
 			$display = ($checked) ? '' : ' style="display: none;"';
 			

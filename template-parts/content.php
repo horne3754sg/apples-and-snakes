@@ -54,7 +54,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 					<?php get_template_part('template-parts/social', 'share-bar'); ?>
 				</div>
 			</div>
-
+			<?php /*
 			<div class="post-content-columns">
 
 				<div class="col col-related-content">
@@ -165,7 +165,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 					</div>
 				</div>
 
-			</div>
+			</div>*/
+			?>
 		</div>
 
 	</article><!-- #post-<?php the_ID(); ?> -->

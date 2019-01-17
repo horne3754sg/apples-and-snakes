@@ -27,10 +27,38 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 				<?php
 				the_content();
 				
+				$fundraisers = get_post_meta($post->ID, 'client_fundraisers_re_', true);
+				//var_dump($fundraisers);
+				if ($fundraisers)
+				{
+					?>
+					<h2>Funders</h2>
+					<div class="clients">
+						<?php
+						foreach ($fundraisers as $c)
+						{
+							//var_dump($c);
+							?>
+							<div class="client_item">
+								<div class="client_logo">
+									<img src="<?php echo !empty($c['client_fundraisers_logo']['url']) ? $c['client_fundraisers_logo']['url'] : ''; ?>" alt="">
+								</div>
+								<div class="client_meta">
+									<?php echo !empty($c['client_fundraisers_desc']) ? $c['client_fundraisers_desc'] : ''; ?>
+								</div>
+							</div>
+							<?php
+						}
+						?>
+					</div>
+					<?php
+				}
+				
 				$clients = get_post_meta($post->ID, 'client_re_', true);
 				if ($clients)
 				{
 					?>
+					<h2>Partners</h2>
 					<div class="clients">
 						<?php
 						foreach ($clients as $c)
@@ -53,6 +81,13 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 				}
 				//var_dump($clients);
 				
+				$text_after_content = get_post_meta($post->ID, 'after_clients_textarea', true);
+				if (!empty($text_after_content))
+				{
+					echo wpautop($text_after_content);
+				}
+				?>
+				<?php
 				wp_link_pages(array(
 					'before' => '<div class="page-links">' . esc_html__('Pages:', 'aas'),
 					'after'  => '</div>',

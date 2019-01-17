@@ -39,3 +39,18 @@ form {
 		margin-bottom: 1em;
 	}
 }
+
+.yikes-easy-mc-form {
+	input[type="text"],
+	input[type="email"] {
+		border: none !important;
+		padding: 1em 1em !important;
+		color: #666 !important;
+	}
+}
+
+.yikes-easy-mc-submit-button {
+	padding: 1em 2em !important;
+	display: inline-block !important;
+	width: auto !important;
+}

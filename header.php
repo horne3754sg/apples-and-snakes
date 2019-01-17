@@ -48,18 +48,9 @@
 
 			<nav id="site-navigation" class="main-navigation">
 				<a class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-					<?php esc_html_e('Menu', 'aas'); ?>
-					<svg width="23px" height="15px" viewBox="0 0 23 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-						<g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square" stroke-opacity="0.949999988">
-							<g id="HOMEPAGE-V4.1" transform="translate(-1326.000000, -64.000000)" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="3">
-								<g id="Group" transform="translate(1328.000000, 64.000000)">
-									<path d="M0.38,1.5 L18.62,1.5" id="Line"></path>
-									<path d="M0.38,7.5 L18.62,7.5" id="Line-Copy"></path>
-									<path d="M0.38,13.5 L18.62,13.5" id="Line-Copy-2"></path>
-								</g>
-							</g>
-						</g>
-					</svg>
+					<span class="menu-icon">
+						<img src="<?php echo get_template_directory_uri(); ?>/images/menu-icon.svg" alt="">
+					</span>
 				</a>
 			</nav><!-- #site-navigation -->
 		</div>

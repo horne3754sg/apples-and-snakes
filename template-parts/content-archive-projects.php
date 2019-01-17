@@ -13,7 +13,11 @@ $header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnai
 
 	<div class="archive-project-posts">
 		<div class="image-col">
-			<img src="<?php echo $header_image_src; ?>" alt="">
+			<?php if (has_post_thumbnail()) : ?>
+                <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+					<?php the_post_thumbnail(); ?>
+                </a>
+			<?php endif; ?>
 		</div>
 		<div class="content-col">
 			<div class="entry-content">

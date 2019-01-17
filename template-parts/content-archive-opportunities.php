@@ -13,12 +13,11 @@
 
 	<div class="archive-post-columns">
 		<div class="image-col">
-			<?php
-			if (has_post_thumbnail())
-			{
-				the_post_thumbnail();
-			}
-			?>
+			<?php if (has_post_thumbnail()) : ?>
+                <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+					<?php the_post_thumbnail(); ?>
+                </a>
+			<?php endif; ?>
 		</div>
 		<div class="content-col">
 			<div class="entry-content">

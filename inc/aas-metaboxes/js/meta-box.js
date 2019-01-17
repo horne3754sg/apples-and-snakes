@@ -38,15 +38,16 @@ var _metabox_fields = {
 			this.oncefancySelect = true;
 		}
 		this.load_code_editor();
-		this.load_conditinal();
+		this.load_conditional();
 		this.load_time_picker();
 		this.load_date_picker();
 		this.load_color_picker();
 		
-		// repater Field
+		// repeater Field
 		$('.at-re-toggle').live('click', function() {
 			$(this).parent().parent().find('.repeater-table').toggle();
 		});
+		
 		// repeater sortable
 		$('.repeater-sortable').sortable({
 			opacity: 0.6,
@@ -129,8 +130,8 @@ var _metabox_fields = {
 			e_d_count++;
 		});
 	},
-	load_conditinal: function() {
-		$('.conditinal_control').click(function() {
+	load_conditional: function() {
+		$('.conditional_control').click(function() {
 			if ($(this).is(':checked')) {
 				$(this).next().show('fast');
 			} else {
@@ -182,8 +183,8 @@ jQuery(document).ready(function($) {
 		
 		function init() {
 			return {
-				image_frame: new Array(),
-				file_frame: new Array(),
+				image_frame: [],
+				file_frame: [],
 				hooks: function() {
 					$(document).on('click', '.simplePanelimageUpload,.simplePanelfileUpload', function(event) {
 						event.preventDefault();
@@ -213,7 +214,7 @@ jQuery(document).ready(function($) {
 				},
 				upload: function(el, utype) {
 					inited.set_fields(el);
-					if (utype == 'image')
+					if (utype === 'image')
 						inited.upload_Image($(el));
 					else
 						inited.upload_File($(el));
@@ -313,7 +314,7 @@ jQuery(document).ready(function($) {
 				set_preview: function(stype, ShowFlag) {
 					ShowFlag = ShowFlag || false;
 					var fileuri = $(inited.file_url).val();
-					if (stype == 'image') {
+					if (stype === 'image') {
 						if (ShowFlag)
 							$(inited.file_id).prev().find('img').attr('src', fileuri).show();
 						else

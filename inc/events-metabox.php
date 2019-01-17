@@ -26,16 +26,21 @@ function aas_events_location()
 	wp_nonce_field(basename(__FILE__), 'event_fields');
 	
 	// Get the when data if it's already been entered
+	$when_order = get_post_meta($post->ID, 'when_order', true);
+	$when_order = !empty($when_order) ? date( 'Y-m-d', $when_order ) : date( 'Y-m-d');
+	echo '<div><label>When (Used to Order Content and must be a valid date format)</label><input type="date" name="when_order" value="' . $when_order . '" class="widefat" placeholder="When? format: dd/mm/yyyy"></div></br>';
+	
+	// Get the when data if it's already been entered
 	$when = get_post_meta($post->ID, 'when', true);
 	echo '<div><label>When (Sidebar)</label><input type="text" name="when" value="' . esc_textarea($when) . '" class="widefat" placeholder="When?"></div></br>';
-	
-	// Get the time data if it's already been entered
-	$time = get_post_meta($post->ID, 'time', true);
-	echo '<div><label>Time (Sidebar)</label><input type="text" name="time" value="' . esc_textarea($time) . '" class="widefat" placeholder="time"></div></br>';
 	
 	// Get the when data if it's already been entered
 	$when_featured = get_post_meta($post->ID, 'when_featured', true);
 	echo '<div><label>When (Featured)</label><input type="text" name="when_featured" value="' . esc_textarea($when_featured) . '" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018"></div></br>';
+	
+	// Get the time data if it's already been entered
+	$time = get_post_meta($post->ID, 'time', true);
+	echo '<div><label>Time (Sidebar)</label><input type="text" name="time" value="' . esc_textarea($time) . '" class="widefat" placeholder="time"></div></br>';
 	
 	// Get the where data if it's already been entered
 	$where = get_post_meta($post->ID, 'where', true);
@@ -46,8 +51,24 @@ function aas_events_location()
 	echo '<div><label>Address</label><input type="text" name="address" value="' . esc_textarea($address) . '" class="widefat" placeholder="Address"></div></br>';
 	
 	// Get the tickets data if it's already been entered
+	$duration = get_post_meta($post->ID, 'duration', true);
+	echo '<div><label>Duration</label><input type="text" name="duration" value="' . esc_textarea($duration) . '" class="widefat" placeholder="The expected duration of the event"></div></br>';
+	
+	// Get the tickets data if it's already been entered
+	$age = get_post_meta($post->ID, 'age', true);
+	echo '<div><label>Age</label><input type="text" name="age" value="' . esc_textarea($age) . '" class="widefat" placeholder="Age group of audience"></div></br>';
+	
+	// Get the tickets data if it's already been entered
 	$tickets = get_post_meta($post->ID, 'tickets', true);
-	echo '<div><label>Tickets</label><input type="text" name="tickets" value="' . esc_textarea($tickets) . '" class="widefat" placeholder="Tickets?"></div></br>';
+	echo '<div><label>Tickets</label><input type="text" name="tickets" value="' . esc_textarea($tickets) . '" class="widefat" placeholder="Tickets"></div></br>';
+	
+	// Get the tickets data if it's already been entered
+	$tickets_text = get_post_meta($post->ID, 'tickets_text', true);
+	echo '<div><label>Get tickets button text</label><input type="text" name="tickets" value="' . esc_textarea($tickets_text) . '" class="widefat" placeholder="Get Tickets"></div></br>';
+	
+	// Get the tickets data if it's already been entered
+	$tickets_link = get_post_meta($post->ID, 'tickets_link', true);
+	echo '<div><label>Get tickets button link</label><input type="url" name="tickets" value="' . esc_textarea($tickets_link) . '" class="widefat" placeholder="Link to where the tickets are sold"></div></br>';
 	
 	// Get the other data if it's already been entered
 	$other = get_post_meta($post->ID, 'other', true);
@@ -78,6 +99,7 @@ function aas_save_events_meta($post_id, $post)
 	}
 	// Now that we're authenticated, time to save the data.
 	// This sanitizes the data from the field and saves it into an array $events_meta.
+	$events_meta['when_order'] = strtotime($_POST['when_order']);
 	$events_meta['when'] = esc_textarea($_POST['when']);
 	$events_meta['where'] = esc_textarea($_POST['where']);
 	$events_meta['address'] = esc_textarea($_POST['address']);

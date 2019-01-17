@@ -26,6 +26,16 @@ function aas_body_classes($classes)
 		$classes[] = 'no-sidebar';
 	}
 	
+	if (is_page('artist-resources'))
+	{
+		$classes[] = 'green-scheme';
+	}
+	
+	if (is_post_type_archive('project') || is_singular('project'))
+	{
+		$classes[] = 'orange-scheme';
+	}
+	
 	return $classes;
 }
 

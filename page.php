@@ -22,11 +22,11 @@ get_header();
 			while (have_posts()) :
 				the_post();
 				
-				if (is_page(70))
+				if (is_page('who-weve-worked-with'))
 				{
 					get_template_part('template-parts/content', 'clients');
 				}
-				else if (is_page(73))
+				else if (is_page('meet-the-team'))
 				{
 					get_template_part('template-parts/content', 'team-members');
 				}

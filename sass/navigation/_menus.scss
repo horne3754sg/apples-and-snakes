@@ -55,14 +55,28 @@
 		}
 	}
 
-	a {
+	a.menu-toggle {
 		display: flex;
-		text-decoration: none;
-		padding: 10px 0;
+		align-items: center;
 		color: #fff;
 
-		svg {
-			margin-left: 15px;
+		.menu-icon {
+			display: flex;
+			text-decoration: none;
+			padding: 10px 0;
+			color: #fff;
+			background: #C03847;
+			width: 55px;
+			height: 55px;
+			border-radius: 100%;
+			align-items: center;
+			justify-content: center;
+
+			img {
+				width: 100%;
+				height: auto;
+				padding: 5px;
+			}
 		}
 
 		&:hover {
@@ -81,7 +95,6 @@
 	}
 
 	.menu-toggle {
-
 	}
 
 	@media (min-width: $breakpoint1) {

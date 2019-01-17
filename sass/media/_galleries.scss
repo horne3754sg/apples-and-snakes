@@ -1,18 +1,31 @@
 .gallery {
+	display: flex;
 	margin-bottom: 1.5em;
+	margin-left: -5px;
+	margin-right: -5px;
+	flex-wrap: wrap;
 }
 
 .gallery-item {
-	display: inline-block;
+	display: flex;
+	align-items: stretch;
 	text-align: center;
 	vertical-align: top;
 	width: 100%;
-
+	margin: 5px;
 	// Loops to enumerate the classes for gallery columns.
 	@for $i from 2 through 9 {
 		.gallery-columns-#{$i} & {
-			max-width: map-get( $columns, $i );
+			$w: map-get($columns, $i);
+			max-width: $w;
+			flex: 0 1 calc(#{$w} - 10px);
 		}
+	}
+
+	img {
+		display: block;
+		object-fit: cover;
+		height: 100%;
 	}
 }
 

@@ -35,19 +35,15 @@ $content = wpautop(get_post_field('post_content', $blog_id));
 						</header><!-- .page-header -->
 
 						<div class="blog-post-types">
-							<?php
-							$article_type = get_terms('article_type');
-							if ($article_type) :
-								foreach ($article_type as $type) : ?>
-									<a class="post-type-block" href="<?php echo get_term_link($type->slug, 'article_type'); ?>">
-										<span><?php echo $type->name; ?></span>
-									</a>
-								<?php
-								endforeach;
-							endif
-							
-							?>
-
+							<a class="post-type-block" href="/articles/read/">
+								<span>Read</span>
+							</a>
+							<a class="post-type-block" href="/articles/watch/">
+								<span>Watch</span>
+							</a>
+							<a class="post-type-block" href="/articles/listen/">
+								<span>Listen</span>
+							</a>
 						</div>
 					<?php
 						//$locations = wp_get_post_terms(get_the_ID(), 'event_location');

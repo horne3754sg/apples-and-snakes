@@ -21,6 +21,47 @@ if (slideoverClose) {
 	});
 }
 
+function fluid_videos() {
+	var iframes = document.getElementsByTagName('iframe');
+	if (iframes) {
+		for (var i = 0; i < iframes.length; i++) {
+			var iframe = iframes[i],
+				players = /www.youtube.com|player.vimeo.com/;
+			if (iframe.src.search(players) > 0) {
+				var videoRatio = (iframe.height / iframe.width) * 100;
+				iframe.style.position = 'absolute';
+				iframe.style.top = '0';
+				iframe.style.left = '0';
+				iframe.width = '100%';
+				iframe.height = '100%';
+				var wrap = document.createElement('div');
+				wrap.className = 'fluid-vids';
+				wrap.style.width = '100%';
+				wrap.style.position = 'relative';
+				wrap.style.paddingTop = videoRatio + '%';
+				var iframeParent = iframe.parentNode;
+				iframeParent.insertBefore(wrap, iframe);
+				wrap.appendChild(iframe);
+			}
+		}
+	}
+}
+
+var primaryMenu = document.querySelectorAll('#primary-menu li.menu-item-has-children > a');
+if (primaryMenu) {
+	primaryMenu.forEach(function(obj) {
+		var toggleEl = document.createElement('div');
+		toggleEl.innerHTML = '<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC \'-//W3C//DTD SVG 1.1//EN\'  \'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\'><svg enable-background="new 0 0 50 50" height="50px" id="Layer_1" version="1.1" viewBox="0 0 50 50" width="50px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect fill="none" height="50" width="50"/><polygon points="47.25,15 45.164,12.914 25,33.078 4.836,12.914 2.75,15 25,37.25 "/></svg>';
+		toggleEl.classList.add('toggle');
+		obj.insertAdjacentElement('beforeend', toggleEl);
+		toggleEl.addEventListener('click', function(e) {
+			e.preventDefault();
+			this.classList.toggle('open');
+			this.parentElement.nextElementSibling.classList.toggle('open');
+		});
+	});
+}
+
 /**
  * File navigation.js.
  *
@@ -127,3 +168,11 @@ if (slideoverClose) {
 		}
 	}(container));
 })();
+
+jQuery('#slider').slick({
+	autoplay: true,
+	arrows: false,
+	dots: true,
+	autoplaySpeed: 5000,
+	speed: 1000
+});
