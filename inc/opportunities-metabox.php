@@ -4,13 +4,13 @@
 /**
  * If you wanted to have two sets of metaboxes.
  */
-function aas_add_event_metaboxes()
+function aas_add_opportunity_metaboxes()
 {
 	add_meta_box(
-		'aas_events_location',
+		'aas_opportunities_info',
 		'Event Info',
-		'aas_events_location',
-		'event',
+		'aas_opportunities_info',
+		'opportunities',
 		'normal',
 		'high'
 	);
@@ -19,15 +19,15 @@ function aas_add_event_metaboxes()
 /**
  * Output the HTML for the metabox.
  */
-function aas_events_location()
+function aas_opportunities_info()
 {
 	global $post;
 	// Nonce field to validate form request came from current site
-	wp_nonce_field(basename(__FILE__), 'event_fields');
+	wp_nonce_field(basename(__FILE__), 'opportunity_fields');
 	
 	// Get the when data if it's already been entered
 	$when_order = get_post_meta($post->ID, 'when_order', true);
-	$when_order = !empty($when_order) ? date( 'Y-m-d', $when_order ) : date( 'Y-m-d');
+	$when_order = !empty($when_order) ? date('Y-m-d', $when_order) : date('Y-m-d');
 	echo '<div><label>When (Used to Order Content and must be a valid date format)</label><input type="date" name="when_order" value="' . $when_order . '" class="widefat" placeholder="When? format: dd/mm/yyyy"></div></br>';
 	
 	// Get the when data if it's already been entered
@@ -52,7 +52,7 @@ function aas_events_location()
 	
 	// Get the tickets data if it's already been entered
 	$duration = get_post_meta($post->ID, 'duration', true);
-	echo '<div><label>Duration</label><input type="text" name="duration" value="' . esc_textarea($duration) . '" class="widefat" placeholder="The expected duration of the event"></div></br>';
+	echo '<div><label>Duration</label><input type="text" name="duration" value="' . esc_textarea($duration) . '" class="widefat" placeholder="The expected duration of the opportunity"></div></br>';
 	
 	// Get the tickets data if it's already been entered
 	$age = get_post_meta($post->ID, 'age', true);
@@ -82,12 +82,12 @@ function aas_events_location()
 /**
  * Save the metabox data
  */
-function aas_save_events_meta($post_id, $post)
+function aas_save_opportunities_meta($post_id, $post)
 {
 	$post_type = get_post_type($post_id);
 	
 	// If this isn't a 'book' post, don't update it.
-	if ("event" != $post_type)
+	if ("opportunities" != $post_type)
 		return;
 	
 	// Return if the user doesn't have edit permissions.
@@ -97,29 +97,29 @@ function aas_save_events_meta($post_id, $post)
 	}
 	// Verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times.
-	if (!empty($_POST['event_fields']) && !wp_verify_nonce($_POST['event_fields'], basename(__FILE__)))
+	if (!empty($_POST['opportunity_fields']) && !wp_verify_nonce($_POST['opportunity_fields'], basename(__FILE__)))
 	{
 		return $post_id;
 	}
 	// Now that we're authenticated, time to save the data.
-	// This sanitizes the data from the field and saves it into an array $events_meta.
-	$events_meta['when_order'] = strtotime($_POST['when_order']);
-	$events_meta['when'] = esc_textarea($_POST['when']);
-	$events_meta['where'] = esc_textarea($_POST['where']);
-	$events_meta['address'] = esc_textarea($_POST['address']);
-	$events_meta['when_featured'] = esc_textarea($_POST['when_featured']);
-	$events_meta['time'] = esc_textarea($_POST['time']);
-	$events_meta['duration'] = esc_textarea($_POST['duration']);
-	$events_meta['age'] = esc_textarea($_POST['age']);
-	$events_meta['tickets'] = esc_textarea($_POST['tickets']);
-	$events_meta['tickets_text'] = esc_textarea($_POST['tickets_text']);
-	$events_meta['tickets_link'] = esc_textarea($_POST['tickets_link']);
-	$events_meta['sub_heading'] = esc_textarea($_POST['sub_heading']);
-	$events_meta['other'] = esc_textarea($_POST['other']);
+	// This sanitizes the data from the field and saves it into an array $opportunities_meta.
+	$opportunities_meta['when_order'] = strtotime($_POST['when_order']);
+	$opportunities_meta['when'] = esc_textarea($_POST['when']);
+	$opportunities_meta['where'] = esc_textarea($_POST['where']);
+	$opportunities_meta['address'] = esc_textarea($_POST['address']);
+	$opportunities_meta['when_featured'] = esc_textarea($_POST['when_featured']);
+	$opportunities_meta['time'] = esc_textarea($_POST['time']);
+	$opportunities_meta['duration'] = esc_textarea($_POST['duration']);
+	$opportunities_meta['age'] = esc_textarea($_POST['age']);
+	$opportunities_meta['tickets'] = esc_textarea($_POST['tickets']);
+	$opportunities_meta['tickets_text'] = esc_textarea($_POST['tickets_text']);
+	$opportunities_meta['tickets_link'] = esc_textarea($_POST['tickets_link']);
+	$opportunities_meta['sub_heading'] = esc_textarea($_POST['sub_heading']);
+	$opportunities_meta['other'] = esc_textarea($_POST['other']);
 	
-	// Cycle through the $events_meta array.
+	// Cycle through the $opportunities_meta array.
 	// Note, in this example we just have one item, but this is helpful if you have multiple.
-	foreach ($events_meta as $key => $value) :
+	foreach ($opportunities_meta as $key => $value) :
 		// Don't store custom data twice
 		if ('revision' === $post->post_type)
 		{
@@ -145,4 +145,4 @@ function aas_save_events_meta($post_id, $post)
 	endforeach;
 }
 
-add_action('save_post', 'aas_save_events_meta', 1, 2);
+add_action('save_post', 'aas_save_opportunities_meta', 1, 2);

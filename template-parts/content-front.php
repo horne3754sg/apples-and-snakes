@@ -62,7 +62,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 			<div class="events_section">
 
 				<div class="quote-text mobile">
-					<span>We believe that poetry and spoken word is for everyone.</span>
+					<span>Apples and Snakes, spoken word trailblazers, with artists at our heart.</span>
 				</div>
 
 				<div class="events_section-header">
@@ -86,7 +86,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 						while ($related_posts->have_posts()) : $related_posts->the_post();
 							if ($count == 2) : ?>
 								<div class="quote-text">
-									<span>We believe that poetry and spoken word is for everyone.</span>
+									<span>Apples and Snakes, spoken word trailblazers, with artists at our heart.</span>
 								</div>
 							<?php
 							endif;
@@ -129,7 +129,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 			<div class="highlight_section">
 				<div class="columns">
 					<div class="col-25">
-						<div class="quote-text"><span>We work to amplify unheard voices.</span></div>
+						<div class="quote-text"><span>By bringing together important voices in interesting ways, we create inspiring experiences for audiences.</span></div>
 						<div class="support-us">
 							<div class="section_spotlight-header">
 								<h3>Support Us</h3>
@@ -142,7 +142,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 							</div>
 						</div>
 					</div>
-					<div class="content">
+					<div class="content col-75">
 						<div class="highlight_section-header">
 							<h3>A+S</h3>
 						</div>
@@ -154,12 +154,17 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 							        allowfullscreen></iframe>
 						</div>
 
-						<div class="highlight_section-header optin">
-							<h3>Keep up to Date</h3>
-						</div>
+						<!--						<div class="highlight_section-header optin">-->
+						<!--							<h3>Keep up to Date</h3>-->
+						<!--						</div>-->
 
-						<div class="optin-form">
-							<?php dynamic_sidebar('front-sign-up'); ?>
+						<div class="optin-form-wrap">
+							<div class="optin-header">
+								<h3>JOIN OUR MAILING LIST</h3>
+							</div>
+							<div class="optin-form">
+								<?php dynamic_sidebar('front-sign-up'); ?>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -211,8 +216,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 						<!--						<h2>Work With Us</h2>-->
 						<!--						<p>We positively encourage artists and producers to push the boundaries of what poetry and spoken word can be.</p>-->
 						<!--						<a href="#" class="more">FIND OUT HOW</a>-->
-						<h2>We positively encourage artists and producers to push the boundaries of what poetry and
-							spoken word can be.</h2>
+						<h2>We are instrumental in the development of extraordinary artists. Want to get involved in spoken word? You are in the right place.</h2>
 					</div>
 				</div>
 			</div>
@@ -221,13 +225,24 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 				<div class="container">
 					<div class="columns">
 
-						<div class="instagram-col col-50">
+						<div class="read-watch-listen-col col-75">
 							<div class="section_spotlight-header">
-								<h3>Instagram</h3>
+								<h3>READ, WATCH, LISTEN</h3>
 							</div>
 							<div class="section_content">
+								<div class="blog-post-types">
+									<a class="post-type-block" href="/articles/read/">
+										<span>Read</span>
+									</a>
+									<a class="post-type-block" href="/articles/watch/">
+										<span>Watch</span>
+									</a>
+									<a class="post-type-block" href="/articles/listen/">
+										<span>Listen</span>
+									</a>
+								</div>
 								<?php //echo do_shortcode( '[instagram-feed num=9 cols=3]' ); ?>
-								<?php echo do_shortcode('[jr_instagram id="2"]'); ?>
+								<?php //echo do_shortcode('[jr_instagram id="2"]'); ?>
 							</div>
 						</div>
 						

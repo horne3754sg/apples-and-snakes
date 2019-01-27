@@ -7,7 +7,7 @@
  * @package apples-and-snakes
  */
 
-if ( !function_exists('aas_setup')) :
+if (!function_exists('aas_setup')) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
@@ -75,9 +75,9 @@ if ( !function_exists('aas_setup')) :
 		 * @link https://codex.wordpress.org/Theme_Logo
 		 */
 		add_theme_support('custom-logo', array(
-			'height' => 250,
-			'width' => 250,
-			'flex-width' => true,
+			'height'      => 250,
+			'width'       => 250,
+			'flex-width'  => true,
 			'flex-height' => true,
 		));
 		
@@ -114,7 +114,7 @@ function order_events_by_meta_field($query)
 		$query->set('meta_query', array(
 			'relation' => 'OR',
 			array(
-				'key' => 'when_order',
+				'key'     => 'when_order',
 				'compare' => 'EXISTS'
 			),
 			//array(
@@ -139,73 +139,73 @@ add_action('pre_get_posts', 'order_events_by_meta_field');
 function aas_widgets_init()
 {
 	register_sidebar(array(
-		'name' => esc_html__('Sidebar', 'aas'),
-		'id' => 'sidebar-1',
-		'description' => esc_html__('Add widgets here.', 'aas'),
+		'name'          => esc_html__('Sidebar', 'aas'),
+		'id'            => 'sidebar-1',
+		'description'   => esc_html__('Add widgets here.', 'aas'),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget' => '</section>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	));
 	
 	register_sidebar(array(
-		'name' => esc_html__('Resources Left', 'aas'),
-		'id' => 'resources-left',
-		'description' => esc_html__('Add widgets here.', 'aas'),
+		'name'          => esc_html__('Resources Left', 'aas'),
+		'id'            => 'resources-left',
+		'description'   => esc_html__('Add widgets here.', 'aas'),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget' => '</section>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	));
 	
 	register_sidebar(array(
-		'name' => esc_html__('Resources Center', 'aas'),
-		'id' => 'resources-center',
-		'description' => esc_html__('Add widgets here.', 'aas'),
+		'name'          => esc_html__('Resources Center', 'aas'),
+		'id'            => 'resources-center',
+		'description'   => esc_html__('Add widgets here.', 'aas'),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget' => '</section>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	));
 	
 	register_sidebar(array(
-		'name' => esc_html__('Resources Right', 'aas'),
-		'id' => 'resources-right',
-		'description' => esc_html__('Add widgets here.', 'aas'),
+		'name'          => esc_html__('Resources Right', 'aas'),
+		'id'            => 'resources-right',
+		'description'   => esc_html__('Add widgets here.', 'aas'),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget' => '</section>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	));
 	
 	register_sidebar(array(
-		'name' => esc_html__('Twitter Feed', 'aas'),
-		'id' => 'twitter-feed',
-		'description' => esc_html__('Add widgets here.', 'aas'),
+		'name'          => esc_html__('Twitter Feed', 'aas'),
+		'id'            => 'twitter-feed',
+		'description'   => esc_html__('Add widgets here.', 'aas'),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget' => '</section>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	));
 	
 	register_sidebar(array(
-		'name' => esc_html__('Footer Sign Up', 'aas'),
-		'id' => 'footer-sign-up',
-		'description' => esc_html__('Add widgets here.', 'aas'),
+		'name'          => esc_html__('Footer Sign Up', 'aas'),
+		'id'            => 'footer-sign-up',
+		'description'   => esc_html__('Add widgets here.', 'aas'),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget' => '</section>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	));
 	
 	register_sidebar(array(
-		'name' => esc_html__('Front Sign Up', 'aas'),
-		'id' => 'front-sign-up',
-		'description' => esc_html__('Add widgets here.', 'aas'),
+		'name'          => esc_html__('Front Sign Up', 'aas'),
+		'id'            => 'front-sign-up',
+		'description'   => esc_html__('Add widgets here.', 'aas'),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget' => '</section>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	));
 }
 
@@ -216,7 +216,7 @@ add_action('widgets_init', 'aas_widgets_init');
  */
 function aas_scripts()
 {
-	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.0.5');
+	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.1');
 	
 	if (is_front_page())
 	{
@@ -236,7 +236,7 @@ function aas_scripts()
 
 add_action('wp_enqueue_scripts', 'aas_scripts');
 
-if ( !function_exists('fix_no_editor_on_posts_page'))
+if (!function_exists('fix_no_editor_on_posts_page'))
 {
 	
 	function fix_no_editor_on_posts_page($post_type, $post)
@@ -293,6 +293,7 @@ require get_template_directory() . '/inc/custom-post-types.php';
  * Custom Metaboxes & shortcodes
  */
 require get_template_directory() . '/inc/aas-metaboxes.php';
+require get_template_directory() . '/inc/opportunities-metabox.php';
 require get_template_directory() . '/inc/events-metabox.php';
 require get_template_directory() . '/inc/shortcodes.php';
 
@@ -339,26 +340,26 @@ class list_categories_widget extends WP_Widget
 			echo $before_title . $title . $after_title;
 		}
 		?>
-        <ul>
+		<ul>
 			<?php
 			global $post;
 			
 			$myposts = get_posts(array(
 				'posts_per_page' => $number,
-				'category' => $taxonomy
+				'category'       => $taxonomy
 			));
 			
 			if ($myposts)
 			{
 				foreach ($myposts as $post) :
 					setup_postdata($post); ?>
-                    <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+					<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
 				<?php
 				endforeach;
 				wp_reset_postdata();
 			}
 			?>
-        </ul>
+		</ul>
 		<?php echo $after_widget; ?>
 		<?php
 	}
@@ -382,20 +383,20 @@ class list_categories_widget extends WP_Widget
 		$taxonomy = !empty($instance['category']) ? esc_attr($instance['category']) : '';
 		//var_dump($taxonomy);
 		?>
-        <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>"
-                   name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>"/>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of categories to display'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('number'); ?>"
-                   name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>"/>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Choose the Category to display'); ?></label>
-            <select name="<?php echo $this->get_field_name('category'); ?>"
-                    id="<?php echo $this->get_field_id('category'); ?>" class="widefat">
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>"
+			       name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>"/>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of categories to display'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('number'); ?>"
+			       name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>"/>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Choose the Category to display'); ?></label>
+			<select name="<?php echo $this->get_field_name('category'); ?>"
+			        id="<?php echo $this->get_field_id('category'); ?>" class="widefat">
 				<?php
 				$categories = get_categories(array('hide_empty' => false));
 				if ($categories)
@@ -406,8 +407,8 @@ class list_categories_widget extends WP_Widget
 					}
 				}
 				?>
-            </select>
-        </p>
+			</select>
+		</p>
 		<?php
 	}
 } // end class list_categories_widget

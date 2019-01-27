@@ -19,6 +19,12 @@
 				<div class="footer-logo">
 					<img src="<?php echo get_template_directory_uri(); ?>/images/footer-logo.png" alt="">
 				</div>
+				<div class="footer-logo arts-council">
+					<img src="<?php echo get_template_directory_uri(); ?>/images/AC_logo_2.png" alt="">
+				</div>
+				<!--				<div class="description">-->
+				<!--					<p>Apples and Snakes is proud to be a National Portfolio Organisation and receive regular funding from Arts Council England.</p>-->
+				<!--				</div>-->
 			</div>
 			<div class="col">
 				<div class="address">
@@ -54,10 +60,12 @@
 <div class="section after-footer legal">
 	<div class="container">
 		<span class="copyright">© <?php echo date('Y'); ?> Apples and Snakes All rights reserved</span>
-		<span>|</span>
+		<span class="spacer">|</span>
 		<span><a href="/terms-conditions/">Terms and Conditions</a></span>
-		<span>|</span>
+		<span class="spacer">|</span>
 		<span><a href="/privacy-policy/">Privacy Policy</a></span>
+		<span class="charityNo">Charity Number: 294030</span>
+		<span class="companyReg">Company registration number: 1994850</span>
 	</div>
 </div>
 
@@ -102,6 +110,15 @@
 
 <?php wp_footer(); ?>
 
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">window.dojoRequire(['mojo/signup-forms/Loader'], function(L) {
+		L.start({
+			'baseUrl': 'mc.us16.list-manage.com',
+			'uuid': '625a4b2bd87829e08f7867ea5',
+			'lid': '0aff2faf7f',
+			'uniqueMethods': true
+		});
+	});</script>
 </body>
 </html>
 

@@ -221,6 +221,25 @@ $projects = array(
 );
 $project = new ZGS_CPT('project', $projects);
 
+// artist opportunities
+$artists = array(
+	'menu_position' => apply_filters('artist_opportunities_post_type_menu_position', 5),
+	'supports' => array('title', 'editor', 'thumbnail'),
+	//'taxonomies'           => array('category', 'post_tag'),
+	'hierarchical' => false,
+	'public' => true,
+	'show_ui' => true,
+	'show_in_menu' => true,
+	'show_in_admin_bar' => true,
+	'show_in_nav_menus' => true,
+	'can_export' => true,
+	'has_archive' => true,
+	'exclude_from_search' => false,
+	'publicly_queryable' => true,
+	'capability_type' => 'page',
+	'register_meta_box_cb' => 'aas_add_opportunity_metaboxes'
+);
+$artist = new ZGS_CPT('opportunities', $artists);
 
 // events
 $events = array(
@@ -239,29 +258,9 @@ $events = array(
 	'exclude_from_search' => false,
 	'publicly_queryable' => true,
 	'capability_type' => 'page',
-	'register_meta_box_cb' => 'aas_add_event_metaboxes',
+	'register_meta_box_cb' => 'aas_add_event_metaboxes'
 );
 $event = new ZGS_CPT('event', $events);
-
-// artist opportunities
-$artists = array(
-	'menu_position' => apply_filters('artist_opportunities_post_type_menu_position', 5),
-	'supports' => array('title', 'editor', 'thumbnail'),
-	//'taxonomies'           => array('category', 'post_tag'),
-	'hierarchical' => false,
-	'public' => true,
-	'show_ui' => true,
-	'show_in_menu' => true,
-	'show_in_admin_bar' => true,
-	'show_in_nav_menus' => true,
-	'can_export' => true,
-	'has_archive' => true,
-	'exclude_from_search' => false,
-	'publicly_queryable' => true,
-	'capability_type' => 'page',
-	//'register_meta_box_cb' => 'aas_add_event_metaboxes',
-);
-$artist = new ZGS_CPT('opportunities', $artists);
 
 // spotlight opportunities
 $spotlights = array(
