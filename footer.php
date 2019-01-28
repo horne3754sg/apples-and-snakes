@@ -53,7 +53,7 @@
 
 <div class="section after-footer quote">
 	<div class="container">
-		<img src="<?php echo get_template_directory_uri(); ?>/images/NO%20WORD%20UNSPOKEN.svg" alt="">
+		<img src="<?php echo get_template_directory_uri(); ?>/images/no-words-unspoken.png" alt="">
 	</div>
 </div>
 

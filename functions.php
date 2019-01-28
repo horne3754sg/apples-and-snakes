@@ -216,7 +216,7 @@ add_action('widgets_init', 'aas_widgets_init');
  */
 function aas_scripts()
 {
-	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.1');
+	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.1.3');
 	
 	if (is_front_page())
 	{

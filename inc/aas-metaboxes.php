@@ -17,7 +17,7 @@ if (is_admin())
 	
 	// who weve worked with
 	//if ('post.php' == $pagenow && '70' == $post_id)
-		if ('post.php' == $pagenow && '241' == $post_id)
+	if ('post.php' == $pagenow && '241' == $post_id)
 	{
 		$prefix = 'client_';
 		
@@ -139,7 +139,7 @@ if (is_admin())
 	
 	$front_id = get_option('page_on_front');
 	if ('post.php' == $pagenow && $front_id == $post_id)
-	//if ('post.php' == $pagenow && '238' == $post_id)
+		//if ('post.php' == $pagenow && '238' == $post_id)
 	{
 		$prefix = 'front_slider_';
 		

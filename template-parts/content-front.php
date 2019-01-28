@@ -62,7 +62,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 			<div class="events_section">
 
 				<div class="quote-text mobile">
-					<span>Apples and Snakes, spoken word trailblazers, with artists at our heart.</span>
+					<span>WE ARE SPOKEN WORD TRAILBLAZERS, WITH ARTISTS AT OUR HEART.</span>
 				</div>
 
 				<div class="events_section-header">
@@ -86,7 +86,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 						while ($related_posts->have_posts()) : $related_posts->the_post();
 							if ($count == 2) : ?>
 								<div class="quote-text">
-									<span>Apples and Snakes, spoken word trailblazers, with artists at our heart.</span>
+									<span>WE ARE SPOKEN WORD TRAILBLAZERS, WITH ARTISTS AT OUR HEART.</span>
 								</div>
 							<?php
 							endif;
@@ -216,7 +216,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 						<!--						<h2>Work With Us</h2>-->
 						<!--						<p>We positively encourage artists and producers to push the boundaries of what poetry and spoken word can be.</p>-->
 						<!--						<a href="#" class="more">FIND OUT HOW</a>-->
-						<h2>We are instrumental in the development of extraordinary artists. Want to get involved in spoken word? You are in the right place.</h2>
+						<h2>We champion the development of extraordinary artists. Want to get involved in spoken word? You are in the right place.</h2>
 					</div>
 				</div>
 			</div>

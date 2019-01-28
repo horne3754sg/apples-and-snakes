@@ -10,7 +10,7 @@
 	font-family: 'clanpro';
 	src: url('#{$path}fonts/clanpro/ClanPro-Medium.woff2') format('woff2'),
 	url('#{$path}fonts/clanpro/ClanPro-Medium.woff') format('woff');
-	font-weight: normal;
+	font-weight: 500;
 	font-style: normal;
 }
 
@@ -18,7 +18,7 @@
 	font-family: 'clanpro';
 	src: url('#{$path}fonts/clanpro/ClanPro-Bold.woff2') format('woff2'),
 	url('#{$path}fonts/clanpro/ClanPro-Bold.woff') format('woff');
-	font-weight: bold;
+	font-weight: 600;
 	font-style: normal;
 }
 

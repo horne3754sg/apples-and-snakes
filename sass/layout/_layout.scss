@@ -307,8 +307,10 @@
 			position: relative;
 
 			&:before {
+				content: '';
 				display: flex;
-				content: url("images/18circle_arrow.png");
+				background-image: url("images/18circle_arrow.png");
+				background-size: contain;
 				margin-right: 10px;
 				width: 30px;
 				height: 30px;
@@ -508,7 +510,7 @@ body.single-event {
 	}
 }
 
-body.green-scheme,
+body.orange-scheme,
 body.single-project,
 body.single-case_studies,
 body.post-type-archive-project,
@@ -518,6 +520,16 @@ body.post-type-archive-case_studies {
 	}
 
 	.section {
+		&.header {
+			.button.donate {
+				background: $c2;
+
+				&:before {
+					background-image: url("images/15circle_arrow.png");
+				}
+			}
+		}
+
 		.header-container {
 			&:before {
 				background-color: $c2;
@@ -538,6 +550,7 @@ body.post-type-archive-case_studies {
 
 			blockquote {
 				color: $c2;
+				border-color: $c2;
 			}
 		}
 
@@ -545,7 +558,7 @@ body.post-type-archive-case_studies {
 			color: $c2;
 		}
 
-		.archive-post-columns {
+		.archive-post-columns, .archive-project-posts {
 			.content-col {
 				.entry-content {
 					h2 {
@@ -628,6 +641,16 @@ body.post-type-archive-opportunities {
 	}
 
 	.section {
+		&.header {
+			.button.donate {
+				background: $c4;
+
+				&:before {
+					background-image: url("images/21circle_arrow.png");
+				}
+			}
+		}
+
 		.header-container {
 			&:before {
 				background-color: $c4;
@@ -648,6 +671,7 @@ body.post-type-archive-opportunities {
 
 			blockquote {
 				color: $c4;
+				border-color: $c4;
 			}
 		}
 
@@ -655,7 +679,7 @@ body.post-type-archive-opportunities {
 			color: $c4;
 		}
 
-		.archive-post-columns {
+		.archive-post-columns, .archive-project-posts {
 			.content-col {
 				.entry-content {
 					h2 {
@@ -723,6 +747,363 @@ body.post-type-archive-opportunities {
 					&:hover {
 						color: $c4;
 						border: 2px solid $c4;
+					}
+				}
+			}
+		}
+	}
+}
+
+body.blue-scheme {
+	.main-navigation a.menu-toggle .menu-icon {
+		background-color: $c5;
+	}
+
+	.section {
+		&.header {
+			.button.donate {
+				background: $c5;
+
+				&:before {
+					background-image: url("images/20circle_arrow.png");
+				}
+			}
+		}
+
+		.header-container {
+			&:before {
+				background-color: $c5;
+			}
+		}
+
+		.entry-content {
+			margin-top: 0;
+
+			h2, h3, h4 {
+				color: $c5;
+			}
+
+			.button {
+				border-color: $c5;
+				color: $c5;
+			}
+
+			blockquote {
+				color: $c5;
+				border-color: $c5;
+			}
+		}
+
+		.archive-description {
+			color: $c5;
+		}
+
+		.archive-post-columns, .archive-project-posts {
+			.content-col {
+				.entry-content {
+					h2 {
+						a:hover {
+							color: $c5;
+						}
+					}
+				}
+			}
+		}
+
+		.archive-project-posts {
+			a {
+				color: $c5;
+				text-decoration: none;
+			}
+
+			.image-col img {
+				width: 100%;
+			}
+
+			.entry-title {
+				font-family: $font_header_round;
+				font-size: 26px;
+				line-height: 28px;
+
+				a {
+					color: #404040;
+				}
+			}
+		}
+
+		.aas-share-this {
+			background: $c5;
+		}
+
+		.post-content-columns {
+			.col .col-header {
+				h3 {
+					color: $c5;
+				}
+
+				&:after {
+					background: $c5;
+				}
+			}
+
+			.col-related-content .related_posts .single_related .related_content::before {
+				background-color: $c5;
+			}
+		}
+
+		.post-content-columns .post_list .post-item a {
+			&:hover {
+				color: $c5;
+			}
+		}
+
+		.cat_nav {
+			li {
+				a {
+					color: #d8d8d8;
+					border: 2px solid #d8d8d8;
+
+					&:hover {
+						color: $c5;
+						border: 2px solid $c5;
+					}
+				}
+			}
+		}
+	}
+}
+
+body.yellow-scheme {
+	.main-navigation a.menu-toggle .menu-icon {
+		background-color: $c6;
+	}
+
+	.section {
+		&.header {
+			.button.donate {
+				background: $c6;
+
+				&:before {
+					background-image: url("images/17circle_arrow.png");
+				}
+			}
+		}
+
+		.header-container {
+			&:before {
+				background-color: $c6;
+			}
+		}
+
+		.entry-content {
+			margin-top: 0;
+
+			h2, h3, h4 {
+				color: $c6;
+			}
+
+			.button {
+				border-color: $c6;
+				color: $c6;
+			}
+
+			blockquote {
+				color: $c6;
+				border-color: $c6;
+			}
+		}
+
+		.archive-description {
+			color: $c6;
+		}
+
+		.archive-post-columns, .archive-project-posts {
+			.content-col {
+				.entry-content {
+					h2 {
+						a:hover {
+							color: $c6;
+						}
+					}
+				}
+			}
+		}
+
+		.archive-project-posts {
+			a {
+				color: $c6;
+				text-decoration: none;
+			}
+
+			.image-col img {
+				width: 100%;
+			}
+
+			.entry-title {
+				font-family: $font_header_round;
+				font-size: 26px;
+				line-height: 28px;
+
+				a {
+					color: #404040;
+				}
+			}
+		}
+
+		.aas-share-this {
+			background: $c6;
+		}
+
+		.post-content-columns {
+			.col .col-header {
+				h3 {
+					color: $c6;
+				}
+
+				&:after {
+					background: $c6;
+				}
+			}
+
+			.col-related-content .related_posts .single_related .related_content::before {
+				background-color: $c6;
+			}
+		}
+
+		.post-content-columns .post_list .post-item a {
+			&:hover {
+				color: $c6;
+			}
+		}
+
+		.cat_nav {
+			li {
+				a {
+					color: #d8d8d8;
+					border: 2px solid #d8d8d8;
+
+					&:hover {
+						color: $c6;
+						border: 2px solid $c6;
+					}
+				}
+			}
+		}
+	}
+}
+
+body.peach-scheme {
+	.main-navigation a.menu-toggle .menu-icon {
+		background-color: $c7;
+	}
+
+	.section {
+		&.header {
+			.button.donate {
+				background: $c7;
+
+				&:before {
+					background-image: url("images/16circle_arrow.png");
+				}
+			}
+		}
+
+		.header-container {
+			&:before {
+				background-color: $c7;
+			}
+		}
+
+		.entry-content {
+			margin-top: 0;
+
+			h2, h3, h4 {
+				color: $c7;
+			}
+
+			.button {
+				border-color: $c7;
+				color: $c7;
+			}
+
+			blockquote {
+				color: $c7;
+				border-color: $c7;
+			}
+		}
+
+		.archive-description {
+			color: $c7;
+		}
+
+		.archive-post-columns, .archive-project-posts {
+			.content-col {
+				.entry-content {
+					h2 {
+						a:hover {
+							color: $c7;
+						}
+					}
+				}
+			}
+		}
+
+		.archive-project-posts {
+			a {
+				color: $c7;
+				text-decoration: none;
+			}
+
+			.image-col img {
+				width: 100%;
+			}
+
+			.entry-title {
+				font-family: $font_header_round;
+				font-size: 26px;
+				line-height: 28px;
+
+				a {
+					color: #404040;
+				}
+			}
+		}
+
+		.aas-share-this {
+			background: $c7;
+		}
+
+		.post-content-columns {
+			.col .col-header {
+				h3 {
+					color: $c7;
+				}
+
+				&:after {
+					background: $c7;
+				}
+			}
+
+			.col-related-content .related_posts .single_related .related_content::before {
+				background-color: $c7;
+			}
+		}
+
+		.post-content-columns .post_list .post-item a {
+			&:hover {
+				color: $c7;
+			}
+		}
+
+		.cat_nav {
+			li {
+				a {
+					color: #d8d8d8;
+					border: 2px solid #d8d8d8;
+
+					&:hover {
+						color: $c7;
+						border: 2px solid $c7;
 					}
 				}
 			}
@@ -966,7 +1347,7 @@ body.archive, body.blog {
 		font-size: 20px;
 	}
 
-	.archive-post-columns {
+	.archive-post-columns, .archive-project-posts {
 		display: flex;
 
 		.image-col {
@@ -1579,7 +1960,7 @@ body.blog {
 		margin-bottom: 30px;
 
 		span {
-			font-size: 40px;
+			font-size: 46px;
 			line-height: 1.1;
 			color: $c1;
 			width: 500px;
@@ -2128,6 +2509,7 @@ body.blog {
 
 	img {
 		margin-top: -1px;
+		margin-bottom: -1px;
 	}
 
 	&.quote {
