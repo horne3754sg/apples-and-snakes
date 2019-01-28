@@ -122,7 +122,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 				</div>
 
 				<div class="button-wrap">
-					<a href="/events/" class="button right red">More</a>
+					<a href="/whats-on/" class="button right red">More</a>
 				</div>
 			</div>
 

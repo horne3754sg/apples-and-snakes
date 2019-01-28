@@ -530,6 +530,12 @@ body.post-type-archive-case_studies {
 			}
 		}
 
+		.highlight-header-container .header-content {
+			&:before {
+				background-color: $c2;
+			}
+		}
+
 		.header-container {
 			&:before {
 				background-color: $c2;
@@ -648,6 +654,12 @@ body.post-type-archive-opportunities {
 				&:before {
 					background-image: url("images/21circle_arrow.png");
 				}
+			}
+		}
+
+		.highlight-header-container .header-content {
+			&:before {
+				background-color: $c4;
 			}
 		}
 
@@ -770,6 +782,12 @@ body.blue-scheme {
 			}
 		}
 
+		.highlight-header-container .header-content {
+			&:before {
+				background-color: $c5;
+			}
+		}
+
 		.header-container {
 			&:before {
 				background-color: $c5;
@@ -889,6 +907,12 @@ body.yellow-scheme {
 			}
 		}
 
+		.highlight-header-container .header-content {
+			&:before {
+				background-color: $c6;
+			}
+		}
+
 		.header-container {
 			&:before {
 				background-color: $c6;
@@ -1005,6 +1029,12 @@ body.peach-scheme {
 				&:before {
 					background-image: url("images/16circle_arrow.png");
 				}
+			}
+		}
+
+		.highlight-header-container .header-content {
+			&:before {
+				background-color: $c7;
 			}
 		}
 

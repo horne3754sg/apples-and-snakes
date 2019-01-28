@@ -26,12 +26,17 @@ function aas_body_classes($classes)
 		$classes[] = 'no-sidebar';
 	}
 	
-	if (is_page('artist-resources'))
+	if (is_page('artist-resources') || is_post_type_archive('spotlight') || is_singular('spotlight') || is_tax('opportunities_type'))
 	{
 		$classes[] = 'green-scheme';
 	}
 	
 	if (is_post_type_archive('project') || is_singular('project'))
+	{
+		$classes[] = 'blue-scheme';
+	}
+	
+	if (is_post_type_archive('event') || is_singular('event') || is_tax('event_location'))
 	{
 		$classes[] = 'orange-scheme';
 	}
