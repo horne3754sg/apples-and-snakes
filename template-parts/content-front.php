@@ -209,7 +209,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 							?>
 						</div>
 						<div class="button-wrap">
-							<a href="/project/" class="button right orange">More</a>
+							<a href="/project/" class="button right blue">More</a>
 						</div>
 					</div>
 					<div class="col work-with-us">

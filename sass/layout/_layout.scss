@@ -636,6 +636,19 @@ body.post-type-archive-case_studies {
 				}
 			}
 		}
+
+		.columns .sidebar .event-meta .meta-header {
+			color: $c2;
+
+			&:after {
+				background: $c2;
+			}
+		}
+
+		.tickets_link {
+			color: $c2;
+			border-color: $c2;
+		}
 	}
 }
 
@@ -763,6 +776,19 @@ body.post-type-archive-opportunities {
 				}
 			}
 		}
+
+		.columns .sidebar .event-meta .meta-header {
+			color: $c4;
+
+			&:after {
+				background: $c4;
+			}
+		}
+
+		.tickets_link {
+			color: $c4;
+			border-color: $c4;
+		}
 	}
 }
 
@@ -887,6 +913,19 @@ body.blue-scheme {
 					}
 				}
 			}
+		}
+
+		.columns .sidebar .event-meta .meta-header {
+			color: $c5;
+
+			&:after {
+				background: $c5;
+			}
+		}
+
+		.tickets_link {
+			color: $c5;
+			border-color: $c5;
 		}
 	}
 }
@@ -1013,6 +1052,19 @@ body.yellow-scheme {
 				}
 			}
 		}
+
+		.columns .sidebar .event-meta .meta-header {
+			color: $c6;
+
+			&:after {
+				background: $c6;
+			}
+		}
+
+		.tickets_link {
+			color: $c6;
+			border-color: $c6;
+		}
 	}
 }
 
@@ -1137,6 +1189,19 @@ body.peach-scheme {
 					}
 				}
 			}
+		}
+
+		.columns .sidebar .event-meta .meta-header {
+			color: $c7;
+
+			&:after {
+				background: $c7;
+			}
+		}
+
+		.tickets_link {
+			color: $c7;
+			border-color: $c7;
 		}
 	}
 }
@@ -2303,7 +2368,7 @@ body.blog {
 				bottom: 30px;
 				left: 30px;
 				right: 30px;
-				background-color: $c2;
+				background-color: $c5;
 				mix-blend-mode: multiply;
 				opacity: 0.85;
 			}

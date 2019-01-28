@@ -70,8 +70,9 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						
 						<?php
 						$when = get_post_meta(get_the_ID(), 'when', true);
-						$address = get_post_meta(get_the_ID(), 'address', true);
-						if (!empty($when) || !empty($address))
+						$time = get_post_meta(get_the_ID(), 'time', true);
+						
+						if (!empty($when) || !empty($time))
 						{
 							?>
 							<div class="meta-section">
@@ -81,7 +82,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								<div class="meta-info">
 									<?php
 									echo ($when) ? '<span class="when">' . $when . '</span>' : '';
-									echo ($address) ? '<span class="address">' . $address . '</span>' : '';
+									echo ($time) ? '<span class="time">' . $time . '</span>' : '';
 									?>
 								</div>
 							</div>
@@ -89,7 +90,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						
 						<?php
 						$where = get_post_meta(get_the_ID(), 'where', true);
-						$time = get_post_meta(get_the_ID(), 'time', true);
+						$address = get_post_meta(get_the_ID(), 'address', true);
 						if (!empty($where) || !empty($address))
 						{
 							?>
@@ -100,7 +101,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								<div class="meta-info">
 									<?php
 									echo ($where) ? '<span class="where">' . $where . '</span>' : '';
-									echo ($time) ? '<span class="time">' . $time . '</span>' : '';
+									echo ($address) ? '<span class="address">' . $address . '</span>' : '';
 									?>
 								</div>
 							</div>

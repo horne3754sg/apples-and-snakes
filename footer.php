@@ -40,7 +40,7 @@
 				<a class="button" href="/keep-in-touch/">CONTACT</a>
 			</div>
 			<div class="col">
-				<h3>KEEP UP TO DATE!</h3>
+				<h3>JOIN OUR MAILING LIST</h3>
 				<?php dynamic_sidebar('footer-sign-up'); ?>
 			</div>
 			<div class="col">

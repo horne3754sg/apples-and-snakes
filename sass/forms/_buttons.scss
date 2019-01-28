@@ -43,6 +43,16 @@ input[type="submit"] {
 			border-color: #404040;
 		}
 	}
+
+	&.blue {
+		color: $c5;
+		border-color: $c5;
+
+		&:hover {
+			color: #404040;
+			border-color: #404040;
+		}
+	}
 }
 
 .button-wrap {
