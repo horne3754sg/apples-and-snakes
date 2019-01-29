@@ -26,7 +26,8 @@ function aas_body_classes($classes)
 		$classes[] = 'no-sidebar';
 	}
 	
-	if (is_page('artist-resources') || is_post_type_archive('spotlight') || is_singular('spotlight') || is_tax('opportunities_type'))
+	if (is_page('artist-resources') || is_post_type_archive('spotlight') || is_singular('spotlight') ||
+		is_tax('opportunities_type')  || is_category(array('finance', 'how-to', 'performing')) || has_category(array('finance', 'how-to', 'performing')))
 	{
 		$classes[] = 'green-scheme';
 	}
