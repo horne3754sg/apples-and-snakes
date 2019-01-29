@@ -510,11 +510,7 @@ body.single-event {
 	}
 }
 
-body.orange-scheme,
-body.single-project,
-body.single-case_studies,
-body.post-type-archive-project,
-body.post-type-archive-case_studies {
+body.orange-scheme {
 	.main-navigation a.menu-toggle .menu-icon {
 		background-color: $c2;
 	}
@@ -1302,22 +1298,6 @@ body.peach-scheme {
 				font-size: 26px;
 				line-height: 28px;
 				margin-bottom: 30px;
-			}
-
-			img {
-				margin-bottom: 30px;
-			}
-
-			blockquote {
-				font-size: 36px;
-				line-height: 45px;
-				color: $c1;
-				font-weight: 400;
-				position: relative;
-				font-family: $font_header_round;
-				border-left: 5px solid $c1;
-				margin: 0;
-				padding-left: 20px;
 			}
 		}
 	}

@@ -32,7 +32,7 @@ function aas_body_classes($classes)
 		$classes[] = 'green-scheme';
 	}
 	
-	if (is_post_type_archive('project') || is_singular('project'))
+	if (is_post_type_archive('project') || is_singular('project') || is_post_type_archive('spines') || is_singular('spines') || is_tax('spine_type'))
 	{
 		$classes[] = 'blue-scheme';
 	}

@@ -290,6 +290,8 @@ $spines = array(
 	//'taxonomies'           => array('category', 'post_tag'),
 	'hierarchical'        => false,
 	'public'              => true,
+	'rewrite'             => array('slug' => 'spine/%year%'),
+	//'rewrite'             => true,
 	'show_ui'             => true,
 	'show_in_menu'        => true,
 	'show_in_admin_bar'   => true,
@@ -435,10 +437,35 @@ function events()
 		'show_ui'           => true,
 		'show_admin_column' => true,
 		'query_var'         => true,
-		'rewrite'           => array('slug' => 'spine-type'),
+		'rewrite'           => array('slug' => 'spine'),
 	);
 	
 	register_taxonomy('spine_type', array('spines'), $args);
 }
 
 add_action('init', 'events', 0);
+
+
+add_permastruct(
+	'spines',
+	"/spine/%year%/%spines%/",
+	array('with_front' => false)
+);
+
+add_rewrite_rule(
+	'^spines/([0-9]{4})/?$',
+	'index.php?post_type=spines&year=$matches[1]',
+	'top'
+);
+
+function spines_permalinks($url, $post)
+{
+	if ('spines' == get_post_type($post))
+	{
+		$url = str_replace("%year%", get_the_date('Y'), $url);
+	}
+	
+	return $url;
+}
+
+add_filter('post_type_link', 'spines_permalinks', 10, 2);

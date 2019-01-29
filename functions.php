@@ -109,6 +109,7 @@ function order_events_by_meta_field($query)
 	{
 		return;
 	}
+	
 	if (is_post_type_archive('event'))
 	{
 		$query->set('meta_query', array(
@@ -122,9 +123,7 @@ function order_events_by_meta_field($query)
 			//	'compare' => 'NOT EXISTS'
 			//)
 		));
-		
 		$query->set('orderby', 'when_order');
-		
 		$query->set('order', 'ASC');
 	}
 }
@@ -216,7 +215,7 @@ add_action('widgets_init', 'aas_widgets_init');
  */
 function aas_scripts()
 {
-	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.1.4');
+	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.1.7');
 	
 	if (is_front_page())
 	{
