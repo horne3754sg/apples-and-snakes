@@ -245,7 +245,7 @@ $artist = new ZGS_CPT('opportunities', $artists);
 $events = array(
 	'menu_position'        => apply_filters('events_post_type_menu_position', 5),
 	'supports'             => array('title', 'editor', 'thumbnail'),
-	'taxonomies'           => array('category', 'post_tag'),
+	//'taxonomies'           => array('category', 'post_tag'),
 	'hierarchical'         => false,
 	'public'               => true,
 	'rewrite'              => array('slug' => 'whats-on'),
@@ -469,3 +469,20 @@ function spines_permalinks($url, $post)
 }
 
 add_filter('post_type_link', 'spines_permalinks', 10, 2);
+
+
+function spine_create_my_taxonomy()
+{
+	
+	register_taxonomy(
+		'event-category',
+		'event',
+		array(
+			'label'        => __('Event Category'),
+			'rewrite'      => array('slug' => 'event-category'),
+			'hierarchical' => true,
+		)
+	);
+}
+
+add_action('init', 'spine_create_my_taxonomy');

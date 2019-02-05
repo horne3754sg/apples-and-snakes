@@ -104,15 +104,22 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 										<a href="<?php echo get_post_type_archive_link('event'); ?>">All</a>
 									</li>
 									<?php
+									$past_events = '';
 									foreach ($event_location as $location)
 									{
-										//var_dump($type);
-										?>
-										<li>
-											<a href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
-										</li>
-										<?php
+										if ($location->name == 'Past Events')
+										{
+											$past_events = '<li><a href="' . get_term_link($location->term_id) . '">' . $location->name . '</a></li>';
+										} else
+										{
+											?>
+											<li>
+												<a href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
+											</li>
+											<?php
+										}
 									}
+									echo $past_events;
 									echo '</ul>';
 									}
 									}
