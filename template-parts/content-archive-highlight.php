@@ -35,4 +35,4 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 			</header><!-- .entry-header -->
 		</a>
 	</div>
-</article><!-- #post-<?php the_ID(); ?> -->
+</article>

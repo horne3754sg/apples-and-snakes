@@ -435,8 +435,10 @@
 				display: block;
 
 				.col {
-					margin-left: 10px;
-					margin-right: 10px;
+					margin-left: 0;
+					margin-right: 0;
+					padding-left: 0;
+					padding-right: 0;
 				}
 			}
 		}
@@ -813,6 +815,7 @@ body.blue-scheme {
 		.header-container {
 			&:before {
 				background-color: $c5;
+				opacity: 0.75;
 			}
 		}
 
@@ -1503,6 +1506,19 @@ body.archive, body.blog {
 
 	.spacing {
 		height: 150px;
+	}
+
+	.featured_content_mobile {
+		display: none;
+	}
+
+	@media (max-width: 600px) {
+		.featured_content_desktop {
+			display: none;
+		}
+		.featured_content_mobile {
+			display: block;
+		}
 	}
 }
 
@@ -2350,7 +2366,7 @@ body.blog {
 				right: 30px;
 				background-color: $c5;
 				mix-blend-mode: multiply;
-				opacity: 0.85;
+				opacity: 0.75;
 			}
 		}
 	}

@@ -95,14 +95,18 @@
 			?>
 		</div>
 		<div class="social_info">
-			<a href="#" class="social_icon"><img
-						src="<?php echo get_template_directory_uri(); ?>/images/facebook-red.png" alt=""></a>
-			<a href="#" class="social_icon"><img
-						src="<?php echo get_template_directory_uri(); ?>/images/twitter-red.png" alt=""></a>
-			<a href="#" class="social_icon"><img
-						src="<?php echo get_template_directory_uri(); ?>/images/instagram-red.png" alt=""></a>
-			<a href="#" class="social_icon"><img
-						src="<?php echo get_template_directory_uri(); ?>/images/You%20tube%20red.png" alt=""></a>
+			<a class="social_icon" href="https://www.facebook.com/applesandsnakes/" target="_blank" rel="noopener noopener" class="social_icon">
+				<img src="<?php echo get_template_directory_uri(); ?>/images/facebook-red.png" alt="">
+			</a>
+			<a class="social_icon" href="https://twitter.com/applesandsnakes" target="_blank" rel="noopener noopener" class="social_icon">
+				<img src="<?php echo get_template_directory_uri(); ?>/images/twitter-red.png" alt="">
+			</a>
+			<a class="social_icon" href="https://www.instagram.com/applesandsnakes/" target="_blank" rel="noopener noopener" class="social_icon">
+				<img src="<?php echo get_template_directory_uri(); ?>/images/instagram-red.png" alt="">
+			</a>
+			<a class="social_icon" href="https://www.youtube.com/user/applesandsnakes/" target="_blank" rel="noopener noopener" class="social_icon">
+				<img src="<?php echo get_template_directory_uri(); ?>/images/You%20tube%20red.png" alt="">
+			</a>
 		</div>
 	</div>
 </div>

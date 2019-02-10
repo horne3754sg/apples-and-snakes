@@ -167,7 +167,12 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 								
 								if ($count == 0)
 								{
+									echo '<div class="featured_content_desktop">';
 									get_template_part('template-parts/content', 'archive-highlight');
+									echo '</div>';
+									echo '<div class="featured_content_mobile">';
+									get_template_part('template-parts/content', 'archive-posts');
+									echo '</div>';
 								}
 								else
 								{
