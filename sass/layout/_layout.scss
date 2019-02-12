@@ -18,6 +18,7 @@
 		padding: 30px 40px;
 		width: inherit;
 		max-width: inherit;
+		overflow-x: hidden;
 	}
 
 	.close {
@@ -1387,6 +1388,10 @@ body.archive, body.blog {
 		line-height: 34px;
 		margin-bottom: 60px;
 
+		h1 {
+			line-height: 1;
+		}
+
 		> :last-child {
 			margin-bottom: 0;
 		}
@@ -2470,11 +2475,11 @@ body.blog {
 
 				.post-type-block {
 					height: 0;
-					padding-bottom: 30%;
+					padding-bottom: calc(33.33333% - 20px);
 					flex: 0 1 33.3333%;
 					background: $c1;
 					color: $c3;
-					margin: 14px;
+					margin: 10px;
 					text-decoration: none;
 					position: relative;
 					display: block;
@@ -2534,6 +2539,10 @@ body.blog {
 		display: flex;
 		align-items: center;
 		margin-bottom: 30px;
+
+		&.margin-40 {
+			margin-bottom: 40px;
+		}
 
 		h3 {
 			color: $c3;

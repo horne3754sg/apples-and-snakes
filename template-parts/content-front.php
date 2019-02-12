@@ -129,7 +129,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 			<div class="highlight_section">
 				<div class="columns">
 					<div class="col-25">
-						<div class="quote-text"><span>By bringing together important voices in interesting ways, we create inspiring experiences for audiences.</span></div>
+						<div class="quote-text"><span>By bringing together important voices in interesting ways, we create inspiring experiences for audiences.</span>
+						</div>
 						<div class="support-us">
 							<div class="section_spotlight-header">
 								<h3>Support Us</h3>
@@ -216,7 +217,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 						<!--						<h2>Work With Us</h2>-->
 						<!--						<p>We positively encourage artists and producers to push the boundaries of what poetry and spoken word can be.</p>-->
 						<!--						<a href="#" class="more">FIND OUT HOW</a>-->
-						<h2>We champion the development of extraordinary artists. Want to get involved in spoken word? You are in the right place.</h2>
+						<h2>We champion the development of extraordinary artists. Want to get involved in spoken word?
+							You are in the right place.</h2>
 					</div>
 				</div>
 			</div>
@@ -264,12 +266,14 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 							$spotlight_image = get_the_post_thumbnail_url($recent_posts[0]['ID']);
 							?>
 							<div class="spotlight col-25">
-								<div class="section_spotlight-header">
+								<div class="section_spotlight-header margin-40">
 									<h3>Spotlight</h3>
 								</div>
-								<a class="section_content" href="<?php echo get_the_permalink($recent_posts[0]['ID']); ?>">
-									<img src="<?php echo $spotlight_image; ?>" alt="">
-								</a>
+								<div>
+									<a class="section_content" href="<?php echo get_the_permalink($recent_posts[0]['ID']); ?>">
+										<img src="<?php echo $spotlight_image; ?>" alt="">
+									</a>
+								</div>
 							</div>
 							<?php
 							
