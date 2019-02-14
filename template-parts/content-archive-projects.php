@@ -22,12 +22,12 @@ $header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnai
 		<div class="content-col">
 			<div class="entry-content">
 				<?php
-				if (is_post_type_archive('project')) :
+				if (is_post_type_archive('project') || is_tax('event_location')) :
 					$locations = wp_get_post_terms(get_the_ID(), 'event_location');
 					if (!empty($locations)) :
 						echo '<span class="event-location">' . __('Project') . '/' . $locations[0]->name . '</span>';
 					endif;
-				elseif (is_post_type_archive('case_studies')) :
+				elseif (is_post_type_archive('case_studies') || is_tax('event_location')) :
 					$cs_location = wp_get_post_terms(get_the_ID(), 'case_study_location');
 					if (!empty($cs_location)) :
 						echo '<span class="event-location">' . __('Case Study') . '/' . $cs_location[0]->name . '</span>';
@@ -43,7 +43,7 @@ $header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnai
 					the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
 				endif;
 				
-				if (is_post_type_archive('event')) :
+				if (is_post_type_archive('event') || is_tax('event_location')) :
 					$when_featured = get_post_meta(get_the_ID(), 'when_featured', true);
 					if (!empty($when_featured)) :
 						echo '<span class="event-featured-time">' . $when_featured . '</span>';

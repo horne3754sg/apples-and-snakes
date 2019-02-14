@@ -39,8 +39,8 @@
 					the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
 				endif;
 				
-				if (is_post_type_archive('event')) :
-					$when_featured = get_post_meta(get_the_ID(), 'when_featured', true);
+				if (is_post_type_archive('event') || is_tax('event_location')) :
+					$when_featured = get_post_meta($post->ID, 'when_featured', true);
 					if (!empty($when_featured)) :
 						echo '<span class="event-featured-time">' . $when_featured . '</span>';
 					endif;

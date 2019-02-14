@@ -14,9 +14,9 @@
 	<div class="archive-post-columns">
 		<div class="image-col">
 			<?php if (has_post_thumbnail()) : ?>
-                <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 					<?php the_post_thumbnail(); ?>
-                </a>
+				</a>
 			<?php endif; ?>
 		</div>
 		<div class="content-col">
@@ -38,7 +38,12 @@
 					the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
 				endif;
 				
-				echo '<span class="post-date">' . get_the_date('D j M Y') . '</span>';
+				$when_featured = get_post_meta(get_the_ID(), 'when_featured', true);
+				if (!empty($when_featured)) :
+					echo '<span class="event-featured-time">' . $when_featured . '</span>';
+				endif;
+				
+				//echo '<span class="post-date">' . get_the_date('D j M Y') . '</span>';
 				
 				echo '<a href="' . get_the_permalink() . '" class="button">' . __('More') . '</a>';
 				?>
