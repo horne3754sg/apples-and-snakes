@@ -110,7 +110,12 @@ function order_events_by_meta_field($query)
 		return;
 	}
 	
-	if (is_post_type_archive('event'))
+	if(!empty($query->query['event_location']) && $query->query['event_location'] == 'past-events') {
+		return;
+	}
+	//var_dump($query->query['event_location']);
+	
+	if ((is_post_type_archive('event') || is_tax('event_location')))
 	{
 		$query->set('meta_query', array(
 			'relation' => 'OR',
@@ -118,13 +123,25 @@ function order_events_by_meta_field($query)
 				'key'     => 'when_order',
 				'compare' => 'EXISTS'
 			),
-			//array(
-			//	'key'     => 'when_order',
-			//	'compare' => 'NOT EXISTS'
-			//)
+			array(
+				'taxonomy' => 'event_location',
+				'field'    => 'id',
+				'terms'    => array(26),
+				'operator' => 'NOT IN'
+			)
 		));
 		$query->set('orderby', 'when_order');
 		$query->set('order', 'ASC');
+		
+		$query->set('tax_query', array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'event_location',
+				'field'    => 'id',
+				'terms'    => array(26),
+				'operator' => 'NOT IN'
+			)
+		));
 	}
 }
 

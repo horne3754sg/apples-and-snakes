@@ -93,8 +93,8 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 								{
 								$event_location = get_terms('event_location', array(
 									'hide_empty' => true,
-									'orderby'    => 'name',
-									'order'      => 'DESC'
+									'orderby'    => 'id',
+									'order'      => 'ASC'
 								));
 								
 								if ($event_location)
@@ -107,17 +107,11 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 									$past_events = '';
 									foreach ($event_location as $location)
 									{
-										if ($location->name == 'Past Events')
-										{
-											$past_events = '<li><a href="' . get_term_link($location->term_id) . '">' . $location->name . '</a></li>';
-										} else
-										{
-											?>
-											<li>
-												<a href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
-											</li>
-											<?php
-										}
+										?>
+										<li>
+											<a href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
+										</li>
+										<?php
 									}
 									echo $past_events;
 									echo '</ul>';
@@ -131,20 +125,19 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 						/* Start the Loop */
 						while (have_posts()) :
 							the_post();
-							if (is_post_type_archive('event')) :
+							if (is_post_type_archive('event') || is_tax('event_location')) :
 								
 								// Get "date" meta field as unix timestamp
 								$when_order = get_post_meta($post->ID, 'when_order', true);
 								
 								// Get "current" unix timestamp
 								$now = date('Y-m-d');
-								$now_plusday = strtotime("+1 day" . $now);
+								//$now_plusday = strtotime("+1 day" . $now);
 								
-								if ($now_plusday > $when_order)
+								if (strtotime($now) >= $when_order)
 								{
-									//var_dump($when_order);
-									//var_dump($now);
-									//var_dump($now_plusday);
+									//var_dump('now ' . strtotime($now));
+									//var_dump('when ' . $when_order);
 									
 									//$date = new DateTime();
 									//$date->setTimestamp($now_plusday);
@@ -160,9 +153,9 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 									//$date->setTimestamp(strtotime('+50 year', $when_order));
 									//echo $date->format('U = Y-m-d H:i:s') . "\n";
 									// $now is later than $then, update post.
-									update_post_meta($post->ID, 'when_order', strtotime('+50 year', $when_order));
-									//wp_set_post_terms($post->ID, array(26), 'event_location', true);
-									wp_set_post_terms($post->ID, array(52), 'event_location', true);
+									//update_post_meta($post->ID, 'when_order', strtotime('+50 year', $when_order));
+									wp_set_post_terms($post->ID, array(26), 'event_location', true);
+									//wp_set_post_terms($post->ID, array(52), 'event_location', true);
 								}
 								
 								if ($count == 0)
