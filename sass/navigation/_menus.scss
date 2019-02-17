@@ -122,3 +122,25 @@
 		width: 50%;
 	}
 }
+
+.comment-navigation a,
+.posts-navigation a,
+.post-navigation a {
+	color: $c1;
+	font-size: 14px;
+	line-height: 1;
+	padding: 1em 2em;
+	display: inline-block;
+	text-decoration: none;
+	border: 2px solid $c1;
+	text-transform: uppercase;
+	background-color: transparent;
+	font-family: $font__main;
+	min-width: 120px;
+	text-align: center;
+
+	&:hover {
+		border-color: #111;
+		color: #111;
+	}
+}

@@ -90,7 +90,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						<?php
 						$where = get_post_meta(get_the_ID(), 'where', true);
 						$time = get_post_meta(get_the_ID(), 'time', true);
-						if (!empty($where) || !empty($address))
+						if (!empty($where) || !empty($time))
 						{
 							?>
 							<div class="meta-section">

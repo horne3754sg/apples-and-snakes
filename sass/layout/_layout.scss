@@ -361,6 +361,10 @@
 			}
 		}
 
+		a {
+			color: rgba(255, 255, 255, 0.8);
+		}
+
 		h3 {
 			font-family: $font__main;
 			font-weight: 300;
@@ -1386,10 +1390,8 @@ body.peach-scheme {
 
 body.archive, body.blog {
 	.archive-description {
-		color: $c1;
-		font-family: $font_header_round;
-		font-size: 30px;
-		line-height: 34px;
+		//color: $c1;
+		//font-family: $font_header_round;
 		margin-bottom: 60px;
 
 		h1 {
@@ -1607,6 +1609,10 @@ body.blog {
 			outline: none;
 			width: 40px;
 			height: 40px;
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 	}
 
@@ -2743,10 +2749,11 @@ body.blog {
 				}
 
 				.team_role {
+					display: inline-block;
 					font-family: $font_header_round;
 					text-transform: uppercase;
 					font-size: 18px;
-					line-height: 22px;
+					line-height: 1;
 				}
 			}
 		}

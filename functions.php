@@ -126,7 +126,7 @@ function order_events_by_meta_field($query)
 			array(
 				'taxonomy' => 'event_location',
 				'field'    => 'id',
-				'terms'    => array(26),
+				'terms'    => array(52), // 26
 				'operator' => 'NOT IN'
 			)
 		));
@@ -138,7 +138,7 @@ function order_events_by_meta_field($query)
 			array(
 				'taxonomy' => 'event_location',
 				'field'    => 'id',
-				'terms'    => array(26),
+				'terms'    => array(52),
 				'operator' => 'NOT IN'
 			)
 		));
@@ -222,6 +222,16 @@ function aas_widgets_init()
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
+	));
+	
+	register_sidebar(array(
+		'name'          => esc_html__('A&S Stories Intro', 'aas'),
+		'id'            => 'as-stories-intro',
+		'description'   => esc_html__('Add widgets here.', 'aas'),
+		'before_widget' => false,
+		'after_widget'  => false,
+		'before_title'  => false,
+		'after_title'   => false,
 	));
 }
 
@@ -429,9 +439,10 @@ class list_categories_widget extends WP_Widget
 	}
 } // end class list_categories_widget
 
-function list_cat_register_widgets()
+
+function as_register_widgets()
 {
 	register_widget('list_categories_widget');
 }
 
-add_action('widgets_init', 'list_cat_register_widgets');
+add_action('widgets_init', 'as_register_widgets');

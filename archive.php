@@ -50,10 +50,16 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 			<main id="main" class="site-main">
 				<div class="container narrow">
 					<?php if (have_posts()) : ?>
-
-						<header class="page-header"><?php the_archive_description('<div class="archive-description">', '</div>'); ?></header><!-- .page-header -->
 						
-						<?php
+						<?php if (is_post_type_archive('case_studies')) : ?>
+							<header class="page-header">
+								<div class="archive-description"><?php dynamic_sidebar('as-stories-intro'); ?></div>
+							</header><!-- .page-header -->
+						<?php else : ?>
+							<header class="page-header">
+								<?php the_archive_description('<div class="archive-description">', '</div>'); ?>
+							</header><!-- .page-header -->
+						<?php endif
 						
 						//$locations = wp_get_post_terms(get_the_ID(), 'event_location');
 						//var_dump($locations);
@@ -61,63 +67,34 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 						?>
 						<div class="category-nav">
 							<?php
-							if (is_post_type_archive(array('opportunities')))
+							if (is_post_type_archive(array('event')) || is_tax('event_location'))
 							{
-							$opportunities_type = get_terms('opportunities_type', array(
+							$event_location = get_terms('event_location', array(
 								'hide_empty' => true,
-								'orderby'    => 'name',
-								'order'      => 'DESC'
+								'orderby'    => 'id',
+								'order'      => 'ASC'
 							));
 							
-							if ($opportunities_type)
+							if ($event_location)
 							{ ?>
 							<ul class="cat_nav">
 								<li>
-									<a href="<?php echo get_post_type_archive_link('opportunities'); ?>">All</a>
+									<a href="<?php echo get_post_type_archive_link('event'); ?>">All</a>
 								</li>
 								<?php
-								foreach ($opportunities_type as $type)
+								$past_events = '';
+								foreach ($event_location as $location)
 								{
-									//var_dump($type);
 									?>
 									<li>
-										<a href="<?php echo get_term_link($type->term_id); ?>"><?php echo $type->name; ?></a>
+										<a href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
 									</li>
 									<?php
 								}
+								echo $past_events;
 								echo '</ul>';
 								}
-								}
-								
-								if (is_post_type_archive(array('event')) || is_tax('event_location'))
-								{
-								$event_location = get_terms('event_location', array(
-									'hide_empty' => true,
-									'orderby'    => 'id',
-									'order'      => 'ASC'
-								));
-								
-								if ($event_location)
-								{ ?>
-								<ul class="cat_nav">
-									<li>
-										<a href="<?php echo get_post_type_archive_link('event'); ?>">All</a>
-									</li>
-									<?php
-									$past_events = '';
-									foreach ($event_location as $location)
-									{
-										?>
-										<li>
-											<a href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
-										</li>
-										<?php
-									}
-									echo $past_events;
-									echo '</ul>';
-									}
-									}
-									?>
+								} ?>
 						</div>
 						<?php ?>
 						<?php
@@ -154,8 +131,8 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 									//echo $date->format('U = Y-m-d H:i:s') . "\n";
 									// $now is later than $then, update post.
 									//update_post_meta($post->ID, 'when_order', strtotime('+50 year', $when_order));
-									wp_set_post_terms($post->ID, array(26), 'event_location', true);
-									//wp_set_post_terms($post->ID, array(52), 'event_location', true);
+									//wp_set_post_terms($post->ID, array(26), 'event_location', true);
+									wp_set_post_terms($post->ID, array(52), 'event_location', true);
 								}
 								
 								if ($count == 0)
@@ -183,7 +160,15 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 						
 						endwhile;
 						
-						the_posts_navigation();
+						if (is_post_type_archive('event')) :
+							the_posts_navigation(array(
+								'prev_text'          => __('More events', 'aas'),
+								'next_text'          => __('back', 'aas'),
+								'screen_reader_text' => __('Event navigation', 'aas')
+							));
+						else :
+							the_posts_navigation();
+						endif;
 					
 					else :
 						
