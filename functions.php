@@ -168,7 +168,7 @@ function order_events_by_meta_field2($query)
 			array(
 				'taxonomy' => 'event-category',
 				'field'    => 'id',
-				'terms'    => array(30), // 30
+				'terms'    => array(57), // 30
 				'operator' => 'NOT IN'
 			)
 		));
@@ -180,7 +180,7 @@ function order_events_by_meta_field2($query)
 			array(
 				'taxonomy' => 'event-category',
 				'field'    => 'id',
-				'terms'    => array(30), // 30
+				'terms'    => array(57), // 30
 				'operator' => 'NOT IN'
 			)
 		));
