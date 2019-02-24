@@ -23,7 +23,7 @@
 		<div class="content-col">
 			<div class="entry-content">
 				<?php
-				if (is_post_type_archive('event') || is_tax('event_location')) :
+				if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category')) :
 					$locations = wp_get_post_terms(get_the_ID(), 'event_location');
 					if (!empty($locations)) :
 						echo '<span class="event-location">' . $locations[0]->name . '</span>';
@@ -39,7 +39,7 @@
 					the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
 				endif;
 				
-				if (is_post_type_archive('event') || is_tax('event_location')) :
+				if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category')) :
 					$when_featured = get_post_meta($post->ID, 'when_featured', true);
 					if (!empty($when_featured)) :
 						echo '<span class="event-featured-time">' . $when_featured . '</span>';

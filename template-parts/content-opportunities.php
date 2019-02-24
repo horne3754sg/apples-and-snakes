@@ -18,7 +18,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 					<?php
 					if (is_singular()) :
 						$sub_heading = get_post_meta(get_the_ID(), 'sub_heading', true);
-						echo (!empty($sub_heading) ? '<div class="sub_heading">' . $sub_heading . '</div>' : '');
+						echo(!empty($sub_heading) ? '<div class="sub_heading">' . $sub_heading . '</div>' : '');
 						the_title('<h1 class="entry-title">', '</h1>');
 					else :
 						the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
@@ -70,8 +70,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						
 						<?php
 						$when = get_post_meta(get_the_ID(), 'when', true);
-						$address = get_post_meta(get_the_ID(), 'address', true);
-						if (!empty($when) || !empty($address))
+						$time = get_post_meta(get_the_ID(), 'time', true);
+						if (!empty($when) || !empty($time))
 						{
 							?>
 							<div class="meta-section">
@@ -81,7 +81,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								<div class="meta-info">
 									<?php
 									echo ($when) ? '<span class="when">' . $when . '</span>' : '';
-									echo ($address) ? '<span class="address">' . $address . '</span>' : '';
+									echo ($time) ? '<span class="time">' . $time . '</span>' : '';
+									
 									?>
 								</div>
 							</div>
@@ -89,8 +90,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						
 						<?php
 						$where = get_post_meta(get_the_ID(), 'where', true);
-						$time = get_post_meta(get_the_ID(), 'time', true);
-						if (!empty($where) || !empty($time))
+						$address = get_post_meta(get_the_ID(), 'address', true);
+						if (!empty($where) || !empty($address))
 						{
 							?>
 							<div class="meta-section">
@@ -100,7 +101,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								<div class="meta-info">
 									<?php
 									echo ($where) ? '<span class="where">' . $where . '</span>' : '';
-									echo ($time) ? '<span class="time">' . $time . '</span>' : '';
+									echo ($address) ? '<span class="address">' . $address . '</span>' : '';
 									?>
 								</div>
 							</div>
@@ -135,31 +136,31 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								</div>
 							</div>
 						<?php } ?>
-
-
+						
+						
 						<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
-							if (!empty($tickets))
-							{
-								?>
-						<div class="meta-section">
-							<div class="meta-header">
-								<h3><?php echo __('Tickets'); ?></h3>
-							</div>
-							
+						if (!empty($tickets))
+						{
+							?>
+							<div class="meta-section">
+								<div class="meta-header">
+									<h3><?php echo __('Tickets'); ?></h3>
+								</div>
+
 								<div class="meta-info">
 									<?php echo ($tickets) ? '<span class="tickets">' . $tickets . '</span>' : ''; ?>
 								</div>
-							
-							<?php
-							$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
-							$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
-							if (!empty($tickets_link))
-							{ ?>
-								<div class="meta-info">
-									<?php echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : ''; ?>
-								</div>
-							<?php } ?>
-						</div>
+								
+								<?php
+								$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
+								$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
+								if (!empty($tickets_link))
+								{ ?>
+									<div class="meta-info">
+										<?php echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : ''; ?>
+									</div>
+								<?php } ?>
+							</div>
 						<?php } ?>
 					</div>
 				</div>

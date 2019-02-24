@@ -102,7 +102,7 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 						/* Start the Loop */
 						while (have_posts()) :
 							the_post();
-							if (is_post_type_archive('event') || is_tax('event_location')) :
+							if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category')) :
 								
 								// Get "date" meta field as unix timestamp
 								$when_order = get_post_meta($post->ID, 'when_order', true);
@@ -132,7 +132,14 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 									// $now is later than $then, update post.
 									//update_post_meta($post->ID, 'when_order', strtotime('+50 year', $when_order));
 									//wp_set_post_terms($post->ID, array(26), 'event_location', true);
-									wp_set_post_terms($post->ID, array(52), 'event_location', true);
+									if (has_term('spine-events', 'event-category'))
+									{
+										wp_set_post_terms($post->ID, array(30), 'event-category', true);
+									}
+									else
+									{
+										wp_set_post_terms($post->ID, array(52), 'event_location', true);
+									}
 								}
 								
 								if ($count == 0)

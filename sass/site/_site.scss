@@ -13,26 +13,81 @@
 	position: relative;
 	display: block;
 	width: 100%;
-	height: 200px;
+	min-height: 100px;
 	margin-bottom: 30px;
+	padding: 30px;
+	text-decoration: none;
 
 	&.red {
 		background: $c1;
-		color: $c3;
+		color: #fff;
+
+		&:hover, &:focus {
+			color: #fff;
+		}
+	}
+
+	&.orange {
+		background: $c2;
+		color: #fff;
+
+		&:hover, &:focus {
+			color: #fff;
+		}
 	}
 
 	&.dark_red {
 		background: $c3;
-		color: $c1;
+		color: #fff;
+
+		&:hover, &:focus {
+			color: #fff;
+		}
+	}
+
+	&.green {
+		background: $c4;
+		color: #111;
+
+		&:hover, &:focus {
+			color: #111;
+		}
+	}
+
+	&.blue {
+		background: $c5;
+		color: #fff;
+
+		&:hover, &:focus {
+			color: #fff;
+		}
+	}
+
+	&.yellow {
+		background: $c6;
+		color: #111;
+
+		&:hover, &:focus {
+			color: #111;
+		}
+	}
+
+	&.peach {
+		background: $c7;
+		color: #111;
+
+		&:hover, &:focus {
+			color: #111;
+		}
 	}
 
 	.block_title {
-		position: absolute;
 		font-size: 50px;
 		line-height: 50px;
-		top: 30px;
-		left: 30px;
 		font-family: $font_header_regular;
+		@media (max-width: 600px) {
+			font-size: 36px;
+		}
 	}
 }
 

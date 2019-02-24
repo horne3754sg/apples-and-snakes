@@ -110,12 +110,13 @@ function order_events_by_meta_field($query)
 		return;
 	}
 	
-	if(!empty($query->query['event_location']) && $query->query['event_location'] == 'past-events') {
+	if (!empty($query->query['event_location']) && $query->query['event_location'] == 'past-events')
+	{
 		return;
 	}
 	//var_dump($query->query['event_location']);
 	
-	if ((is_post_type_archive('event') || is_tax('event_location')))
+	if ((is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category')))
 	{
 		$query->set('meta_query', array(
 			'relation' => 'OR',
@@ -146,6 +147,47 @@ function order_events_by_meta_field($query)
 }
 
 add_action('pre_get_posts', 'order_events_by_meta_field');
+
+
+function order_events_by_meta_field2($query)
+{
+	if (is_admin() || !$query->is_main_query())
+	{
+		return;
+	}
+	
+	if (!empty($query->query['event-category']) && $query->query['event-category'] == 'spine-events')
+	{
+		
+		$query->set('meta_query', array(
+			'relation' => 'OR',
+			array(
+				'key'     => 'when_order',
+				'compare' => 'EXISTS'
+			),
+			array(
+				'taxonomy' => 'event-category',
+				'field'    => 'id',
+				'terms'    => array(30), // 30
+				'operator' => 'NOT IN'
+			)
+		));
+		$query->set('orderby', 'when_order');
+		$query->set('order', 'ASC');
+		
+		$query->set('tax_query', array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'event-category',
+				'field'    => 'id',
+				'terms'    => array(30), // 30
+				'operator' => 'NOT IN'
+			)
+		));
+	}
+}
+
+add_action('pre_get_posts', 'order_events_by_meta_field2');
 
 /**
  * Register widget area.
@@ -242,7 +284,7 @@ add_action('widgets_init', 'aas_widgets_init');
  */
 function aas_scripts()
 {
-	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.1.94');
+	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.1.96');
 	
 	if (is_front_page())
 	{

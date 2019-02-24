@@ -103,46 +103,49 @@ function aas_save_events_meta($post_id, $post)
 	}
 	// Now that we're authenticated, time to save the data.
 	// This sanitizes the data from the field and saves it into an array $events_meta.
-	$events_meta['when_order'] = strtotime($_POST['when_order']);
-	$events_meta['when'] = esc_textarea($_POST['when']);
-	$events_meta['where'] = esc_textarea($_POST['where']);
-	$events_meta['address'] = esc_textarea($_POST['address']);
-	$events_meta['when_featured'] = esc_textarea($_POST['when_featured']);
-	$events_meta['time'] = esc_textarea($_POST['time']);
-	$events_meta['duration'] = esc_textarea($_POST['duration']);
-	$events_meta['age'] = esc_textarea($_POST['age']);
-	$events_meta['tickets'] = esc_textarea($_POST['tickets']);
-	$events_meta['tickets_text'] = esc_textarea($_POST['tickets_text']);
-	$events_meta['tickets_link'] = esc_textarea($_POST['tickets_link']);
-	$events_meta['sub_heading'] = esc_textarea($_POST['sub_heading']);
-	$events_meta['other'] = esc_textarea($_POST['other']);
+	$events_meta['when_order'] = !empty($_POST['when_order']) ? strtotime($_POST['when_order']) : '';
+	$events_meta['when'] = !empty($_POST['when']) ?  esc_textarea($_POST['when']) : '';
+	$events_meta['where'] = !empty($_POST['where']) ?  esc_textarea($_POST['where']) : '';
+	$events_meta['address'] = !empty($_POST['address']) ?  esc_textarea($_POST['address']) : '';
+	$events_meta['when_featured'] = !empty($_POST['when_featured']) ?  esc_textarea($_POST['when_featured']) : '';
+	$events_meta['time'] = !empty($_POST['time']) ?  esc_textarea($_POST['time']) : '';
+	$events_meta['duration'] = !empty($_POST['duration']) ?  esc_textarea($_POST['duration']) : '';
+	$events_meta['age'] = !empty($_POST['age']) ?  esc_textarea($_POST['age']) : '';
+	$events_meta['tickets'] = !empty($_POST['tickets']) ?  esc_textarea($_POST['tickets']) : '';
+	$events_meta['tickets_text'] = !empty($_POST['tickets_text']) ?  esc_textarea($_POST['tickets_text']) : '';
+	$events_meta['tickets_link'] = !empty($_POST['tickets_link']) ?  esc_textarea($_POST['tickets_link']) : '';
+	$events_meta['sub_heading'] = !empty($_POST['sub_heading']) ?  esc_textarea($_POST['sub_heading']) : '';
+	$events_meta['other'] = !empty($_POST['other']) ?  esc_textarea($_POST['other']) : '';
 	
 	// Cycle through the $events_meta array.
 	// Note, in this example we just have one item, but this is helpful if you have multiple.
-	foreach ($events_meta as $key => $value) :
-		// Don't store custom data twice
-		if ('revision' === $post->post_type)
-		{
-			return;
-		}
-		
-		if (get_post_meta($post_id, $key, false))
-		{
-			// If the custom field already has a value, update it.
-			update_post_meta($post_id, $key, $value);
-		}
-		else
-		{
-			// If the custom field doesn't have a value, add it.
-			add_post_meta($post_id, $key, $value);
-		}
-		
-		if (!$value)
-		{
-			// Delete the meta key if there's no value
-			delete_post_meta($post_id, $key);
-		}
-	endforeach;
+	if($events_meta)
+	{
+		foreach ($events_meta as $key => $value) :
+			// Don't store custom data twice
+			if ('revision' === $post->post_type)
+			{
+				return;
+			}
+			
+			if (get_post_meta($post_id, $key, false))
+			{
+				// If the custom field already has a value, update it.
+				update_post_meta($post_id, $key, $value);
+			}
+			else
+			{
+				// If the custom field doesn't have a value, add it.
+				add_post_meta($post_id, $key, $value);
+			}
+			
+			if (!$value)
+			{
+				// Delete the meta key if there's no value
+				delete_post_meta($post_id, $key);
+			}
+		endforeach;
+	}
 }
 
 add_action('save_post', 'aas_save_events_meta', 1, 2);

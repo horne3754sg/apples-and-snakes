@@ -63,6 +63,9 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 					</div><!-- .entry-content -->
 					
 					<?php get_template_part('template-parts/social', 'share-bar'); ?>
+					
+					<a class="button back" href="<?php echo get_post_type_archive_link( 'event' ); ?>">back to what's on</a>
+					
 				</div>
 
 				<div class="sidebar">

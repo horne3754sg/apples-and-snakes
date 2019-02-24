@@ -342,6 +342,16 @@
 		}
 	}
 
+	.button.back {
+		border-color: $c1;
+		color: $c1;
+
+		&:hover {
+			border-color: #222;
+			color: #222;
+		}
+	}
+
 	&.footer {
 		.container {
 			max-width: 1024px;
@@ -656,6 +666,16 @@ body.orange-scheme {
 			color: $c2;
 			border-color: $c2;
 		}
+
+		.button.back {
+			border-color: $c2;
+			color: $c2;
+
+			&:hover {
+				border-color: #222;
+				color: #222;
+			}
+		}
 	}
 }
 
@@ -796,6 +816,16 @@ body.post-type-archive-opportunities {
 			color: $c4;
 			border-color: $c4;
 		}
+
+		.button.back {
+			border-color: $c4;
+			color: $c4;
+
+			&:hover {
+				border-color: #222;
+				color: #222;
+			}
+		}
 	}
 }
 
@@ -935,6 +965,16 @@ body.blue-scheme {
 			color: $c5;
 			border-color: $c5;
 		}
+
+		.button.back {
+			border-color: $c5;
+			color: $c5;
+
+			&:hover {
+				border-color: #222;
+				color: #222;
+			}
+		}
 	}
 }
 
@@ -1073,6 +1113,16 @@ body.yellow-scheme {
 			color: $c6;
 			border-color: $c6;
 		}
+
+		.button.back {
+			border-color: $c6;
+			color: $c6;
+
+			&:hover {
+				border-color: #222;
+				color: #222;
+			}
+		}
 	}
 }
 
@@ -1210,6 +1260,16 @@ body.peach-scheme {
 		.tickets_link {
 			color: $c7;
 			border-color: $c7;
+		}
+
+		.button.back {
+			border-color: $c7;
+			color: $c7;
+
+			&:hover {
+				border-color: #222;
+				color: #222;
+			}
 		}
 	}
 }
@@ -2488,7 +2548,7 @@ body.blog {
 					padding-bottom: calc(33.33333% - 20px);
 					flex: 0 1 33.3333%;
 					background: $c1;
-					color: $c3;
+					color: #fff;
 					margin: 10px;
 					text-decoration: none;
 					position: relative;
