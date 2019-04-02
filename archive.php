@@ -135,6 +135,7 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 									if (has_term('spine-events', 'event-category'))
 									{
 										wp_set_post_terms($post->ID, array(57), 'event-category', true);
+										wp_set_post_terms($post->ID, array(52), 'event_location', true);
 									}
 									else
 									{

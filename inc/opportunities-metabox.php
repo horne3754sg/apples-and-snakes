@@ -32,51 +32,51 @@ function aas_opportunities_info()
 	
 	// Get the when data if it's already been entered
 	$when = get_post_meta($post->ID, 'when', true);
-	echo '<div><label>When (Sidebar)</label><input type="text" name="when" value="' . esc_textarea($when) . '" class="widefat" placeholder="When?"></div></br>';
+	echo '<div><label>When (Sidebar)</label><input type="text" name="when" value="' . $when . '" class="widefat" placeholder="When?"></div></br>';
 	
 	// Get the when data if it's already been entered
 	$when_featured = get_post_meta($post->ID, 'when_featured', true);
-	echo '<div><label>When (Featured)</label><input type="text" name="when_featured" value="' . esc_textarea($when_featured) . '" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018"></div></br>';
+	echo '<div><label>When (Featured)</label><input type="text" name="when_featured" value="' . $when_featured . '" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018"></div></br>';
 	
 	// Get the time data if it's already been entered
 	$time = get_post_meta($post->ID, 'time', true);
-	echo '<div><label>Time (Sidebar)</label><input type="text" name="time" value="' . esc_textarea($time) . '" class="widefat" placeholder="time"></div></br>';
+	echo '<div><label>Time (Sidebar)</label><input type="text" name="time" value="' . $time . '" class="widefat" placeholder="time"></div></br>';
 	
 	// Get the where data if it's already been entered
 	$where = get_post_meta($post->ID, 'where', true);
-	echo '<div><label>Where</label><input type="text" name="where" value="' . esc_textarea($where) . '" class="widefat" placeholder="Where?"></div></br>';
+	echo '<div><label>Where</label><input type="text" name="where" value="' . $where . '" class="widefat" placeholder="Where?"></div></br>';
 	
 	// Get the address data if it's already been entered
 	$address = get_post_meta($post->ID, 'address', true);
-	echo '<div><label>Address</label><input type="text" name="address" value="' . esc_textarea($address) . '" class="widefat" placeholder="Address"></div></br>';
+	echo '<div><label>Address</label><input type="text" name="address" value="' . $address . '" class="widefat" placeholder="Address"></div></br>';
 	
 	// Get the tickets data if it's already been entered
 	$duration = get_post_meta($post->ID, 'duration', true);
-	echo '<div><label>Duration</label><input type="text" name="duration" value="' . esc_textarea($duration) . '" class="widefat" placeholder="The expected duration of the opportunity"></div></br>';
+	echo '<div><label>Duration</label><input type="text" name="duration" value="' . $duration . '" class="widefat" placeholder="The expected duration of the opportunity"></div></br>';
 	
 	// Get the tickets data if it's already been entered
 	$age = get_post_meta($post->ID, 'age', true);
-	echo '<div><label>Age</label><input type="text" name="age" value="' . esc_textarea($age) . '" class="widefat" placeholder="Age group of audience"></div></br>';
+	echo '<div><label>Age</label><input type="text" name="age" value="' . $age . '" class="widefat" placeholder="Age group of audience"></div></br>';
 	
 	// Get the tickets data if it's already been entered
 	$tickets = get_post_meta($post->ID, 'tickets', true);
-	echo '<div><label>Tickets</label><input type="text" name="tickets" value="' . esc_textarea($tickets) . '" class="widefat" placeholder="Tickets"></div></br>';
+	echo '<div><label>Tickets</label><input type="text" name="tickets" value="' . $tickets . '" class="widefat" placeholder="Tickets"></div></br>';
 	
 	// Get the tickets data if it's already been entered
 	$tickets_text = get_post_meta($post->ID, 'tickets_text', true);
-	echo '<div><label>Get tickets button text</label><input type="text" name="tickets_text" value="' . esc_textarea($tickets_text) . '" class="widefat" placeholder="Get Tickets"></div></br>';
+	echo '<div><label>Get tickets button text</label><input type="text" name="tickets_text" value="' . $tickets_text . '" class="widefat" placeholder="Get Tickets"></div></br>';
 	
 	// Get the tickets data if it's already been entered
 	$tickets_link = get_post_meta($post->ID, 'tickets_link', true);
-	echo '<div><label>Get tickets button link</label><input type="text" name="tickets_link" value="' . esc_textarea($tickets_link) . '" class="widefat" placeholder="Link to where the tickets are sold"></div></br>';
+	echo '<div><label>Get tickets button link</label><input type="text" name="tickets_link" value="' . $tickets_link . '" class="widefat" placeholder="Link to where the tickets are sold"></div></br>';
 	
 	// Get the when data if it's already been entered
 	$sub_heading = get_post_meta($post->ID, 'sub_heading', true);
-	echo '<div><label>Sub Heading</label><input type="text" name="sub_heading" value="' . esc_textarea($sub_heading) . '" class="widefat" placeholder="Sub heading"></div></br>';
+	echo '<div><label>Sub Heading</label><input type="text" name="sub_heading" value="' . $sub_heading . '" class="widefat" placeholder="Sub heading"></div></br>';
 	
 	// Get the other data if it's already been entered
 	$other = get_post_meta($post->ID, 'other', true);
-	echo '<div><label>Other</label><textarea type="text" name="other" class="widefat" placeholder="Other info">' . esc_textarea($other) . '</textarea></div></br>';
+	echo '<div><label>Other</label><textarea type="text" name="other" class="widefat" placeholder="Other info">' . $other . '</textarea></div></br>';
 }
 
 /**
