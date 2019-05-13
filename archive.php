@@ -102,11 +102,14 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 						/* Start the Loop */
 						while (have_posts()) :
 							the_post();
-							if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category')) :
+							if (is_post_type_archive('event') ||
+								is_post_type_archive('opportunities') ||
+								is_tax('event_location') ||
+								is_tax('opportunities_type') ||
+								has_term('spine-events', 'event-category')) :
 								
 								// Get "date" meta field as unix timestamp
 								$when_order = get_post_meta($post->ID, 'when_order', true);
-								
 								// Get "current" unix timestamp
 								$now = date('Y-m-d');
 								//$now_plusday = strtotime("+1 day" . $now);
@@ -132,14 +135,25 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 									// $now is later than $then, update post.
 									//update_post_meta($post->ID, 'when_order', strtotime('+50 year', $when_order));
 									//wp_set_post_terms($post->ID, array(26), 'event_location', true);
-									if (has_term('spine-events', 'event-category'))
+									
+									//opportunities_type
+									if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))
 									{
-										wp_set_post_terms($post->ID, array(57), 'event-category', true);
-										wp_set_post_terms($post->ID, array(52), 'event_location', true);
+										wp_set_post_terms($post->ID, array(OPTYPE), 'opportunities_type', true);
 									}
-									else
+									
+									if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category'))
 									{
-										wp_set_post_terms($post->ID, array(52), 'event_location', true);
+										
+										if (has_term('spine-events', 'event-category'))
+										{
+											wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
+											wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
+										}
+										else
+										{
+											wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
+										}
 									}
 								}
 								

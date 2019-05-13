@@ -7,6 +7,11 @@
  * @package apples-and-snakes
  */
 
+define('DEV', true);
+define('OPTYPE', (!empty(DEV) ? 31 : 62)); // opportunities type archive cat
+define('ECTYPE', (!empty(DEV) ? 30 : 57)); // event category type archive cat
+define('ELTYPE', (!empty(DEV) ? 26 : 52)); // event location type archive cat
+
 if (!function_exists('aas_setup')) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -127,7 +132,7 @@ function order_events_by_meta_field($query)
 			array(
 				'taxonomy' => 'event_location',
 				'field'    => 'id',
-				'terms'    => array(52), // 26
+				'terms'    => array(ELTYPE), // 26
 				'operator' => 'NOT IN'
 			)
 		));
@@ -139,7 +144,7 @@ function order_events_by_meta_field($query)
 			array(
 				'taxonomy' => 'event_location',
 				'field'    => 'id',
-				'terms'    => array(52),
+				'terms'    => array(ELTYPE),
 				'operator' => 'NOT IN'
 			)
 		));
@@ -168,7 +173,7 @@ function order_events_by_meta_field2($query)
 			array(
 				'taxonomy' => 'event-category',
 				'field'    => 'id',
-				'terms'    => array(57), // 30
+				'terms'    => array(ECTYPE), // 30
 				'operator' => 'NOT IN'
 			)
 		));
@@ -180,7 +185,7 @@ function order_events_by_meta_field2($query)
 			array(
 				'taxonomy' => 'event-category',
 				'field'    => 'id',
-				'terms'    => array(57), // 30
+				'terms'    => array(ECTYPE), // 30
 				'operator' => 'NOT IN'
 			)
 		));
@@ -188,6 +193,47 @@ function order_events_by_meta_field2($query)
 }
 
 add_action('pre_get_posts', 'order_events_by_meta_field2');
+
+function order_events_by_meta_field3($query)
+{
+	if (is_admin() || !$query->is_main_query())
+	{
+		return;
+	}
+	//var_dump($query->query['event_location']);
+	
+	//opportunities_type
+	if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))
+	{
+		$query->set('meta_query', array(
+			'relation' => 'OR',
+			array(
+				'key'     => 'when_order',
+				'compare' => 'EXISTS'
+			),
+			array(
+				'taxonomy' => 'opportunities_type',
+				'field'    => 'id',
+				'terms'    => array(OPTYPE), // 26
+				'operator' => 'NOT IN'
+			)
+		));
+		$query->set('orderby', 'when_order');
+		$query->set('order', 'ASC');
+		
+		$query->set('tax_query', array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'opportunities_type',
+				'field'    => 'id',
+				'terms'    => array(OPTYPE),
+				'operator' => 'NOT IN'
+			)
+		));
+	}
+}
+
+add_action('pre_get_posts', 'order_events_by_meta_field3');
 
 /**
  * Register widget area.

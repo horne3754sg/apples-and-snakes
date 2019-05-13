@@ -10,40 +10,59 @@
 ?>
 
 <section class="no-results not-found">
-	<header class="page-header"><h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'aas' ); ?></h1></header><!-- .page-header -->
+	<?php if (is_post_type_archive('opportunities') || is_tax('opportunities_type')) : ?>
+		<header class="page-header"><h1 class="page-title"><?php esc_html_e('No Opportunities', 'aas'); ?></h1></header>
+	<?php elseif (is_post_type_archive('event')) : ?>
+		<header class="page-header"><h1 class="page-title"><?php esc_html_e('No Events', 'aas'); ?></h1></header>
+	<?php else : ?>
+		<header class="page-header"><h1 class="page-title"><?php esc_html_e('Nothing Found', 'aas'); ?></h1></header>
+		<!-- .page-header -->
+	<?php endif; ?>
 
 	<div class="page-content">
 		<?php
-		if ( is_home() && current_user_can( 'publish_posts' ) ) :
-
-			printf(
-				'<p>' . wp_kses(
+		
+		if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))
+		{
+			echo "We currently have no opportunities available at this time. Please check back soon.";
+		}
+		else if (is_post_type_archive('event'))
+		{
+			echo "We currently have no events available at this time. Please check back soon.";
+		}
+		else
+		{
+			if (is_home() && current_user_can('publish_posts')) :
+				
+				printf(
+					'<p>' . wp_kses(
 					/* translators: 1: link to WP admin new post page. */
-					__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'aas' ),
-					array(
-						'a' => array(
-							'href' => array(),
-						),
-					)
-				) . '</p>',
-				esc_url( admin_url( 'post-new.php' ) )
-			);
+						__('Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'aas'),
+						array(
+							'a' => array(
+								'href' => array(),
+							),
+						)
+					) . '</p>',
+					esc_url(admin_url('post-new.php'))
+				);
 
-		elseif ( is_search() ) :
-			?>
+			elseif (is_search()) :
+				?>
 
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'aas' ); ?></p>
-			<?php
-			get_search_form();
+				<p><?php esc_html_e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'aas'); ?></p>
+				<?php
+				get_search_form();
+			
+			else :
+				?>
 
-		else :
-			?>
-
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'aas' ); ?></p>
-			<?php
-			get_search_form();
-
-		endif;
+				<p><?php esc_html_e('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'aas'); ?></p>
+				<?php
+				get_search_form();
+			
+			endif;
+		}
 		?>
 	</div><!-- .page-content -->
 </section><!-- .no-results -->
