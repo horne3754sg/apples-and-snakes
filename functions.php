@@ -7,7 +7,8 @@
  * @package apples-and-snakes
  */
 
-define('DEV', true);
+define('DEV', false);
+define('AAS_VERSION', 1.2);
 define('OPTYPE', (!empty(DEV) ? 31 : 62)); // opportunities type archive cat
 define('ECTYPE', (!empty(DEV) ? 30 : 57)); // event category type archive cat
 define('ELTYPE', (!empty(DEV) ? 26 : 52)); // event location type archive cat
@@ -334,13 +335,13 @@ function aas_scripts()
 	
 	if (is_front_page())
 	{
-		wp_enqueue_script('aas-slick', get_template_directory_uri() . '/inc/slick/slick.min.js', array(), '20151214', true);
+		wp_enqueue_script('aas-slick', get_template_directory_uri() . '/inc/slick/slick.min.js', array(), AAS_VERSION, true);
 		//wp_enqueue_style('aas-slick-style', get_template_directory_uri() . '/inc/slick/slick.css', array(), '20151215', true);
 	}
 	
-	wp_enqueue_script('aas-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151214', true);
+	wp_enqueue_script('aas-navigation', get_template_directory_uri() . '/js/navigation.js', array(), AAS_VERSION, true);
 	
-	wp_enqueue_script('aas-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151214', true);
+	wp_enqueue_script('aas-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), AAS_VERSION, true);
 	
 	if (is_singular() && comments_open() && get_option('thread_comments'))
 	{
@@ -534,3 +535,54 @@ function as_register_widgets()
 }
 
 add_action('widgets_init', 'as_register_widgets');
+
+add_action('yikes-mailchimp-google-analytics', 'yikes_mailchimp_google_analytics', 10, 1);
+
+function yikes_mailchimp_google_analytics($form_id)
+{
+	?>
+	<script type="text/javascript">
+		
+		var form_id = <?php echo $form_id; ?>;
+		
+		// Fire off GA event for a failed subscription
+		function yikes_mailchimp_google_analytics_failure(response) {
+			
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function() {
+					(i[r].q = i[r].q || []).push(arguments);
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m);
+			})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+			
+			ga('create', 'UA-108570495-1', 'auto');
+			ga('send', 'event', 'mailchimp-subscribe', 'subscription-failed');
+		}
+		
+		// Fire off GA event for a successful subscription
+		function yikes_mailchimp_google_analytics_success(response) {
+			
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function() {
+					(i[r].q = i[r].q || []).push(arguments);
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m);
+			})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+			
+			ga('create', 'UA-108570495-1', 'auto');
+			ga('send', 'event', 'mailchimp-subscribe', 'subscription-successful');
+		}
+
+	</script>
+	<?php
+}
