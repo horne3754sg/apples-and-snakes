@@ -7,7 +7,7 @@
  * @package apples-and-snakes
  */
 
-define('DEV', false);
+define('DEV', true);
 define('AAS_VERSION', 1.2);
 define('OPTYPE', (!empty(DEV) ? 31 : 62)); // opportunities type archive cat
 define('ECTYPE', (!empty(DEV) ? 30 : 57)); // event category type archive cat
@@ -120,7 +120,6 @@ function order_events_by_meta_field($query)
 	{
 		return;
 	}
-	//var_dump($query->query['event_location']);
 	
 	if ((is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category')))
 	{
@@ -162,9 +161,9 @@ function order_events_by_meta_field2($query)
 		return;
 	}
 	
+	// $event = get_post_meta($post->ID, 'aas_event', true);
 	if (!empty($query->query['event-category']) && $query->query['event-category'] == 'spine-events')
 	{
-		
 		$query->set('meta_query', array(
 			'relation' => 'OR',
 			array(
@@ -585,4 +584,59 @@ function yikes_mailchimp_google_analytics($form_id)
 
 	</script>
 	<?php
+}
+
+
+/**
+ * Get the event date
+ *
+ * @param int $postid
+ * @param bool $strtime
+ *
+ * @return int|mixed|string
+ */
+function get_post_meta_event_date($postid = -1, $strtime = false)
+{
+	$event_date = '';
+	if ($postid > 0)
+	{
+		$now = date('Y-m-d');
+		$events = get_post_meta($postid, 'aas_event', true);
+		if (!empty($events) && !empty($events['event']))
+		{
+			foreach ($events['event'] as $event)
+			{
+				if (strtotime($now) <= $event['when_order'])
+				{
+					$when_order = $event['when_order'];
+					update_post_meta($postid, 'when_order', $when_order);
+					update_post_meta($postid, 'time', $event['time']);
+					break;
+				}
+			}
+		}
+		else
+		{
+			$when_order = get_post_meta($postid, 'when_order', true);
+		}
+		
+		if (!empty($when_order) && empty($strtime))
+		{
+			$time = get_post_meta($postid, 'time', true);
+			$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+		}
+		else
+		{
+			$event_date = !empty($when_order) ? $when_order : -1;
+		}
+		
+		if ($event_date == -1)
+		{
+			$when_order = get_post_meta($postid, 'when_order', true);
+			$time = get_post_meta($postid, 'time', true);
+			$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+		}
+	}
+	
+	return $event_date;
 }

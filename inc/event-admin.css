@@ -1,0 +1,40 @@
+.group_options {
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+
+.group_options .group_header, .group_options .group_content ul li .event_header {
+	display: flex;
+	padding: 10px;
+	background: #ededed;
+	border-bottom: 1px solid #ddd;
+}
+
+.group_options .group_header h3, .group_options .group_content ul li .event_header h4 {
+	margin: 0;
+}
+
+.group_options .group_header .toggle-indicator, .group_options .group_content ul li .event_header .toggle-indicator {
+    margin-left: auto;
+}
+
+.group_options .group_content, .group_options .group_content ul li .event_content {
+	padding: 10px;
+}
+
+.group_options .group_content ul {
+	margin-top: 0;
+}
+
+.group_options .group_content ul li {
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+
+.group_options .group_content .option_row {
+	margin-bottom: 10px;
+}
+
+.group_options .button_wrap {
+	text-align: right;
+}

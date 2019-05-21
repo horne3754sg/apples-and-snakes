@@ -108,34 +108,12 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 								is_tax('opportunities_type') ||
 								has_term('spine-events', 'event-category')) :
 								
-								// Get "date" meta field as unix timestamp
-								$when_order = get_post_meta($post->ID, 'when_order', true);
+								$when_order = get_post_meta_event_date($post->ID, true);
 								// Get "current" unix timestamp
 								$now = date('Y-m-d');
-								//$now_plusday = strtotime("+1 day" . $now);
 								
 								if (strtotime($now) >= $when_order)
 								{
-									//var_dump('now ' . strtotime($now));
-									//var_dump('when ' . $when_order);
-									
-									//$date = new DateTime();
-									//$date->setTimestamp($now_plusday);
-									//echo $date->format('U = Y-m-d H:i:s') . "\n";
-									//echo '<br/>';
-									//var_dump('old time: ' . $when_order);
-									//$date = new DateTime();
-									//$date->setTimestamp($when_order);
-									//echo $date->format('U = Y-m-d H:i:s') . "\n";
-									//echo '<br/>';
-									//var_dump('new time: ' . strtotime('+100 year', $when_order));
-									//$date = new DateTime();
-									//$date->setTimestamp(strtotime('+50 year', $when_order));
-									//echo $date->format('U = Y-m-d H:i:s') . "\n";
-									// $now is later than $then, update post.
-									//update_post_meta($post->ID, 'when_order', strtotime('+50 year', $when_order));
-									//wp_set_post_terms($post->ID, array(26), 'event_location', true);
-									
 									//opportunities_type
 									if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))
 									{

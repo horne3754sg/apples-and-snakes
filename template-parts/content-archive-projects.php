@@ -14,9 +14,9 @@ $header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnai
 	<div class="archive-project-posts">
 		<div class="image-col">
 			<?php if (has_post_thumbnail()) : ?>
-                <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 					<?php the_post_thumbnail(); ?>
-                </a>
+				</a>
 			<?php endif; ?>
 		</div>
 		<div class="content-col">
@@ -44,9 +44,9 @@ $header_image_src = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnai
 				endif;
 				
 				if (is_post_type_archive('event') || is_tax('event_location')) :
-					$when_featured = get_post_meta(get_the_ID(), 'when_featured', true);
-					if (!empty($when_featured)) :
-						echo '<span class="event-featured-time">' . $when_featured . '</span>';
+					$event_date = get_post_meta_event_date(get_the_ID());
+					if (!empty($event_date)) :
+						echo '<span class="event-featured-time">' . $event_date . '</span>';
 					endif;
 				endif;
 				

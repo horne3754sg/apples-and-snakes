@@ -32,11 +32,11 @@ function aas_opportunities_info()
 	
 	// Get the when data if it's already been entered
 	$when = get_post_meta($post->ID, 'when', true);
-	echo '<div><label>When (Sidebar)</label><input type="text" name="when" value="' . $when . '" class="widefat" placeholder="When?"></div></br>';
+	echo '<div><label>When (Sidebar - optional free text to give you flexibility, otherwise it will use the when date)</label><input type="text" name="when" value="' . $when . '" class="widefat" placeholder="When?"></div></br>';
 	
 	// Get the when data if it's already been entered
 	$when_featured = get_post_meta($post->ID, 'when_featured', true);
-	echo '<div><label>When (Featured)</label><input type="text" name="when_featured" value="' . $when_featured . '" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018"></div></br>';
+	echo '<div><label>When (Featured - optional free text to give you flexibility, otherwise it will use the when date)</label><input type="text" name="when_featured" value="' . $when_featured . '" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018"></div></br>';
 	
 	// Get the time data if it's already been entered
 	$time = get_post_meta($post->ID, 'time', true);

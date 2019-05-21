@@ -63,19 +63,20 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 					</div><!-- .entry-content -->
 					
 					<?php get_template_part('template-parts/social', 'share-bar'); ?>
-					
-					<a class="button back" href="<?php echo get_post_type_archive_link( 'event' ); ?>">back to what's on</a>
-					
+
+					<a class="button back" href="<?php echo get_post_type_archive_link('event'); ?>">back to what's
+						on</a>
+
 				</div>
 
 				<div class="sidebar">
 					<div class="event-meta">
 						
 						<?php
-						$when = get_post_meta(get_the_ID(), 'when', true);
-						$time = get_post_meta(get_the_ID(), 'time', true);
+						$event_meta = get_post_meta($post->ID, 'aas_event', true);
+						$event_date = get_post_meta_event_date($post->ID);
 						
-						if (!empty($when) || !empty($time))
+						if (!empty($event_date) || !empty($time))
 						{
 							?>
 							<div class="meta-section">
@@ -84,16 +85,16 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								</div>
 								<div class="meta-info">
 									<?php
-									echo ($when) ? '<span class="when">' . $when . '</span>' : '';
-									echo ($time) ? '<span class="time">' . $time . '</span>' : '';
+									echo ($event_date) ? '<span class="when">' . $event_date . '</span>' : '';
+									//echo ($time) ? '<span class="time">' . $time . '</span>' : '';
 									?>
 								</div>
 							</div>
 						<?php } ?>
 						
 						<?php
-						$where = get_post_meta(get_the_ID(), 'where', true);
-						$address = get_post_meta(get_the_ID(), 'address', true);
+						$where = !empty($event_meta['where']) ? $event_meta['where'] : get_post_meta(get_the_ID(), 'where', true);
+						$address = !empty($event_meta['address']) ? $event_meta['address'] : get_post_meta(get_the_ID(), 'address', true);
 						if (!empty($where) || !empty($address))
 						{
 							?>
@@ -111,7 +112,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						<?php } ?>
 						
 						<?php
-						$age = get_post_meta(get_the_ID(), 'age', true);
+						$age = !empty($event_meta['age']) ? $event_meta['age'] : get_post_meta(get_the_ID(), 'age', true);
 						if (!empty($age))
 						{
 							?>
@@ -126,7 +127,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						<?php } ?>
 						
 						<?php
-						$other = get_post_meta(get_the_ID(), 'other', true);
+						$other = !empty($event_meta['other']) ? $event_meta['other'] : get_post_meta(get_the_ID(), 'other', true);
 						if (!empty($other))
 						{
 							?>
@@ -141,7 +142,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						<?php } ?>
 						
 						
-						<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
+						<?php $tickets = !empty($event_meta['tickets']) ? $event_meta['tickets'] : get_post_meta(get_the_ID(), 'tickets', true);
 						if (!empty($tickets))
 						{
 							?>
@@ -155,8 +156,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								</div>
 								
 								<?php
-								$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
-								$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
+								$tickets_link = !empty($event_meta['tickets_link']) ? $event_meta['tickets_link'] : get_post_meta(get_the_ID(), 'tickets_link', true);
+								$tickets_text = !empty($event_meta['tickets_text']) ? $event_meta['tickets_text'] : get_post_meta(get_the_ID(), 'tickets_text', true);
 								if (!empty($tickets_link))
 								{ ?>
 									<div class="meta-info">

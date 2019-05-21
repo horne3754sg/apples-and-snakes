@@ -76,8 +76,33 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 						'post_type'           => 'event',
 						'posts_per_page'      => 5,
 						'ignore_sticky_posts' => 1,
-						'orderby'             => 'ASC',
-						'post__not_in'        => array($post->ID)
+						'order'               => 'ASC',
+						'orderby'             => 'when_order',
+						'post__not_in'        => array($post->ID),
+						'meta_query'          => array(
+							array(
+								'relation' => 'OR',
+								array(
+									'key'     => 'when_order',
+									'compare' => 'EXISTS'
+								),
+								array(
+									'taxonomy' => 'event-category',
+									'field'    => 'id',
+									'terms'    => array(ECTYPE), // 30
+									'operator' => 'NOT IN'
+								)
+							)
+						),
+						'tax_query'           => array(
+							'relation' => 'AND',
+							array(
+								'taxonomy' => 'event-category',
+								'field'    => 'id',
+								'terms'    => array(ECTYPE), // 30
+								'operator' => 'NOT IN'
+							)
+						)
 					));
 					
 					$count = 0;
@@ -105,9 +130,9 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 										
 										the_title('<h2 class="entry-title">', '</h2>');
 										
-										$when_featured = get_post_meta(get_the_ID(), 'when_featured', true);
-										if (!empty($when_featured)) :
-											echo '<span class="event-featured-time">' . $when_featured . '</span>';
+										$event_date = get_post_meta_event_date(get_the_ID());
+										if (!empty($event_date)) :
+											echo '<span class="event-featured-time">' . $event_date . '</span>';
 										endif;
 										?>
 									</div>

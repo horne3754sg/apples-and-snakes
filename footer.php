@@ -17,7 +17,7 @@
 		<div class="cols">
 			<div class="col">
 				<div class="footer-logo">
-					<img src="<?php echo get_template_directory_uri(); ?>/images/footer-logo.png" alt="">
+					<img src="<?php echo get_template_directory_uri(); ?>/images/apples-and-snakes-logo.svg" alt="">
 				</div>
 				<div class="footer-logo arts-council">
 					<img src="<?php echo get_template_directory_uri(); ?>/images/AC_logo_2.png" alt="">

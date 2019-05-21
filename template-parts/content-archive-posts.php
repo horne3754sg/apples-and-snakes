@@ -40,15 +40,17 @@
 				endif;
 				
 				if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category')) :
-					$when_featured = get_post_meta($post->ID, 'when_featured', true);
-					if (!empty($when_featured)) :
-						echo '<span class="event-featured-time">' . $when_featured . '</span>';
+					
+					$event_date = get_post_meta_event_date(get_the_ID());
+					if (!empty($event_date)) :
+						echo '<span class="event-featured-time">' . $event_date . '</span>';
 					endif;
 				endif;
 				
 				echo '<p class="excerpt">' . get_the_excerpt() . '</p>';
 				
-				echo '<a href="' . get_the_permalink() . '" class="button">' . __('More') . '</a>';
+				if (!has_term('watch', 'article_type'))
+					echo '<a href="' . get_the_permalink() . '" class="button">' . __('More') . '</a>';
 				?>
 			</div>
 		</div>

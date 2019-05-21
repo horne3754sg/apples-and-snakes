@@ -385,6 +385,10 @@
 		.footer-logo {
 			margin-bottom: 3rem;
 
+			img {
+				max-width: 120px;
+			}
+
 			&.arts-council {
 				margin-bottom: 1.5rem;
 
