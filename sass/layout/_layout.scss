@@ -1437,6 +1437,19 @@ body.peach-scheme {
 							font-family: $font__main;
 						}
 					}
+
+					&.events_list_item {
+						margin-bottom: 10px;
+						border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+						.when {
+							font-size: 16px;
+						}
+
+						&.past_event {
+							opacity: 0.3;
+						}
+					}
 				}
 			}
 		}

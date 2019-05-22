@@ -74,42 +74,91 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						
 						<?php
 						$event_meta = get_post_meta($post->ID, 'aas_event', true);
+						//var_dump($event_meta);
 						$event_date = get_post_meta_event_date($post->ID);
+						$now = date('Y-m-d');
 						
-						if (!empty($event_date) || !empty($time))
+						if (!empty($event_meta['event']))
 						{
 							?>
 							<div class="meta-section">
 								<div class="meta-header">
-									<h3><?php echo __('When'); ?></h3>
+									<h3><?php echo __('Event Dates'); ?></h3>
 								</div>
-								<div class="meta-info">
-									<?php
-									echo ($event_date) ? '<span class="when">' . $event_date . '</span>' : '';
-									//echo ($time) ? '<span class="time">' . $time . '</span>' : '';
-									?>
-								</div>
+								<?php
+								foreach ($event_meta['event'] as $event)
+								{
+									if (strtotime($now) <= $event['when_order'])
+									{
+										?>
+										<div class="meta-info events_list_item">
+											<?php
+											$when_order = !empty($event['when_order']) ? (int)$event['when_order'] : '';
+											$time = !empty($event['time']) ? $event['time'] : '';
+											$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+											
+											echo ($event['where']) ? '<span class="where">' . $event['where'] . '</span>' : '';
+											echo ($event_date) ? '<span class="when">' . $event_date . '</span>' : '';
+											echo ($event['address']) ? '<span class="address">' . $event['address'] . '</span>' : '';
+											?>
+										</div>
+									<?php }
+									else
+									{ ?>
+										<div class="meta-info events_list_item past_event">
+											<?php
+											$when_order = !empty($event['when_order']) ? (int)$event['when_order'] : '';
+											$time = !empty($event['time']) ? $event['time'] : '';
+											$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+											
+											echo ($event['where']) ? '<span class="where">' . $event['where'] . '</span>' : '';
+											echo ($event_date) ? '<span class="when">' . $event_date . '</span>' : '';
+											echo ($event['address']) ? '<span class="address">' . $event['address'] . '</span>' : '';
+											?>
+										</div>
+									<?php }
+								} ?>
 							</div>
-						<?php } ?>
-						
-						<?php
-						$where = !empty($event_meta['where']) ? $event_meta['where'] : get_post_meta(get_the_ID(), 'where', true);
-						$address = !empty($event_meta['address']) ? $event_meta['address'] : get_post_meta(get_the_ID(), 'address', true);
-						if (!empty($where) || !empty($address))
+						<?php }
+						else
 						{
-							?>
-							<div class="meta-section">
-								<div class="meta-header">
-									<h3><?php echo __('Where'); ?></h3>
+							if (!empty($event_date) || !empty($time))
+							{
+								?>
+								<div class="meta-section">
+									<div class="meta-header">
+										<h3><?php echo __('When'); ?></h3>
+									</div>
+									<div class="meta-info">
+										<?php
+										echo ($event_date) ? '<span class="when">' . $event_date . '</span>' : '';
+										//echo ($time) ? '<span class="time">' . $time . '</span>' : '';
+										?>
+									</div>
 								</div>
-								<div class="meta-info">
-									<?php
-									echo ($where) ? '<span class="where">' . $where . '</span>' : '';
-									echo ($address) ? '<span class="address">' . $address . '</span>' : '';
-									?>
+							<?php } ?>
+							
+							<?php
+							
+							
+							$where = !empty($event_meta['where']) ? $event_meta['where'] : get_post_meta(get_the_ID(), 'where', true);
+							$address = !empty($event_meta['address']) ? $event_meta['address'] : get_post_meta(get_the_ID(), 'address', true);
+							if (!empty($where) || !empty($address))
+							{
+								?>
+								<div class="meta-section">
+									<div class="meta-header">
+										<h3><?php echo __('Where'); ?></h3>
+									</div>
+									<div class="meta-info">
+										<?php
+										echo ($where) ? '<span class="where">' . $where . '</span>' : '';
+										echo ($address) ? '<span class="address">' . $address . '</span>' : '';
+										?>
+									</div>
 								</div>
-							</div>
-						<?php } ?>
+							<?php }
+						} // end else ?>
 						
 						<?php
 						$age = !empty($event_meta['age']) ? $event_meta['age'] : get_post_meta(get_the_ID(), 'age', true);

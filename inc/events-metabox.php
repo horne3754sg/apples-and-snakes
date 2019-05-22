@@ -59,7 +59,7 @@ function aas_events_location()
 		
 		echo '<div class="event_content">';
 		
-		// Get the when data if it's already been entered
+		// Get the when data if it's already been enteredCase Study Meta
 		$when_order = !empty($events['event'][$i]['when_order']) ? $events['event'][$i]['when_order'] : get_post_meta($post->ID, 'when_order', true);
 		$when_order = !empty($when_order) ? date('Y-m-d', $when_order) : date('Y-m-d');
 		echo '<div class="option_row"><label>When (Used to Order Content and must be a valid date format)</label><input type="date" name="events[event][' . $i . '][when_order]" value="' . $when_order . '" class="widefat" placeholder="When? format: dd/mm/yyyy"></div>';
