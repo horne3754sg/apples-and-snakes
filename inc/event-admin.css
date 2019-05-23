@@ -15,7 +15,7 @@
 }
 
 .group_options .group_header .toggle-indicator, .group_options .group_content ul li .event_header .toggle-indicator {
-    margin-left: auto;
+	margin-left: auto;
 }
 
 .group_options .group_content, .group_options .group_content ul li .event_content {
@@ -34,6 +34,11 @@
 .group_options .group_content .option_row {
 	margin-bottom: 10px;
 }
+
+.group_options .group_content .option_row label {
+	font-weight: 600;
+}
+
 
 .group_options .button_wrap {
 	text-align: right;

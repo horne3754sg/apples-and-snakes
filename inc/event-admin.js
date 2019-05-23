@@ -55,6 +55,18 @@ var EventAdmin = (function($) {
 			'<div class="option_row">' +
 			'<label>Address</label>' +
 			'<input type="text" name="events[event][' + i + '][address]" value="" class="widefat" placeholder="Address">' +
+			'</div>' +
+			'<div class="option_row">' +
+			'<label>Tickets</label>' +
+			'<input type="text" name="events[event][' + i + '][tickets]" value="" class="widefat" placeholder="Tickets">' +
+			'</div>' +
+			'<div class="option_row">' +
+			'<label>Get tickets button text</label>' +
+			'<input type="text" name="events[event][' + i + '][tickets_text]" value="" class="widefat" placeholder="Get Tickets">' +
+			'</div>' +
+			'<div class="option_row">' +
+			'<label>Get tickets button link</label>' +
+			'<input type="text" name="events[event][' + i + '][tickets_link]" value="" class="widefat" placeholder="Link to where the tickets are sold">' +
 			'</div>';
 		li.appendChild(eventContent);
 		

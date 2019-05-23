@@ -202,6 +202,11 @@ function order_events_by_meta_field3($query)
 	}
 	//var_dump($query->query['event_location']);
 	
+	if (!empty($query->query['opportunities_type']) && $query->query['opportunities_type'] == 'past-opportunities')
+	{
+		return;
+	}
+	
 	//opportunities_type
 	if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))
 	{
@@ -634,7 +639,8 @@ function get_post_meta_event_date($postid = -1, $strtime = false)
 		{
 			$when_order = get_post_meta($postid, 'when_order', true);
 			$time = get_post_meta($postid, 'time', true);
-			$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+			if ($when_order > 0)
+				$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
 		}
 	}
 	

@@ -521,7 +521,7 @@ body.home {
 			text-decoration: none;
 			margin: 0 5px;
 
-			&:hover {
+			&:hover, &.active {
 				color: $c1;
 				border: 2px solid $c1;
 			}
@@ -650,7 +650,7 @@ body.orange-scheme {
 					color: #d8d8d8;
 					border: 2px solid #d8d8d8;
 
-					&:hover {
+					&:hover, &.active {
 						color: $c2;
 						border: 2px solid $c2;
 					}
@@ -800,7 +800,7 @@ body.post-type-archive-opportunities {
 					color: #d8d8d8;
 					border: 2px solid #d8d8d8;
 
-					&:hover {
+					&:hover, &.active {
 						color: $c4;
 						border: 2px solid $c4;
 					}
@@ -949,7 +949,7 @@ body.blue-scheme {
 					color: #d8d8d8;
 					border: 2px solid #d8d8d8;
 
-					&:hover {
+					&:hover, &.active {
 						color: $c5;
 						border: 2px solid $c5;
 					}
@@ -1097,7 +1097,7 @@ body.yellow-scheme {
 					color: #d8d8d8;
 					border: 2px solid #d8d8d8;
 
-					&:hover {
+					&:hover, &.active {
 						color: $c6;
 						border: 2px solid $c6;
 					}
@@ -1245,7 +1245,7 @@ body.peach-scheme {
 					color: #d8d8d8;
 					border: 2px solid #d8d8d8;
 
-					&:hover {
+					&:hover, &.active {
 						color: $c7;
 						border: 2px solid $c7;
 					}
@@ -2177,7 +2177,9 @@ body.blog {
 		.optin-form {
 			form {
 				display: flex;
+				flex-wrap: wrap;
 				align-items: center;
+				justify-content: space-between;
 
 				input {
 					margin-right: 5px;
@@ -2189,12 +2191,23 @@ body.blog {
 					}
 				}
 
-				.EMAIL-label {
+				> label {
 					flex: 1 0 auto;
 				}
 
+				.FNAME-label, .LNAME-label, .EMAIL-label {
+					flex: 0 0 32.3333%;
+					padding-right: 0;
+				}
+
+				.EMAIL-label {
+					margin-right: 0;
+				}
+
 				.submit-button-inline-label {
-					width: unset;
+					margin-left: auto;
+					text-align: right;
+					flex: 0 0 auto;
 				}
 
 				button {
@@ -2210,6 +2223,10 @@ body.blog {
 
 					input {
 						width: 100%;
+					}
+
+					input[type="checkbox"] {
+						width: auto;
 					}
 				}
 			}

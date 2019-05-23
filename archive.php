@@ -79,15 +79,16 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 							{ ?>
 							<ul class="cat_nav">
 								<li>
-									<a href="<?php echo get_post_type_archive_link('event'); ?>">All</a>
+									<a class="<?php echo(!empty(get_queried_object()->name) && (get_queried_object()->name == 'event') ? 'active' : '') ?>" href="<?php echo get_post_type_archive_link('event'); ?>">All</a>
 								</li>
 								<?php
 								$past_events = '';
 								foreach ($event_location as $location)
 								{
+									$class = (!empty(get_queried_object()->term_id) && (get_queried_object()->term_id == $location->term_id)) ? ' class="active"' : '';
 									?>
 									<li>
-										<a href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
+										<a <?php echo $class; ?> href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
 									</li>
 									<?php
 								}

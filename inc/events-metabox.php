@@ -83,9 +83,22 @@ function aas_events_location()
 		// Get the address data if it's already been entered
 		$address = !empty($events['event'][$i]['address']) ? $events['event'][$i]['address'] : get_post_meta($post->ID, 'address', true);
 		echo '<div class="option_row"><label>Address</label><input type="text" name="events[event][' . $i . '][address]" value="' . $address . '" class="widefat" placeholder="Address"></div>';
+		
+		// Get the tickets data if it's already been entered
+		$tickets = !empty($events['event'][$i]['tickets']) ? $events['event'][$i]['tickets'] : get_post_meta($post->ID, 'tickets', true);
+		echo '<div class="option_row"><label>Tickets</label><input type="text" name="events[event][' . $i . '][tickets]" value="' . $tickets . '" class="widefat" placeholder="Tickets"></div>';
+		
+		// Get the tickets data if it's already been entered
+		$tickets_text = !empty($events['event'][$i]['tickets_text']) ? $events['event'][$i]['tickets_text'] : get_post_meta($post->ID, 'tickets_text', true);
+		echo '<div class="option_row"><label>Get tickets button text</label><input type="text" name="events[event][' . $i . '][tickets_text]" value="' . $tickets_text . '" class="widefat" placeholder="Get Tickets"></div>';
+		
+		// Get the tickets data if it's already been entered
+		$tickets_link = !empty($events['event'][$i]['tickets_link']) ? $events['event'][$i]['tickets_link'] : get_post_meta($post->ID, 'tickets_link', true);
+		echo '<div class="option_row"><label>Get tickets button link</label><input type="text" name="events[event][' . $i . '][tickets_link]" value="' . $tickets_link . '" class="widefat" placeholder="Link to where the tickets are sold"></div>';
+		
+		
 		echo '</div>'; // content
 		echo '</li>';
-		
 		$i++;
 	} while ($i < (!empty($events['event']) ? count($events['event']) : 0));
 	
@@ -100,27 +113,27 @@ function aas_events_location()
 	
 	echo '</div>'; // end group
 	
-	echo '<div class="group_options">'; // start group
+	//echo '<div class="group_options">'; // start group
 	
-	echo '<div class="group_header">';
-	echo '<h3>Ticketing information</h3>';
-	echo '</div>';
+	//echo '<div class="group_header">';
+	//echo '<h3>Ticketing information</h3>';
+	//echo '</div>';
 	
-	echo '<div class="group_content">';
-	// Get the tickets data if it's already been entered
-	$tickets = !empty($events['tickets']) ? $events['tickets'] : get_post_meta($post->ID, 'tickets', true);
-	echo '<div class="option_row"><label>Tickets</label><input type="text" name="events[tickets]" value="' . $tickets . '" class="widefat" placeholder="Tickets"></div>';
+	//echo '<div class="group_content">';
+	//// Get the tickets data if it's already been entered
+	//$tickets = !empty($events['tickets']) ? $events['tickets'] : get_post_meta($post->ID, 'tickets', true);
+	//echo '<div class="option_row"><label>Tickets</label><input type="text" name="events[tickets]" value="' . $tickets . '" class="widefat" placeholder="Tickets"></div>';
+	//
+	//// Get the tickets data if it's already been entered
+	//$tickets_text = !empty($events['tickets_text']) ? $events['tickets_text'] : get_post_meta($post->ID, 'tickets_text', true);
+	//echo '<div class="option_row"><label>Get tickets button text</label><input type="text" name="events[tickets_text]" value="' . $tickets_text . '" class="widefat" placeholder="Get Tickets"></div>';
+	//
+	//// Get the tickets data if it's already been entered
+	//$tickets_link = !empty($events['tickets_link']) ? $events['tickets_link'] : get_post_meta($post->ID, 'tickets_link', true);
+	//echo '<div class="option_row"><label>Get tickets button link</label><input type="text" name="events[tickets_link]" value="' . $tickets_link . '" class="widefat" placeholder="Link to where the tickets are sold"></div>';
+	//echo '</div>';
 	
-	// Get the tickets data if it's already been entered
-	$tickets_text = !empty($events['tickets_text']) ? $events['tickets_text'] : get_post_meta($post->ID, 'tickets_text', true);
-	echo '<div class="option_row"><label>Get tickets button text</label><input type="text" name="events[tickets_text]" value="' . $tickets_text . '" class="widefat" placeholder="Get Tickets"></div>';
-	
-	// Get the tickets data if it's already been entered
-	$tickets_link = !empty($events['tickets_link']) ? $events['tickets_link'] : get_post_meta($post->ID, 'tickets_link', true);
-	echo '<div class="option_row"><label>Get tickets button link</label><input type="text" name="events[tickets_link]" value="' . $tickets_link . '" class="widefat" placeholder="Link to where the tickets are sold"></div>';
-	echo '</div>';
-	
-	echo '</div>'; // end group
+	//echo '</div>'; // end group
 	
 	echo '<div class="group_options">'; // start group
 	
@@ -189,6 +202,11 @@ function aas_save_events_meta($post_id, $post)
 				$em['event'][$i]['where'] = !empty($event['where']) ? esc_textarea($event['where']) : '';
 				$em['event'][$i]['address'] = !empty($event['address']) ? esc_textarea($event['address']) : '';
 				
+				// ticket info
+				$em['event'][$i]['tickets'] = !empty($event['tickets']) ? esc_textarea($event['tickets']) : '';
+				$em['event'][$i]['tickets_text'] = !empty($event['tickets_text']) ? esc_textarea($event['tickets_text']) : '';
+				$em['event'][$i]['tickets_link'] = !empty($event['tickets_link']) ? esc_url($event['tickets_link']) : '';
+				
 				update_post_meta($post_id, 'when_order', $em['event'][$i]['when_order']);
 				update_post_meta($post_id, 'time', $em['event'][$i]['time']);
 				if (strtotime($now) <= $em['event'][$i]['when_order'])
@@ -197,6 +215,10 @@ function aas_save_events_meta($post_id, $post)
 					wp_remove_object_terms($post_id, array(ELTYPE), 'event_location');
 					update_post_meta($post_id, 'when_order', $em['event'][$i]['when_order']);
 					update_post_meta($post_id, 'time', $em['event'][$i]['time']);
+					
+					update_post_meta($post_id, 'tickets', $em['event'][$i]['tickets']);
+					update_post_meta($post_id, 'tickets_text', $em['event'][$i]['tickets_text']);
+					update_post_meta($post_id, 'tickets_link', $em['event'][$i]['tickets_link']);
 				}
 				else
 				{
@@ -209,9 +231,9 @@ function aas_save_events_meta($post_id, $post)
 		// handle other saved options
 		$em['duration'] = !empty($_POST['events']['duration']) ? esc_textarea($_POST['events']['duration']) : '';
 		$em['age'] = !empty($_POST['events']['age']) ? esc_textarea($_POST['events']['age']) : '';
-		$em['tickets'] = !empty($_POST['events']['tickets']) ? esc_textarea($_POST['events']['tickets']) : '';
-		$em['tickets_text'] = !empty($_POST['events']['tickets_text']) ? esc_textarea($_POST['events']['tickets_text']) : '';
-		$em['tickets_link'] = !empty($_POST['events']['tickets_link']) ? esc_textarea($_POST['events']['tickets_link']) : '';
+		//$em['tickets'] = !empty($_POST['events']['tickets']) ? esc_textarea($_POST['events']['tickets']) : '';
+		//$em['tickets_text'] = !empty($_POST['events']['tickets_text']) ? esc_textarea($_POST['events']['tickets_text']) : '';
+		//$em['tickets_link'] = !empty($_POST['events']['tickets_link']) ? esc_textarea($_POST['events']['tickets_link']) : '';
 		$em['sub_heading'] = !empty($_POST['events']['sub_heading']) ? esc_textarea($_POST['events']['sub_heading']) : '';
 		$em['other'] = !empty($_POST['events']['other']) ? esc_textarea($_POST['events']['other']) : '';
 	}
@@ -245,8 +267,17 @@ function aas_save_events_meta($post_id, $post)
 		
 		// delete the old data
 		$keys = array(
-			'when', 'where', 'address', 'when_featured', 'duration', 'age', 'tickets',
-			'tickets_text', 'tickets_link', 'sub_heading', 'other'
+			'when',
+			'where',
+			'address',
+			'when_featured',
+			'duration',
+			'age',
+			//'tickets',
+			//'tickets_text',
+			//'tickets_link',
+			'sub_heading',
+			'other'
 		);
 		if ($keys)
 		{

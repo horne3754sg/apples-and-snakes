@@ -56,3 +56,22 @@ form {
 	margin-bottom: 0 !important;
 	min-height: 50px !important;
 }
+
+.yikes-easy-mc-form .yikes-easy-mc-checkbox-label {
+	display: flex !important;
+}
+
+.yikes-easy-mc-checkbox-label {
+	font-size: 10px;
+
+	input {
+		display: inline-block;
+		margin-bottom: 0;
+		margin-right: 5px;
+	}
+}
+
+.checkbox-parent-label {
+	margin-bottom: 10px;
+	font-size: 10px;
+}

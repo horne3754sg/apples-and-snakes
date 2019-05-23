@@ -191,7 +191,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						<?php } ?>
 						
 						
-						<?php $tickets = !empty($event_meta['tickets']) ? $event_meta['tickets'] : get_post_meta(get_the_ID(), 'tickets', true);
+						<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
+						//var_dump($tickets);
 						if (!empty($tickets))
 						{
 							?>
@@ -205,8 +206,8 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								</div>
 								
 								<?php
-								$tickets_link = !empty($event_meta['tickets_link']) ? $event_meta['tickets_link'] : get_post_meta(get_the_ID(), 'tickets_link', true);
-								$tickets_text = !empty($event_meta['tickets_text']) ? $event_meta['tickets_text'] : get_post_meta(get_the_ID(), 'tickets_text', true);
+								$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
+								$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
 								if (!empty($tickets_link))
 								{ ?>
 									<div class="meta-info">
