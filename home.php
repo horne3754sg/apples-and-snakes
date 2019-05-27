@@ -9,7 +9,8 @@
 
 get_header();
 
-$header_image = get_template_directory_uri() . '/images/default-banner-image.jpg';
+$header_image = get_post_meta($post->ID, 'featured-header-image', true);
+$header_image = !empty($header_image) ? $header_image : (!empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/images/default-banner-image.jpg');
 
 $blog_id = get_option('page_for_posts');
 $title = get_the_title($blog_id);

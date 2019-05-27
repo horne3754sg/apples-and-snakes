@@ -166,10 +166,10 @@ if (!class_exists('AT_Meta_Box')) :
 			if (in_array($typenow, $this->_meta_box['pages']) && $this->is_edit_page())
 			{
 				// Enqueue Meta Box Style
-				wp_enqueue_style('at-meta-box', $plugin_path . '/css/meta-box.css');
+				wp_enqueue_style('at-meta-box', $plugin_path . '/css/meta-box.css', '', AAS_VERSION);
 				
 				// Enqueue Meta Box Scripts
-				wp_enqueue_script('at-meta-box', $plugin_path . '/js/meta-box.js', array('jquery'), null, true);
+				wp_enqueue_script('at-meta-box', $plugin_path . '/js/meta-box.js', array('jquery'), AAS_VERSION, true);
 				
 				// Make upload feature work event when custom post type doesn't support 'editor'
 				if ($this->has_field('image') || $this->has_field('file'))
@@ -205,8 +205,8 @@ if (!class_exists('AT_Meta_Box')) :
 			// Enqueu JQuery UI, use proper version.
 			
 			// Enqueu JQuery select2 library, use proper version.
-			wp_enqueue_style('at-multiselect-select2-css', $plugin_path . '/js/select2/select2.css', array(), null);
-			wp_enqueue_script('at-multiselect-select2-js', $plugin_path . '/js/select2/select2.js', array('jquery'), false, true);
+			wp_enqueue_style('at-multiselect-select2-css', $plugin_path . '/js/select2/select2.css', array(), AAS_VERSION);
+			wp_enqueue_script('at-multiselect-select2-js', $plugin_path . '/js/select2/select2.js', array('jquery'), AAS_VERSION, true);
 		}
 		
 		/**

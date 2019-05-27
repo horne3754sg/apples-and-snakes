@@ -7,12 +7,27 @@
  * @package apples-and-snakes
  */
 
-$header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image: url(' . get_the_post_thumbnail_url() . ');"' : '';
+$featured_header_image = get_post_meta($post->ID, 'featured-header-image', true);
+$featured_header_image = !empty($featured_header_image) ? $featured_header_image : (!empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : '');
+$header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : '';
+$header_image = !empty($header_image) ? $header_image : '';
+?>
+<style>
+	.section .header-container {
+		background-image: url(<?php echo $featured_header_image; ?>);
+	}
+
+	@media screen and (max-width: 800px) {
+		.section .header-container {
+			background-image: url(<?php echo $header_image; ?>);
+		}
+	}
+</style>
 ?>
 <div class="section">
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-		<div class="header-container" <?php echo $header_image; ?>>
+		<div class="header-container">
 			<div class="header-content">
 				<header class="entry-header">
 					<?php
@@ -136,32 +151,32 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 								</div>
 							</div>
 						<?php } ?>
-						
-						
-						<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
-						if (!empty($tickets))
-						{
-							?>
-							<div class="meta-section">
-								<div class="meta-header">
-									<h3><?php echo __('Tickets'); ?></h3>
-								</div>
 
+
+						<div class="meta-section">
+							<div class="meta-header">
+								<h3><?php echo __('Tickets'); ?></h3>
+							</div>
+							
+							<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
+							if (!empty($tickets))
+							{
+								?>
 								<div class="meta-info">
 									<?php echo ($tickets) ? '<span class="tickets">' . $tickets . '</span>' : ''; ?>
 								</div>
-								
-								<?php
-								$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
-								$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
-								if (!empty($tickets_link))
-								{ ?>
-									<div class="meta-info">
-										<?php echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : ''; ?>
-									</div>
-								<?php } ?>
-							</div>
-						<?php } ?>
+							<?php } ?>
+							
+							<?php
+							$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
+							$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
+							if (!empty($tickets_link))
+							{ ?>
+								<div class="meta-info">
+									<?php echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '" target="_blank">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : ''; ?>
+								</div>
+							<?php } ?>
+						</div>
 					</div>
 				</div>
 			</div>

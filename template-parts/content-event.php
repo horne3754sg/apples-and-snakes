@@ -7,12 +7,26 @@
  * @package apples-and-snakes
  */
 
-$header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image: url(' . get_the_post_thumbnail_url() . ');"' : '';
+$featured_header_image = get_post_meta($post->ID, 'featured-header-image', true);
+$featured_header_image = !empty($featured_header_image) ? $featured_header_image : (!empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : '');
+$header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : '';
+$header_image = !empty($header_image) ? $header_image : '';
 ?>
+<style>
+	.section .header-container {
+		background-image: url(<?php echo $featured_header_image; ?>);
+	}
+
+	@media screen and (max-width: 800px) {
+		.section .header-container {
+			background-image: url(<?php echo $header_image; ?>);
+		}
+	}
+</style>
 <div class="section">
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-		<div class="header-container" <?php echo $header_image; ?>>
+		<div class="header-container">
 			<div class="header-content">
 				<header class="entry-header">
 					<?php
@@ -74,7 +88,13 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 						
 						<?php
 						$event_meta = get_post_meta($post->ID, 'aas_event', true);
-						//var_dump($event_meta);
+						if ($event_meta['event'])
+						{
+							usort($event_meta['event'], function ($a, $b)
+							{
+								return $a['when_order'] - $b['when_order'];
+							});
+						}
 						$event_date = get_post_meta_event_date($post->ID);
 						$now = date('Y-m-d');
 						
@@ -100,6 +120,10 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 											echo ($event['where']) ? '<span class="where">' . $event['where'] . '</span>' : '';
 											echo ($event_date) ? '<span class="when">' . $event_date . '</span>' : '';
 											echo ($event['address']) ? '<span class="address">' . $event['address'] . '</span>' : '';
+											
+											$tickets_link = !empty($event['tickets_link']) ? $event['tickets_link'] : '';
+											$tickets_text = !empty($event['tickets_text']) ? $event['tickets_text'] : '';
+											echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '" target="_blank">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : '';
 											?>
 										</div>
 									<?php }
@@ -190,28 +214,28 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 							</div>
 						<?php } ?>
 						
-						
-						<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
-						//var_dump($tickets);
-						if (!empty($tickets))
-						{
-							?>
+						<?php if (empty($event_meta['event']))
+						{ ?>
 							<div class="meta-section">
 								<div class="meta-header">
 									<h3><?php echo __('Tickets'); ?></h3>
 								</div>
-
-								<div class="meta-info">
-									<?php echo ($tickets) ? '<span class="tickets">' . $tickets . '</span>' : ''; ?>
-								</div>
 								
+								<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
+								if (!empty($tickets))
+								{
+									?>
+									<div class="meta-info">
+										<?php echo ($tickets) ? '<span class="tickets">' . $tickets . '</span>' : ''; ?>
+									</div>
+								<?php } ?>
 								<?php
 								$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
 								$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
 								if (!empty($tickets_link))
 								{ ?>
 									<div class="meta-info">
-										<?php echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : ''; ?>
+										<?php echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '" target="_blank">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : ''; ?>
 									</div>
 								<?php } ?>
 							</div>

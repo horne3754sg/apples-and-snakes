@@ -43,3 +43,15 @@
 .group_options .button_wrap {
 	text-align: right;
 }
+
+.featured_header_image input {
+	width: 100%;
+}
+
+.featured_header_image input[type="text"] {
+	margin-bottom: 5px;
+}
+
+#featured-header-image-preview {
+	max-width: 100%;
+}

@@ -47,6 +47,13 @@ function aas_events_location()
 	echo '<ul id="event_list">';
 	$i = 0;
 	$events = get_post_meta($post->ID, 'aas_event', true);
+	if (!empty($events['event']))
+	{
+		usort($events['event'], function ($a, $b)
+		{
+			return $a['when_order'] - $b['when_order'];
+		});
+	}
 	//var_dump($events);
 	do
 	{
@@ -188,6 +195,7 @@ function aas_save_events_meta($post_id, $post)
 	
 	$em = array();
 	$now = date('Y-m-d');
+	$nextevent = false;
 	if (!empty($_POST['events']))
 	{
 		// handle events
@@ -213,12 +221,17 @@ function aas_save_events_meta($post_id, $post)
 				{
 					wp_remove_object_terms($post_id, array(ECTYPE), 'event-category');
 					wp_remove_object_terms($post_id, array(ELTYPE), 'event_location');
-					update_post_meta($post_id, 'when_order', $em['event'][$i]['when_order']);
-					update_post_meta($post_id, 'time', $em['event'][$i]['time']);
-					
-					update_post_meta($post_id, 'tickets', $em['event'][$i]['tickets']);
-					update_post_meta($post_id, 'tickets_text', $em['event'][$i]['tickets_text']);
-					update_post_meta($post_id, 'tickets_link', $em['event'][$i]['tickets_link']);
+					if (!$nextevent)
+					{
+						update_post_meta($post_id, 'when_order', $em['event'][$i]['when_order']);
+						update_post_meta($post_id, 'time', $em['event'][$i]['time']);
+						
+						update_post_meta($post_id, 'tickets', $em['event'][$i]['tickets']);
+						update_post_meta($post_id, 'tickets_text', $em['event'][$i]['tickets_text']);
+						update_post_meta($post_id, 'tickets_link', $em['event'][$i]['tickets_link']);
+						
+						$nextevent = $em['event'][$i]['when_order'];
+					}
 				}
 				else
 				{

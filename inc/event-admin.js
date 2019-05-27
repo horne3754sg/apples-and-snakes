@@ -40,14 +40,14 @@ var EventAdmin = (function($) {
 			'<label>Time (Sidebar)</label>' +
 			'<input type="text" name="events[event][' + i + '][time]" value="" class="widefat" placeholder="time">' +
 			'</div>' +
-			'<div class="option_row">' +
-			'<label>When (Sidebar - optional free text to give you flexibility, otherwise it will use the when date)</label>' +
-			'<input type="text" name="events[event][' + i + '][when]" value="" class="widefat" placeholder="When?">' +
-			'</div>' +
-			'<div>' +
-			'<label>When (Featured - optional free text to give you flexibility, otherwise it will use the when date)</label>' +
-			'<input type="text" name="events[event][' + i + '][when_featured]" value="" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018">' +
-			'</div>' +
+			// '<div class="option_row">' +
+			// '<label>When (Sidebar - optional free text to give you flexibility, otherwise it will use the when date)</label>' +
+			// '<input type="text" name="events[event][' + i + '][when]" value="" class="widefat" placeholder="When?">' +
+			// '</div>' +
+			// '<div>' +
+			// '<label>When (Featured - optional free text to give you flexibility, otherwise it will use the when date)</label>' +
+			// '<input type="text" name="events[event][' + i + '][when_featured]" value="" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018">' +
+			// '</div>' +
 			'<div class="option_row">' +
 			'<label>Where</label>' +
 			'<input type="text" name="events[event][' + i + '][where]" value="" class="widefat" placeholder="Where?">' +

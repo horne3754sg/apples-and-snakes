@@ -6,14 +6,27 @@
  *
  * @package apples-and-snakes
  */
+$featured_header_image = get_post_meta($post->ID, 'featured-header-image', true);
+$featured_header_image = !empty($featured_header_image) ? $featured_header_image : (!empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : '');
 $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/images/default-banner-image.jpg';
+$header_image = !empty($header_image) ? $header_image : '';
 ?>
+<style>
+	.section .header-container {
+		background-image: url(<?php echo $featured_header_image; ?>);
+	}
 
+	@media screen and (max-width: 800px) {
+		.section .header-container {
+			background-image: url(<?php echo $header_image; ?>);
+		}
+	}
+</style>
 <div class="section">
 
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-		<div class="header-container" style="background-image: url(<?php echo $header_image; ?>);">
+		<div class="header-container">
 			<div class="header-content">
 				<header class="entry-header">
 					<?php the_title('<h1 class="entry-title">', '</h1>'); ?>

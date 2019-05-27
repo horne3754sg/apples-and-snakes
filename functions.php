@@ -8,7 +8,7 @@
  */
 
 define('DEV', true);
-define('AAS_VERSION', 1.2);
+define('AAS_VERSION', 1.22);
 define('OPTYPE', (!empty(DEV) ? 31 : 62)); // opportunities type archive cat
 define('ECTYPE', (!empty(DEV) ? 30 : 57)); // event category type archive cat
 define('ELTYPE', (!empty(DEV) ? 26 : 52)); // event location type archive cat
@@ -415,6 +415,7 @@ require get_template_directory() . '/inc/aas-metaboxes.php';
 require get_template_directory() . '/inc/opportunities-metabox.php';
 require get_template_directory() . '/inc/events-metabox.php';
 require get_template_directory() . '/inc/shortcodes.php';
+require get_template_directory() . '/inc/featured-header-metabox.php';
 
 /**
  * Load Jetpack compatibility file.
@@ -600,23 +601,47 @@ function yikes_mailchimp_google_analytics($form_id)
  *
  * @return int|mixed|string
  */
-function get_post_meta_event_date($postid = -1, $strtime = false)
+function get_post_meta_event_date($postid = -1, $strtime = false, $ranged = false)
 {
 	$event_date = '';
 	if ($postid > 0)
 	{
+		$ranged_dates = array();
+		$total = 0;
 		$now = date('Y-m-d');
 		$events = get_post_meta($postid, 'aas_event', true);
+		if (!empty($events['event']))
+		{
+			usort($events['event'], function ($a, $b)
+			{
+				return $a['when_order'] - $b['when_order'];
+			});
+		}
 		if (!empty($events) && !empty($events['event']))
 		{
-			foreach ($events['event'] as $event)
+			$nextevent = false;
+			$total = count($events['event']);
+			foreach ($events['event'] as $i => $event)
 			{
+				if ($i == 0)
+				{
+					$ranged_dates[] = $event['when_order'];
+				}
+				
 				if (strtotime($now) <= $event['when_order'])
 				{
-					$when_order = $event['when_order'];
-					update_post_meta($postid, 'when_order', $when_order);
-					update_post_meta($postid, 'time', $event['time']);
-					break;
+					if (!$nextevent)
+					{
+						$when_order = $event['when_order'];
+						update_post_meta($postid, 'when_order', $when_order);
+						update_post_meta($postid, 'time', $event['time']);
+						$nextevent = $when_order;
+					}
+				}
+				
+				if ($i == ($total - 1))
+				{
+					$ranged_dates[] = $event['when_order'];
 				}
 			}
 		}
@@ -625,24 +650,107 @@ function get_post_meta_event_date($postid = -1, $strtime = false)
 			$when_order = get_post_meta($postid, 'when_order', true);
 		}
 		
-		if (!empty($when_order) && empty($strtime))
+		if ($total > 0 && $ranged_dates && count($ranged_dates) == 2 && $ranged)
 		{
-			$time = get_post_meta($postid, 'time', true);
-			$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+			$event_date = date("l d M", $ranged_dates[0]) . ' - ' . date("l d M", $ranged_dates[1]);
 		}
 		else
 		{
-			$event_date = !empty($when_order) ? $when_order : -1;
-		}
-		
-		if ($event_date == -1)
-		{
-			$when_order = get_post_meta($postid, 'when_order', true);
-			$time = get_post_meta($postid, 'time', true);
-			if ($when_order > 0)
+			if (!empty($when_order) && empty($strtime))
+			{
+				$time = get_post_meta($postid, 'time', true);
 				$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+			}
+			else
+			{
+				$event_date = !empty($when_order) ? $when_order : -1;
+			}
+			
+			if ($event_date == -1)
+			{
+				$when_order = get_post_meta($postid, 'when_order', true);
+				$time = get_post_meta($postid, 'time', true);
+				if ($when_order > 0)
+					$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+			}
 		}
 	}
 	
 	return $event_date;
 }
+
+
+//if (!wp_next_scheduled('update_aas_events_hook'))
+//{
+//	wp_schedule_event(time(), 'hourly', 'update_aas_events_hook');
+//}
+//
+//add_action('update_aas_events_hook', 'update_aas_events_function');
+
+function update_aas_events_function()
+{
+	//wp_mail('mattjhorne@hotmail.co.uk', 'Automatic email', 'Automatic scheduled email from WordPress.');
+	$get_events = get_posts(array(
+		'post_type'   => 'event',
+		'post_status' => 'publish',
+		'numberposts' => -1
+	));
+	
+	if ($get_events)
+	{
+		foreach ($get_events as $event)
+		{
+			if ($event->ID > 0)
+			{
+				$events_meta = get_post_meta($event->ID, 'aas_event', true);
+				if (!empty($events_meta['event']))
+				{
+					usort($events_meta['event'], function ($a, $b)
+					{
+						return $a['when_order'] - $b['when_order'];
+					});
+				}
+				if (!empty($events_meta['event']))
+				{
+					$now = date('Y-m-d');
+					$nextevent = false;
+					foreach ($events_meta['event'] as $event_window)
+					{
+						if (strtotime($now) <= $event_window['when_order'])
+						{
+							//var_dump($events_meta['event']);
+							//wp_remove_object_terms($event->ID, array(ECTYPE), 'event-category');
+							//wp_remove_object_terms($event->ID, array(ELTYPE), 'event_location');
+							if (!$nextevent)
+							{
+								if (!empty($event_window['when_order']))
+									update_post_meta($event->ID, 'when_order', $event_window['when_order']);
+								
+								if (!empty($event_window['time']))
+									update_post_meta($event->ID, 'time', $event_window['time']);
+								
+								if (!empty($event_window['tickets']))
+									update_post_meta($event->ID, 'tickets', $event_window['tickets']);
+								
+								if (!empty($event_window['tickets_text']))
+									update_post_meta($event->ID, 'tickets_text', $event_window['tickets_text']);
+								
+								if (!empty($event_window['tickets_link']))
+									update_post_meta($event->ID, 'tickets_link', $event_window['tickets_link']);
+								
+								$nextevent = $event_window['when_order'];
+							}
+						}
+						else
+						{
+							//wp_set_post_terms($event->ID, array(ECTYPE), 'event-category', true);
+							//wp_set_post_terms($event->ID, array(ELTYPE), 'event_location', true);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+update_aas_events_function();
