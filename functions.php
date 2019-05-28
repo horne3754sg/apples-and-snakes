@@ -639,7 +639,7 @@ function get_post_meta_event_date($postid = -1, $strtime = false, $ranged = fals
 					}
 				}
 				
-				if ($i == ($total - 1))
+				if ($i == ($total - 1) && $i != 0)
 				{
 					$ranged_dates[] = $event['when_order'];
 				}

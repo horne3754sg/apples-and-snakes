@@ -27,7 +27,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? 'style="background-image:
 					the_title('<h2 class="entry-title">', '</h2>');
 				endif;
 				
-				$event_date = get_post_meta_event_date(get_the_ID());
+				$event_date = get_post_meta_event_date(get_the_ID(), false, true);
 				if (!empty($event_date)) :
 					echo '<span class="event-featured-time">' . $event_date . '</span>';
 				endif;

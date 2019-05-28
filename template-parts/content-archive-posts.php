@@ -45,7 +45,7 @@
 				
 				if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category')) :
 					
-					$event_date = get_post_meta_event_date(get_the_ID());
+					$event_date = get_post_meta_event_date(get_the_ID(), false, true);
 					if (!empty($event_date)) :
 						echo '<span class="event-featured-time">' . $event_date . '</span>';
 					endif;

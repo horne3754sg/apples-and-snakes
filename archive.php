@@ -113,7 +113,7 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 								// Get "current" unix timestamp
 								$now = date('Y-m-d');
 								
-								if (strtotime($now) >= $when_order)
+								if (strtotime($now) > $when_order)
 								{
 									//opportunities_type
 									if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))

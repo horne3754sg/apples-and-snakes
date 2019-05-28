@@ -88,7 +88,7 @@ $header_image = !empty($header_image) ? $header_image : '';
 						
 						<?php
 						$event_meta = get_post_meta($post->ID, 'aas_event', true);
-						if ($event_meta['event'])
+						if (!empty($event_meta['event']))
 						{
 							usort($event_meta['event'], function ($a, $b)
 							{
