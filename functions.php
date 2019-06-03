@@ -6,7 +6,7 @@
  *
  * @package apples-and-snakes
  */
-
+ 
 define('DEV', true);
 define('AAS_VERSION', 1.22);
 define('OPTYPE', (!empty(DEV) ? 31 : 62)); // opportunities type archive cat
@@ -598,6 +598,7 @@ function yikes_mailchimp_google_analytics($form_id)
  *
  * @param int $postid
  * @param bool $strtime
+ * @param bool $ranged
  *
  * @return int|mixed|string
  */
@@ -617,6 +618,7 @@ function get_post_meta_event_date($postid = -1, $strtime = false, $ranged = fals
 				return $a['when_order'] - $b['when_order'];
 			});
 		}
+		
 		if (!empty($events) && !empty($events['event']))
 		{
 			$nextevent = false;

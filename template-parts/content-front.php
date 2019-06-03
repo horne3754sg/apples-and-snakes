@@ -81,7 +81,7 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 						'post__not_in'        => array($post->ID),
 						'meta_query'          => array(
 							array(
-								'relation' => 'OR',
+								'relation' => 'AND',
 								array(
 									'key'     => 'when_order',
 									'compare' => 'EXISTS'
@@ -90,6 +90,12 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 									'taxonomy' => 'event-category',
 									'field'    => 'id',
 									'terms'    => array(ECTYPE), // 30
+									'operator' => 'NOT IN'
+								),
+								array(
+									'taxonomy' => 'event_location',
+									'field'    => 'id',
+									'terms'    => array(ELTYPE), // 30
 									'operator' => 'NOT IN'
 								)
 							)
@@ -100,6 +106,12 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 								'taxonomy' => 'event-category',
 								'field'    => 'id',
 								'terms'    => array(ECTYPE), // 30
+								'operator' => 'NOT IN'
+							),
+							array(
+								'taxonomy' => 'event_location',
+								'field'    => 'id',
+								'terms'    => array(ELTYPE), // 30
 								'operator' => 'NOT IN'
 							)
 						)
@@ -129,7 +141,6 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 										endif;
 										
 										the_title('<h2 class="entry-title">', '</h2>');
-										
 										$event_date = get_post_meta_event_date(get_the_ID(), false, true);
 										if (!empty($event_date)) :
 											echo '<span class="event-featured-time">' . $event_date . '</span>';
