@@ -12,15 +12,24 @@ var EventAdmin = (function($) {
 			});
 			$c.addNewEvent.disabled = false;
 		}
+		
+		$c.eventDeletes = document.querySelectorAll('#event_list .event_header .delete');
+		if ($c.eventDeletes) {
+			for (var i = 0; i < $c.eventDeletes.length; i++) {
+				$c.eventDeletes[i].addEventListener('click', function(e) {
+					e.preventDefault();
+					removeEvent(this);
+				});
+			}
+		}
 	};
 	
 	var addNew = function() {
-		console.log('adding new');
-		
 		var i = $c.eventList.childElementCount;
 		
 		var frag = document.createDocumentFragment();
 		var li = document.createElement('li');
+		li.classList.add('event_item');
 		frag.appendChild(li);
 		
 		// event header
@@ -28,6 +37,16 @@ var EventAdmin = (function($) {
 		eventHeader.classList.add('event_header');
 		eventHeader.innerHTML = '<h4>Event ' + (i + 1) + '</h4>';
 		li.appendChild(eventHeader);
+		
+		var eventDelete = document.createElement('a');
+		eventDelete.href = '#';
+		eventDelete.classList.add('delete');
+		eventDelete.innerHTML = 'delete';
+		eventDelete.addEventListener('click', function(e) {
+			e.preventDefault();
+			removeEvent(this);
+		});
+		eventHeader.appendChild(eventDelete);
 		
 		var eventContent = document.createElement('div');
 		eventContent.classList.add('event_content');
@@ -40,14 +59,6 @@ var EventAdmin = (function($) {
 			'<label>Time (Sidebar)</label>' +
 			'<input type="text" name="events[event][' + i + '][time]" value="" class="widefat" placeholder="time">' +
 			'</div>' +
-			// '<div class="option_row">' +
-			// '<label>When (Sidebar - optional free text to give you flexibility, otherwise it will use the when date)</label>' +
-			// '<input type="text" name="events[event][' + i + '][when]" value="" class="widefat" placeholder="When?">' +
-			// '</div>' +
-			// '<div>' +
-			// '<label>When (Featured - optional free text to give you flexibility, otherwise it will use the when date)</label>' +
-			// '<input type="text" name="events[event][' + i + '][when_featured]" value="" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018">' +
-			// '</div>' +
 			'<div class="option_row">' +
 			'<label>Where</label>' +
 			'<input type="text" name="events[event][' + i + '][where]" value="" class="widefat" placeholder="Where?">' +
@@ -71,6 +82,13 @@ var EventAdmin = (function($) {
 		li.appendChild(eventContent);
 		
 		$c.eventList.appendChild(frag);
+	};
+	
+	var removeEvent = function(obj) {
+		var event_item = obj.closest('li.event_item');
+		if (event_item) {
+			event_item.remove();
+		}
 	};
 	
 	return {

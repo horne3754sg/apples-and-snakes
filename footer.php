@@ -19,6 +19,10 @@
 				<div class="footer-logo">
 					<img src="<?php echo get_template_directory_uri(); ?>/images/apples-and-snakes-logo.svg" alt="">
 				</div>
+
+				<div class="footer-logo weston-council">
+					<img src="<?php echo get_template_directory_uri(); ?>/images/Garfield-weston-foundation-logo_white.png" alt="">
+				</div>
 				<div class="footer-logo arts-council">
 					<img src="<?php echo get_template_directory_uri(); ?>/images/AC_logo_2.png" alt="">
 				</div>

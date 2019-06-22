@@ -10,6 +10,15 @@
 	border-bottom: 1px solid #ddd;
 }
 
+.group_options .group_content ul li .event_header .delete {
+	color: #a00;
+	margin-left: auto;
+}
+
+.group_options .group_content ul li .event_header .delete:hover {
+	color: #dc3232;
+}
+
 .group_options .group_header h3, .group_options .group_content ul li .event_header h4 {
 	margin: 0;
 }

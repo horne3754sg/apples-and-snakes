@@ -25,6 +25,9 @@ function aas_load_scripts_styles()
 	{
 		wp_enqueue_style('admin-styles', get_stylesheet_directory_uri() . '/inc/event-admin.css', '', AAS_VERSION);
 		wp_enqueue_script('admin-script', get_stylesheet_directory_uri() . '/inc/event-admin.js', array('jquery'), AAS_VERSION);
+		//wp_localize_script('admin-script', 'aas_events_admin', array(
+		//	'ajaxurl' => admin_url('admin-ajax.php')
+		//));
 	}
 }
 
@@ -57,11 +60,11 @@ function aas_events_location()
 	//var_dump($events);
 	do
 	{
-		echo '<li>';
+		echo '<li class="event_item">';
 		
 		echo '<div class="event_header">';
-		echo '<h4>Event date ' . ($i + 1) . '</h4>';
-		//echo '<span class="toggle-indicator"></span>';
+		echo '<h4>Event ' . ($i + 1) . '</h4>';
+		echo '<a class="delete" href="#">delete</a>';
 		echo '</div>';
 		
 		echo '<div class="event_content">';
@@ -74,14 +77,6 @@ function aas_events_location()
 		// Get the time data if it's already been entered
 		$time = !empty($events['event'][$i]['time']) ? $events['event'][$i]['time'] : get_post_meta($post->ID, 'time', true);
 		echo '<div class="option_row"><label>Time (Sidebar)</label><input type="text" name="events[event][' . $i . '][time]" value="' . esc_textarea($time) . '" class="widefat" placeholder="time"></div>';
-		
-		// Get the when data if it's already been entered
-		//$when = !empty($events['event'][$i]['when']) ? $events['event'][$i]['when'] : get_post_meta($post->ID, 'when', true);
-		//echo '<div class="option_row"><label>When (Sidebar - optional free text to give you flexibility, otherwise it will use the when date)</label><input type="text" name="events[event][' . $i . '][when]" value="' . $when . '" class="widefat" placeholder="When?"></div>';
-		//
-		//// Get the when data if it's already been entered
-		//$when_featured = !empty($events['event'][$i]['when_featured']) ? $events['event'][$i]['when_featured'] : get_post_meta($post->ID, 'when_featured', true);
-		//echo '<div><label>When (Featured - optional free text to give you flexibility, otherwise it will use the when date)</label><input type="text" name="events[event][' . $i . '][when_featured]" value="' . $when_featured . '" class="widefat" placeholder="eg. Thurs 26 - Sun 28 Oct 2018"></div>';
 		
 		// Get the where data if it's already been entered
 		$where = !empty($events['event'][$i]['where']) ? $events['event'][$i]['where'] : get_post_meta($post->ID, 'where', true);
@@ -113,34 +108,16 @@ function aas_events_location()
 	echo '</ul>';
 	
 	echo '<div class="button_wrap">';
-	echo '<button id="add_new_event" class="button" disabled>Add More</button>';
+	//echo '<select id="event_type">';
+	//echo '<option value="eventtype1">Single Date & Venue</option>';
+	//echo '<option value="eventtype2">Multi Date & Same Venue</option>';
+	//echo '<option value="eventtype3">Multi Date &  Multi Venue</option>';
+	//echo '</select>';
+	echo '<button id="add_new_event" class="button" disabled>Add New</button>';
 	echo '</div>';
 	
 	echo '</div>';
-	
 	echo '</div>'; // end group
-	
-	//echo '<div class="group_options">'; // start group
-	
-	//echo '<div class="group_header">';
-	//echo '<h3>Ticketing information</h3>';
-	//echo '</div>';
-	
-	//echo '<div class="group_content">';
-	//// Get the tickets data if it's already been entered
-	//$tickets = !empty($events['tickets']) ? $events['tickets'] : get_post_meta($post->ID, 'tickets', true);
-	//echo '<div class="option_row"><label>Tickets</label><input type="text" name="events[tickets]" value="' . $tickets . '" class="widefat" placeholder="Tickets"></div>';
-	//
-	//// Get the tickets data if it's already been entered
-	//$tickets_text = !empty($events['tickets_text']) ? $events['tickets_text'] : get_post_meta($post->ID, 'tickets_text', true);
-	//echo '<div class="option_row"><label>Get tickets button text</label><input type="text" name="events[tickets_text]" value="' . $tickets_text . '" class="widefat" placeholder="Get Tickets"></div>';
-	//
-	//// Get the tickets data if it's already been entered
-	//$tickets_link = !empty($events['tickets_link']) ? $events['tickets_link'] : get_post_meta($post->ID, 'tickets_link', true);
-	//echo '<div class="option_row"><label>Get tickets button link</label><input type="text" name="events[tickets_link]" value="' . $tickets_link . '" class="widefat" placeholder="Link to where the tickets are sold"></div>';
-	//echo '</div>';
-	
-	//echo '</div>'; // end group
 	
 	echo '<div class="group_options">'; // start group
 	
@@ -250,21 +227,6 @@ function aas_save_events_meta($post_id, $post)
 		$em['sub_heading'] = !empty($_POST['events']['sub_heading']) ? esc_textarea($_POST['events']['sub_heading']) : '';
 		$em['other'] = !empty($_POST['events']['other']) ? esc_textarea($_POST['events']['other']) : '';
 	}
-	// Now that we're authenticated, time to save the data.
-	// This sanitizes the data from the field and saves it into an array $em.
-	//$em['when_order'] = !empty($_POST['when_order']) ? strtotime($_POST['when_order']) : '';
-	//$em['when'] = !empty($_POST['when']) ? esc_textarea($_POST['when']) : '';
-	//$em['where'] = !empty($_POST['where']) ? esc_textarea($_POST['where']) : '';
-	//$em['address'] = !empty($_POST['address']) ? esc_textarea($_POST['address']) : '';
-	//$em['when_featured'] = !empty($_POST['when_featured']) ? esc_textarea($_POST['when_featured']) : '';
-	//$em['time'] = !empty($_POST['time']) ? esc_textarea($_POST['time']) : '';
-	//$em['duration'] = !empty($_POST['duration']) ? esc_textarea($_POST['duration']) : '';
-	//$em['age'] = !empty($_POST['age']) ? esc_textarea($_POST['age']) : '';
-	//$em['tickets'] = !empty($_POST['tickets']) ? esc_textarea($_POST['tickets']) : '';
-	//$em['tickets_text'] = !empty($_POST['tickets_text']) ? esc_textarea($_POST['tickets_text']) : '';
-	//$em['tickets_link'] = !empty($_POST['tickets_link']) ? esc_textarea($_POST['tickets_link']) : '';
-	//$em['sub_heading'] = !empty($_POST['sub_heading']) ? esc_textarea($_POST['sub_heading']) : '';
-	//$em['other'] = !empty($_POST['other']) ? esc_textarea($_POST['other']) : '';
 	
 	// Cycle through the $em array.
 	// Note, in this example we just have one item, but this is helpful if you have multiple.
