@@ -118,7 +118,7 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 									//opportunities_type
 									if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))
 									{
-										wp_set_post_terms($post->ID, array(OPTYPE), 'opportunities_type', true);
+										//wp_set_post_terms($post->ID, array(OPTYPE), 'opportunities_type', true);
 									}
 									
 									if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category'))
@@ -126,13 +126,13 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 										
 										if (has_term('spine-events', 'event-category'))
 										{
-											wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
-											wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
+											//wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
+											//wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
 										}
 										else
 										{
-											wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
-											wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
+											//wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
+											//wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
 										}
 									}
 								}

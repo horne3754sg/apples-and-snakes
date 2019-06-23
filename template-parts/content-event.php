@@ -87,17 +87,26 @@ $header_image = !empty($header_image) ? $header_image : '';
 					<div class="event-meta">
 						
 						<?php
-						$event_meta = get_post_meta($post->ID, 'aas_event', true);
-						if (!empty($event_meta['event']))
-						{
-							usort($event_meta['event'], function ($a, $b)
-							{
-								return $a['when_order'] - $b['when_order'];
-							});
-						}
-						$event_date = get_post_meta_event_date($post->ID);
-						$now = date('Y-m-d');
+						echo '<pre>';
+						//$test = get_event_meta_data($post->ID);
+						echo '</pre>';
 						
+						//$event_meta = get_post_meta($post->ID, 'aas_event', true);
+						////var_dump($event_meta);
+						//if (!empty($event_meta['event']))
+						//{
+						//	usort($event_meta['event'], function ($a, $b)
+						//	{
+						//		return $a['when_order'] - $b['when_order'];
+						//	});
+						//}
+						//$event_date = get_post_meta_event_date($post->ID);
+						//$now = date('Y-m-d');
+						
+						$get_all_events_dates = get_all_events_dates($post->ID);
+						//var_dump($get_all_events_dates);
+						
+						//var_dump($event_meta);
 						if (!empty($event_meta['event']))
 						{
 							?>

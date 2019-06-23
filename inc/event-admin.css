@@ -44,6 +44,15 @@
 	margin-bottom: 10px;
 }
 
+.group_options .group_content .option_cols {
+	display: flex;
+	justify-content: space-between;
+}
+
+.group_options .group_content .option_col {
+	flex: 0 0 49%;
+}
+
 .group_options .group_content .option_row label {
 	font-weight: 600;
 }
@@ -63,4 +72,24 @@
 
 #featured-header-image-preview {
 	max-width: 100%;
+}
+
+#event_list .event_dates {
+	padding: 0;
+	margin-bottom: 10px;
+}
+
+#event_list .event_dates h4 {
+	margin: 0;
+}
+
+#event_list .event_date_item {
+	padding: 0;
+}
+
+#event_list .event_dates_list li {
+	border: 1px solid #d9d9d9;
+	margin-bottom: 10px;
+	padding: 0 10px;
+	background: #f1f1f1;
 }

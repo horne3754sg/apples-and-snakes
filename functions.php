@@ -6,7 +6,7 @@
  *
  * @package apples-and-snakes
  */
- 
+
 define('DEV', true);
 define('AAS_VERSION', 1.22);
 define('OPTYPE', (!empty(DEV) ? 31 : 62)); // opportunities type archive cat
@@ -681,7 +681,6 @@ function get_post_meta_event_date($postid = -1, $strtime = false, $ranged = fals
 	return $event_date;
 }
 
-
 //if (!wp_next_scheduled('update_aas_events_hook'))
 //{
 //	wp_schedule_event(time(), 'hourly', 'update_aas_events_hook');
@@ -705,54 +704,129 @@ function update_aas_events_function()
 			if ($event->ID > 0)
 			{
 				$events_meta = get_post_meta($event->ID, 'aas_event', true);
-				if (!empty($events_meta['event']))
+				$all_event_dates = get_all_events_dates($event->ID);
+				
+				if (!empty($all_event_dates))
 				{
-					usort($events_meta['event'], function ($a, $b)
-					{
-						return $a['when_order'] - $b['when_order'];
-					});
-				}
-				if (!empty($events_meta['event']))
-				{
-					$now = date('Y-m-d');
 					$nextevent = false;
-					foreach ($events_meta['event'] as $event_window)
+					$now = date('Y-m-d');
+					foreach ($all_event_dates as $event_window)
 					{
-						if (strtotime($now) <= $event_window['when_order'])
+						//var_dump($event->ID);
+						//var_dump(date("l d M Y", $event_window));
+						//var_dump('--------------');
+						foreach ($event_window as $window)
 						{
-							//var_dump($events_meta['event']);
-							//wp_remove_object_terms($event->ID, array(ECTYPE), 'event-category');
-							//wp_remove_object_terms($event->ID, array(ELTYPE), 'event_location');
-							if (!$nextevent)
+							if (!empty($window['when_order']))
 							{
-								if (!empty($event_window['when_order']))
-									update_post_meta($event->ID, 'when_order', $event_window['when_order']);
-								
-								if (!empty($event_window['time']))
-									update_post_meta($event->ID, 'time', $event_window['time']);
-								
-								if (!empty($event_window['tickets']))
-									update_post_meta($event->ID, 'tickets', $event_window['tickets']);
-								
-								if (!empty($event_window['tickets_text']))
-									update_post_meta($event->ID, 'tickets_text', $event_window['tickets_text']);
-								
-								if (!empty($event_window['tickets_link']))
-									update_post_meta($event->ID, 'tickets_link', $event_window['tickets_link']);
-								
-								$nextevent = $event_window['when_order'];
+								if (strtotime($now) <= $window['when_order'])
+								{
+									if ($nextevent == false)
+									{
+										if (!empty($events_meta))
+										{
+											$event_data = $events_meta;
+											
+											if (!empty($window['when_order']))
+												$event_data['when_order'] = $window['when_order'];
+											
+											if (!empty($window['time']))
+												$event_data['time'] = $window['time'];
+											
+											if (!empty($window['tickets']))
+												$event_data['tickets'] = $window['tickets'];
+											
+											if (!empty($window['tickets_text']))
+												$event_data['tickets_text'] = $window['tickets_text'];
+											
+											if (!empty($window['tickets_link']))
+												$event_data['tickets_link'] = $window['tickets_link'];
+											
+											//var_dump($event_data);
+											update_post_meta($event->ID, 'aas_event', $event_data);
+											
+											$nextevent = true;
+											
+											//var_dump(wp_remove_object_terms($event->ID, array(ELTYPE), 'event_location'));
+											wp_remove_object_terms($event->ID, array(ECTYPE), 'event-category');
+											wp_remove_object_terms($event->ID, array(ELTYPE), 'event_location');
+										}
+									}
+								}
 							}
 						}
-						else
+						
+						if (!$nextevent)
 						{
-							//wp_set_post_terms($event->ID, array(ECTYPE), 'event-category', true);
-							//wp_set_post_terms($event->ID, array(ELTYPE), 'event_location', true);
+							wp_set_post_terms($event->ID, array(ECTYPE), 'event-category', true);
+							wp_set_post_terms($event->ID, array(ELTYPE), 'event_location', true);
 						}
 					}
 				}
 			}
 		}
+		//var_dump($event_dates);
 	}
 }
 
-update_aas_events_function();
+add_action('wp_loaded', 'update_aas_events_function');
+//update_aas_events_function();
+
+/**
+ * Get all the event dates and reorder them
+ *
+ * @param $eventid
+ *
+ * @return array
+ */
+function get_all_events_dates($eventid = -1)
+{
+	$all_event_dates = array();
+	if ($eventid > 0)
+	{
+		$events_meta = get_post_meta($eventid, 'aas_event', true);
+		//var_dump($events_meta);
+		if (!empty($events_meta['event']))
+		{
+			foreach ($events_meta['event'] as $i => $em)
+			{
+				if (!empty($em['dates']))
+				{
+					foreach ($em['dates'] as $j => $event_dates)
+					{
+						if (!empty($event_dates['when_order']))
+						{
+							unset($em['dates']);
+							$all_event_dates[$eventid][] = array(
+								'eventid'    => $eventid,
+								'meta'       => $em,
+								'when'       => !empty($event_dates['when_order']) ? date("l d M", $event_dates['when_order']) : '',
+								'when_order' => !empty($event_dates['when_order']) ? $event_dates['when_order'] : '',
+								'time'       => !empty($event_dates['time']) ? $event_dates['time'] : ''
+							);
+						}
+					}
+				}
+				else if (!empty($em['when_order']))
+				{
+					unset($em['dates']);
+					$all_event_dates[$eventid][] = array(
+						'eventid'    => $eventid,
+						'meta'       => $em,
+						'when'       => !empty($em['when_order']) ? date("l d M", $em['when_order']) : '',
+						'when_order' => !empty($em['when_order']) ? $em['when_order'] : '',
+						'time'       => !empty($em['time']) ? $em['time'] : ''
+					);
+				}
+			}
+		}
+		
+		//var_dump($all_event_dates[$event->ID]);
+		usort($all_event_dates[$eventid], function ($a, $b)
+		{
+			return $a['when_order'] - $b['when_order'];
+		});
+	}
+	
+	return $all_event_dates;
+}

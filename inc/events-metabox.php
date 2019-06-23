@@ -26,7 +26,8 @@ function aas_load_scripts_styles()
 		wp_enqueue_style('admin-styles', get_stylesheet_directory_uri() . '/inc/event-admin.css', '', AAS_VERSION);
 		wp_enqueue_script('admin-script', get_stylesheet_directory_uri() . '/inc/event-admin.js', array('jquery'), AAS_VERSION);
 		//wp_localize_script('admin-script', 'aas_events_admin', array(
-		//	'ajaxurl' => admin_url('admin-ajax.php')
+		//	'ajaxurl'     => admin_url('admin-ajax.php'),
+		//	'event_nonce' => wp_create_nonce('event_nonce'),
 		//));
 	}
 }
@@ -50,13 +51,13 @@ function aas_events_location()
 	echo '<ul id="event_list">';
 	$i = 0;
 	$events = get_post_meta($post->ID, 'aas_event', true);
-	if (!empty($events['event']))
-	{
-		usort($events['event'], function ($a, $b)
-		{
-			return $a['when_order'] - $b['when_order'];
-		});
-	}
+	//if (!empty($events['event']))
+	//{
+	//	usort($events['event'], function ($a, $b)
+	//	{
+	//		return $a['when_order'] - $b['when_order'];
+	//	});
+	//}
 	//var_dump($events);
 	do
 	{
@@ -69,14 +70,43 @@ function aas_events_location()
 		
 		echo '<div class="event_content">';
 		
-		// Get the when data if it's already been enteredCase Study Meta
-		$when_order = !empty($events['event'][$i]['when_order']) ? $events['event'][$i]['when_order'] : get_post_meta($post->ID, 'when_order', true);
-		$when_order = !empty($when_order) ? date('Y-m-d', $when_order) : date('Y-m-d');
-		echo '<div class="option_row"><label>When (Used to Order Content and must be a valid date format)</label><input type="date" name="events[event][' . $i . '][when_order]" value="' . $when_order . '" class="widefat" placeholder="When? format: dd/mm/yyyy"></div>';
+		echo '<div class="event_dates">'; // event dates
+		echo '<h4>Event Dates</h4>';
+		echo '<ul id="event_dates_' . $i . '" class="event_dates_list">'; // date/time lists
 		
-		// Get the time data if it's already been entered
-		$time = !empty($events['event'][$i]['time']) ? $events['event'][$i]['time'] : get_post_meta($post->ID, 'time', true);
-		echo '<div class="option_row"><label>Time (Sidebar)</label><input type="text" name="events[event][' . $i . '][time]" value="' . esc_textarea($time) . '" class="widefat" placeholder="time"></div>';
+		$j = 0;
+		do
+		{
+			echo '<li class="event_date_item">'; // date/time lists
+			
+			// Get the when data if it's already been enteredCase Study Meta
+			$when_order = !empty($events['event'][$i]['dates'][$j]['when_order']) ? $events['event'][$i]['dates'][$j]['when_order'] : '';
+			$when_order = !empty($when_order) ? date('Y-m-d', $when_order) : date('Y-m-d');
+			echo '<div class="option_row option_cols">';
+			echo '<div class="option_col">';
+			echo '<label>When</label>';
+			echo '<input type="date" name="events[event][' . $i . '][dates][' . $j . '][when_order]" value="' . $when_order . '" class="widefat" placeholder="When? format: dd/mm/yyyy">';
+			echo '</div>';
+			
+			// Get the time data if it's already been entered
+			$time = !empty($events['event'][$i]['dates'][$j]['time']) ? $events['event'][$i]['dates'][$j]['time'] : '';
+			echo '<div class="option_col">';
+			echo '<label>Time</label>';
+			echo '<input type="text" name="events[event][' . $i . '][dates][' . $j . '][time]" value="' . esc_textarea($time) . '" class="widefat" placeholder="time">';
+			echo '</div>';
+			echo '</div>';
+			
+			echo '</li>';  // end date/time lists
+			$j++;
+		} while ($j < (!empty($events['event'][$i]['dates']) ? count($events['event'][$i]['dates']) : 0));
+		
+		echo '</ul>';  // end date/time lists
+		
+		echo '<div class="button_wrap">';
+		echo '<button class="button add_new_event_date" data-id="' . $i . '"  disabled>Add Date/Time</button>';
+		echo '</div>';
+		
+		echo '</div>'; // event dates
 		
 		// Get the where data if it's already been entered
 		$where = !empty($events['event'][$i]['where']) ? $events['event'][$i]['where'] : get_post_meta($post->ID, 'where', true);
@@ -108,11 +138,6 @@ function aas_events_location()
 	echo '</ul>';
 	
 	echo '<div class="button_wrap">';
-	//echo '<select id="event_type">';
-	//echo '<option value="eventtype1">Single Date & Venue</option>';
-	//echo '<option value="eventtype2">Multi Date & Same Venue</option>';
-	//echo '<option value="eventtype3">Multi Date &  Multi Venue</option>';
-	//echo '</select>';
 	echo '<button id="add_new_event" class="button" disabled>Add New</button>';
 	echo '</div>';
 	
@@ -148,6 +173,11 @@ function aas_events_location()
 
 /**
  * Save the metabox data
+ *
+ * @param $post_id
+ * @param $post
+ *
+ * @return bool|void
  */
 function aas_save_events_meta($post_id, $post)
 {
@@ -155,8 +185,8 @@ function aas_save_events_meta($post_id, $post)
 	
 	//var_dump($_POST);
 	// If this isn't a 'book' post, don't update it.
-	if ("event" != $post_type)
-		return;
+	if ('event' != $post_type)
+		return false;
 	
 	// Return if the user doesn't have edit permissions.
 	if (!current_user_can('edit_post', $post_id))
@@ -175,15 +205,22 @@ function aas_save_events_meta($post_id, $post)
 	$nextevent = false;
 	if (!empty($_POST['events']))
 	{
+		//var_dump($_POST['events']);
 		// handle events
 		if (!empty($_POST['events']['event']))
 		{
 			foreach ($_POST['events']['event'] as $i => $event)
 			{
-				$em['event'][$i]['when_order'] = !empty($event['when_order']) ? strtotime($event['when_order']) : '';
-				$em['event'][$i]['when'] = !empty($event['when']) ? esc_textarea($event['when']) : '';
-				$em['event'][$i]['when_featured'] = !empty($event['when_featured']) ? esc_textarea($event['when_featured']) : '';
-				$em['event'][$i]['time'] = !empty($event['time']) ? esc_textarea($event['time']) : '';
+				if (!empty($event['dates']))
+				{
+					foreach ($event['dates'] as $j => $dates)
+					{
+						$em['event'][$i]['dates'][$j]['when_order'] = !empty($dates['when_order']) ? strtotime($dates['when_order']) : '';
+						$em['event'][$i]['dates'][$j]['time'] = !empty($dates['time']) ? esc_textarea($dates['time']) : '';
+						//$em['event'][$i]['dates'][$j]['when'] = !empty($dates['when']) ? esc_textarea($dates['when']) : '';
+					}
+				}
+				
 				$em['event'][$i]['where'] = !empty($event['where']) ? esc_textarea($event['where']) : '';
 				$em['event'][$i]['address'] = !empty($event['address']) ? esc_textarea($event['address']) : '';
 				
@@ -192,29 +229,29 @@ function aas_save_events_meta($post_id, $post)
 				$em['event'][$i]['tickets_text'] = !empty($event['tickets_text']) ? esc_textarea($event['tickets_text']) : '';
 				$em['event'][$i]['tickets_link'] = !empty($event['tickets_link']) ? esc_url($event['tickets_link']) : '';
 				
-				update_post_meta($post_id, 'when_order', $em['event'][$i]['when_order']);
-				update_post_meta($post_id, 'time', $em['event'][$i]['time']);
-				if (strtotime($now) <= $em['event'][$i]['when_order'])
-				{
-					wp_remove_object_terms($post_id, array(ECTYPE), 'event-category');
-					wp_remove_object_terms($post_id, array(ELTYPE), 'event_location');
-					if (!$nextevent)
-					{
-						update_post_meta($post_id, 'when_order', $em['event'][$i]['when_order']);
-						update_post_meta($post_id, 'time', $em['event'][$i]['time']);
-						
-						update_post_meta($post_id, 'tickets', $em['event'][$i]['tickets']);
-						update_post_meta($post_id, 'tickets_text', $em['event'][$i]['tickets_text']);
-						update_post_meta($post_id, 'tickets_link', $em['event'][$i]['tickets_link']);
-						
-						$nextevent = $em['event'][$i]['when_order'];
-					}
-				}
-				else
-				{
-					wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
-					wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
-				}
+				//update_post_meta($post_id, 'when_order', $em['event'][$i]['when_order']);
+				//update_post_meta($post_id, 'time', $em['event'][$i]['time']);
+				//if (strtotime($now) <= $em['event'][$i]['when_order'])
+				//{
+				//	wp_remove_object_terms($post_id, array(ECTYPE), 'event-category');
+				//	wp_remove_object_terms($post_id, array(ELTYPE), 'event_location');
+				//	if (!$nextevent)
+				//	{
+				//		update_post_meta($post_id, 'when_order', $em['event'][$i]['when_order']);
+				//		update_post_meta($post_id, 'time', $em['event'][$i]['time']);
+				//
+				//		update_post_meta($post_id, 'tickets', $em['event'][$i]['tickets']);
+				//		update_post_meta($post_id, 'tickets_text', $em['event'][$i]['tickets_text']);
+				//		update_post_meta($post_id, 'tickets_link', $em['event'][$i]['tickets_link']);
+				//
+				//		$nextevent = $em['event'][$i]['when_order'];
+				//	}
+				//}
+				//else
+				//{
+				//	wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
+				//	wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
+				//}
 			}
 		}
 		
@@ -269,3 +306,73 @@ function aas_save_events_meta($post_id, $post)
 }
 
 add_action('save_post', 'aas_save_events_meta', 1, 2);
+
+
+// Add the custom columns to the book post type:
+add_filter('manage_event_posts_columns', 'set_custom_edit_event_columns');
+function set_custom_edit_event_columns($columns)
+{
+	$columns['event_count'] = __('Total Event Dates', 'aas');
+	$columns['next_event_date'] = __('Next Event Date', 'aas');
+	
+	return $columns;
+}
+
+// Add the data to the custom columns for the book post type:
+add_action('manage_event_posts_custom_column', 'custom_event_column', 10, 2);
+function custom_event_column($column, $post_id)
+{
+	$events = get_post_meta($post_id, 'aas_event', true);
+	
+	$event_count = 0;
+	$nextevent = false;
+	$now = date('Y-m-d');
+	$next_event_date = 'No Dates';
+	$all_event_dates = array();
+	if (!empty($events['event']))
+	{
+		foreach ($events['event'] as $event)
+		{
+			if (!empty($event['dates']))
+			{
+				foreach ($event['dates'] as $event_dates)
+				{
+					$all_event_dates[] = array_merge($event_dates, $event);
+					$event_count++;
+				}
+			}
+			else if (!empty($event['when_order']))
+			{
+				$all_event_dates[] = $event;
+				$event_count++;
+			}
+		}
+	}
+	
+	usort($all_event_dates, function ($a, $b)
+	{
+		return $a['when_order'] - $b['when_order'];
+	});
+	
+	if (!empty($all_event_dates))
+	{
+		foreach ($all_event_dates as $dates)
+		{
+			if (!$nextevent && (strtotime($now) < $dates['when_order']))
+			{
+				$next_event_date = date('l d M Y', $dates['when_order']);
+				$nextevent = true;
+			}
+		}
+	}
+	
+	switch ($column)
+	{
+		case 'event_count' :
+			echo $event_count;
+			break;
+		case 'next_event_date' :
+			echo $next_event_date;
+			break;
+	}
+}
