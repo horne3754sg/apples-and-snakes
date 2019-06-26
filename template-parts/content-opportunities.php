@@ -151,32 +151,36 @@ $header_image = !empty($header_image) ? $header_image : '';
 								</div>
 							</div>
 						<?php } ?>
-
-
-						<div class="meta-section">
-							<div class="meta-header">
-								<h3><?php echo __('Tickets'); ?></h3>
+						
+						
+						<?php
+						$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
+						if (!empty($tickets_link)) :
+							?>
+							<div class="meta-section">
+								<div class="meta-header">
+									<h3><?php echo __('Tickets'); ?></h3>
+								</div>
+								
+								<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
+								if (!empty($tickets))
+								{
+									?>
+									<div class="meta-info">
+										<?php echo ($tickets) ? '<span class="tickets">' . $tickets . '</span>' : ''; ?>
+									</div>
+								<?php } ?>
+								
+								<?php
+								$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
+								if (!empty($tickets_link))
+								{ ?>
+									<div class="meta-info">
+										<?php echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '" target="_blank">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : ''; ?>
+									</div>
+								<?php } ?>
 							</div>
-							
-							<?php $tickets = get_post_meta(get_the_ID(), 'tickets', true);
-							if (!empty($tickets))
-							{
-								?>
-								<div class="meta-info">
-									<?php echo ($tickets) ? '<span class="tickets">' . $tickets . '</span>' : ''; ?>
-								</div>
-							<?php } ?>
-							
-							<?php
-							$tickets_link = get_post_meta(get_the_ID(), 'tickets_link', true);
-							$tickets_text = get_post_meta(get_the_ID(), 'tickets_text', true);
-							if (!empty($tickets_link))
-							{ ?>
-								<div class="meta-info">
-									<?php echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '" target="_blank">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : ''; ?>
-								</div>
-							<?php } ?>
-						</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

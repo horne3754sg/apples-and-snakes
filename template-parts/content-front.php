@@ -167,17 +167,18 @@ $header_image = !empty(get_the_post_thumbnail_url()) ? get_the_post_thumbnail_ur
 					<div class="col-25">
 						<div class="quote-text"><span>By bringing together important voices in interesting ways, we create inspiring experiences for audiences.</span>
 						</div>
-<!--						<div class="support-us">-->
-<!--							<div class="section_spotlight-header">-->
-<!--								<h3>Support Us</h3>-->
-<!--							</div>-->
-<!--							<div class="section_content">-->
-<!--								<a href="/support-us/" title="support us" class="inner-wrap">-->
-<!--									<img src="--><?php //echo get_template_directory_uri() . '/images/support-us-2.png' ?><!--"-->
-<!--									     alt="">-->
-<!--								</a>-->
-<!--							</div>-->
-<!--						</div>-->
+						<!--						<div class="support-us">-->
+						<!--							<div class="section_spotlight-header">-->
+						<!--								<h3>Support Us</h3>-->
+						<!--							</div>-->
+						<!--							<div class="section_content">-->
+						<!--								<a href="/support-us/" title="support us" class="inner-wrap">-->
+						<!--									<img src="-->
+						<?php //echo get_template_directory_uri() . '/images/support-us-2.png' ?><!--"-->
+						<!--									     alt="">-->
+						<!--								</a>-->
+						<!--							</div>-->
+						<!--						</div>-->
 					</div>
 					<div class="content col-75">
 						<div class="highlight_section-header">

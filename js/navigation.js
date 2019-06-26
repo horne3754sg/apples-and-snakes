@@ -169,10 +169,12 @@ if (primaryMenu) {
 	}(container));
 })();
 
-jQuery('#slider').slick({
-	autoplay: true,
-	arrows: false,
-	dots: true,
-	autoplaySpeed: 5000,
-	speed: 1000
-});
+if (typeof slick == 'function') {
+	jQuery('#slider').slick({
+		autoplay: true,
+		arrows: false,
+		dots: true,
+		autoplaySpeed: 5000,
+		speed: 1000
+	});
+}

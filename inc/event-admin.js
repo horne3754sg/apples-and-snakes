@@ -61,7 +61,9 @@ var EventAdmin = (function($) {
 		eventHeader.appendChild(eventDelete);
 		
 		var dateTimeList = document.getElementById('event_dates_' + i);
-		var j = dateTimeList.childElementCount;
+		var j = 0;
+		if (dateTimeList)
+			j = dateTimeList.childElementCount;
 		
 		// event date button
 		var eventNewDateWrap = document.createElement('div');
@@ -131,11 +133,16 @@ var EventAdmin = (function($) {
 			'<input type="text" name="events[event][' + i + '][tickets_link]" value="" class="widefat" placeholder="Link to where the tickets are sold">' +
 			'</div>';
 		li.appendChild(eventContent);
-		// eventNewDateWrap
 		$c.eventList.appendChild(frag);
 		
 		if (dateTimeList)
 			dateTimeList.appendChild(eventNewDateWrap);
+		
+		setTimeout(function() {
+			var event_dates = eventContent.querySelector('.event_dates');
+			if (event_dates)
+				event_dates.appendChild(eventNewDateWrap);
+		}, 100);
 	}
 	
 	function addNewEventDate(obj) {
