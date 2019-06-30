@@ -87,26 +87,10 @@ $header_image = !empty($header_image) ? $header_image : '';
 					<div class="event-meta">
 						
 						<?php
-						echo '<pre>';
-						//$test = get_event_meta_data($post->ID);
-						echo '</pre>';
-						
-						//$event_meta = get_post_meta($post->ID, 'aas_event', true);
-						////var_dump($event_meta);
-						//if (!empty($event_meta['event']))
-						//{
-						//	usort($event_meta['event'], function ($a, $b)
-						//	{
-						//		return $a['when_order'] - $b['when_order'];
-						//	});
-						//}
-						//$event_date = get_post_meta_event_date($post->ID);
-						//$now = date('Y-m-d');
-						
+						$now = date('Y-m-d');
+						$event_meta = get_post_meta($post->ID, 'aas_event', true);
 						$get_all_events_dates = get_all_events_dates($post->ID);
-						//var_dump($get_all_events_dates);
 						
-						//var_dump($event_meta);
 						if (!empty($event_meta['event']))
 						{
 							?>
@@ -117,40 +101,49 @@ $header_image = !empty($header_image) ? $header_image : '';
 								<?php
 								foreach ($event_meta['event'] as $event)
 								{
-									if (strtotime($now) <= $event['when_order'])
-									{
+									//var_dump($event);
+									?>
+									<div class="meta-info events_list_item">
+										<?php
+										echo ($event['where']) ? '<span class="where">' . $event['where'] . '</span>' : '';
+										if (!empty($event['dates']))
+										{
+											$nextevent = false;
+											usort($event['dates'], function ($a, $b)
+											{
+												return $a['when_order'] - $b['when_order'];
+											});
+											
+											echo '<ul class="event-dates">';
+											foreach ($event['dates'] as $dates)
+											{
+												$class = 'past-event';
+												if ($dates['when_order'] >= strtotime($now))
+												{
+													$class = 'future-event';
+													if ($nextevent == false)
+													{
+														$class = 'next-event';
+														$nextevent = true;
+													}
+												}
+												
+												$when_order = !empty($dates['when_order']) ? (int)$dates['when_order'] : '';
+												$time = !empty($dates['time']) ? $dates['time'] : '';
+												$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+												echo ($event_date) ? '<li class="' . $class . '"><span class="when">' . $event_date . '</span></li>' : '';
+											}
+											echo '</ul>';
+										}
+										
+										echo ($event['address']) ? '<span class="address">' . $event['address'] . '</span>' : '';
+										
+										$tickets_link = !empty($event['tickets_link']) ? $event['tickets_link'] : '';
+										$tickets_text = !empty($event['tickets_text']) ? $event['tickets_text'] : '';
+										echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '" target="_blank">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : '';
 										?>
-										<div class="meta-info events_list_item">
-											<?php
-											$when_order = !empty($event['when_order']) ? (int)$event['when_order'] : '';
-											$time = !empty($event['time']) ? $event['time'] : '';
-											$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
-											
-											echo ($event['where']) ? '<span class="where">' . $event['where'] . '</span>' : '';
-											echo ($event_date) ? '<span class="when">' . $event_date . '</span>' : '';
-											echo ($event['address']) ? '<span class="address">' . $event['address'] . '</span>' : '';
-											
-											$tickets_link = !empty($event['tickets_link']) ? $event['tickets_link'] : '';
-											$tickets_text = !empty($event['tickets_text']) ? $event['tickets_text'] : '';
-											echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '" target="_blank">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : '';
-											?>
-										</div>
-									<?php }
-									else
-									{ ?>
-										<div class="meta-info events_list_item past_event">
-											<?php
-											$when_order = !empty($event['when_order']) ? (int)$event['when_order'] : '';
-											$time = !empty($event['time']) ? $event['time'] : '';
-											$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
-											
-											echo ($event['where']) ? '<span class="where">' . $event['where'] . '</span>' : '';
-											echo ($event_date) ? '<span class="when">' . $event_date . '</span>' : '';
-											echo ($event['address']) ? '<span class="address">' . $event['address'] . '</span>' : '';
-											?>
-										</div>
-									<?php }
-								} ?>
+									</div>
+								<?php } ?>
 							</div>
 						<?php }
 						else

@@ -1455,6 +1455,21 @@ body.peach-scheme {
 							opacity: 0.3;
 						}
 					}
+
+					.event-dates {
+						margin-left: 0;
+						padding-left: 20px;
+
+						li {
+							&.past-event {
+								text-decoration: line-through
+							}
+
+							&.next-event {
+								font-weight: 600;
+							}
+						}
+					}
 				}
 			}
 		}
