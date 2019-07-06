@@ -109,33 +109,33 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 								is_tax('opportunities_type') ||
 								has_term('spine-events', 'event-category')) :
 								
-								$when_order = get_post_meta_event_date($post->ID, true);
+								//$when_order = get_post_meta_event_date($post->ID, true);
 								// Get "current" unix timestamp
-								$now = date('Y-m-d');
+								//$now = date('Y-m-d');
 								
-								if (strtotime($now) > $when_order)
-								{
-									//opportunities_type
-									if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))
-									{
-										//wp_set_post_terms($post->ID, array(OPTYPE), 'opportunities_type', true);
-									}
-									
-									if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category'))
-									{
-										
-										if (has_term('spine-events', 'event-category'))
-										{
-											//wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
-											//wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
-										}
-										else
-										{
-											//wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
-											//wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
-										}
-									}
-								}
+								//if (strtotime($now) > $when_order)
+								//{
+								//	//opportunities_type
+								//	if (is_post_type_archive('opportunities') || is_tax('opportunities_type'))
+								//	{
+								//		//wp_set_post_terms($post->ID, array(OPTYPE), 'opportunities_type', true);
+								//	}
+								//
+								//	if (is_post_type_archive('event') || is_tax('event_location') || has_term('spine-events', 'event-category'))
+								//	{
+								//
+								//		if (has_term('spine-events', 'event-category'))
+								//		{
+								//			//wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
+								//			//wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
+								//		}
+								//		else
+								//		{
+								//			//wp_set_post_terms($post->ID, array(ECTYPE), 'event-category', true);
+								//			//wp_set_post_terms($post->ID, array(ELTYPE), 'event_location', true);
+								//		}
+								//	}
+								//}
 								
 								if ($count == 0)
 								{
@@ -148,12 +148,17 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 								}
 								else
 								{
-									get_template_part('template-parts/content', 'archive-posts');
+									if (is_post_type_archive(array('opportunities'))) :
+										get_template_part('template-parts/content', 'archive-opportunities');
+									elseif (is_post_type_archive(array('project', 'case_studies'))) :
+										get_template_part('template-parts/content', 'archive-projects');
+									else :
+										get_template_part('template-parts/content', 'archive-posts');
+									endif;
 								}
-							elseif (is_post_type_archive(array('project', 'case_studies'))) :
-								get_template_part('template-parts/content', 'archive-projects');
-							elseif (is_post_type_archive(array('opportunities'))) :
-								get_template_part('template-parts/content', 'archive-opportunities');
+
+							//elseif (is_post_type_archive(array('opportunities'))) :
+							//	get_template_part('template-parts/content', 'archive-opportunities');
 							else :
 								get_template_part('template-parts/content', 'archive-posts');
 							endif;

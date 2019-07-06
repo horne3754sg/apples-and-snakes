@@ -38,9 +38,9 @@
 					the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
 				endif;
 				
-				$event_date = get_post_meta_event_date(get_the_ID());
-				if (!empty($event_date)) :
-					echo '<span class="event-featured-time">' . $event_date . '</span>';
+				$opportunity_date = get_post_meta_event_date(get_the_ID());
+				if (!empty($opportunity_date)) :
+					echo '<span class="event-featured-time">' . $opportunity_date . '</span>';
 				endif;
 				
 				//echo '<span class="post-date">' . get_the_date('D j M Y') . '</span>';

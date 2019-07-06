@@ -773,6 +773,37 @@ function update_aas_events_function()
 add_action('wp_loaded', 'update_aas_events_function');
 //update_aas_events_function();
 
+function update_aas_opportunities_function()
+{
+	//wp_mail('mattjhorne@hotmail.co.uk', 'Automatic email', 'Automatic scheduled email from WordPress.');
+	$get_opportunities = get_posts(array(
+		'post_type'   => 'opportunities',
+		'post_status' => 'publish',
+		'numberposts' => -1
+	));
+	if ($get_opportunities)
+	{
+		$now = date('Y-m-d');
+		foreach ($get_opportunities as $opportunities)
+		{
+			if ($opportunities->ID > 0)
+			{
+				$when_order = get_post_meta($opportunities->ID, 'when_order', true);
+				if (strtotime($now) > $when_order)
+				{
+					wp_set_post_terms($opportunities->ID, array(OPTYPE), 'opportunities_type', true);
+				}
+				else
+				{
+					wp_remove_object_terms($opportunities->ID, array(OPTYPE), 'opportunities_type');
+				}
+			}
+		}
+	}
+}
+
+add_action('wp_loaded', 'update_aas_opportunities_function');
+
 /**
  * Get all the event dates and reorder them
  *
@@ -845,8 +876,9 @@ function get_all_events_dates($eventid = -1)
  */
 function get_post_meta_event_date($eventid = -1, $strtime = false, $ranged = false)
 {
-	$all_event_dates = array();
 	$event_date = '';
+	$all_event_dates = array();
+	
 	if ($eventid > 0)
 	{
 		$events_meta = get_post_meta($eventid, 'aas_event', true);
@@ -882,29 +914,40 @@ function get_post_meta_event_date($eventid = -1, $strtime = false, $ranged = fal
 					);
 				}
 			}
-		}
-		
-		usort($all_event_dates[$eventid], function ($a, $b)
-		{
-			return $a['when_order'] - $b['when_order'];
-		});
-		
-		if ($all_event_dates[$eventid] > 1 && $ranged)
-		{
-			$first_date = $all_event_dates[$eventid][0];
-			//var_dump($first_date);
-			$last_date = $all_event_dates[$eventid][count($all_event_dates[$eventid]) - 1];
-			//var_dump($last_date);
 			
-			$event_date = date("l d M", $first_date['when_order']) . ' - ' . date("l d M", $last_date['when_order']);
+			
+			if (!empty($all_event_dates))
+			{
+				usort($all_event_dates[$eventid], function ($a, $b)
+				{
+					return $a['when_order'] - $b['when_order'];
+				});
+				
+				
+				if (count($all_event_dates[$eventid]) > 1 && $ranged)
+				{
+					$first_date = $all_event_dates[$eventid][0];
+					//var_dump($first_date);
+					$last_date = $all_event_dates[$eventid][count($all_event_dates[$eventid]) - 1];
+					//var_dump($last_date);
+					
+					$event_date = date("l d M", $first_date['when_order']) . ' - ' . date("l d M", $last_date['when_order']);
+				}
+				else
+				{
+					$time = (!empty($all_event_dates[$eventid][0]['time']) ? ', ' . $all_event_dates[$eventid][0]['time'] : '');
+					if (!empty($all_event_dates[$eventid][0]['when']))
+						$event_date = date("l d M", $all_event_dates[$eventid][0]['when_order']) . $time;
+				}
+			}
 		}
 		else
 		{
-			$time = (!empty($all_event_dates[$eventid][0]['time']) ? ', ' . $all_event_dates[$eventid][0]['time'] : '');
-			if (!empty($all_event_dates[$eventid][0]['when']))
-				$event_date = date("l d M", $all_event_dates[$eventid][0]['when_order']) . $time;
+			$when_order = get_post_meta($eventid, 'when_order', true);
+			$event_time = get_post_meta($eventid, 'time', true);
+			if (!empty($when_order))
+				$event_date = date("l d M", $when_order) . (!empty($event_time) ? ', ' . $event_time : '');
 		}
-		//$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
 	}
 	
 	//var_dump($all_event_dates);
