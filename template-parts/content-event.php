@@ -137,7 +137,14 @@ $header_image = !empty($header_image) ? $header_image : '';
 										}
 										
 										echo ($event['address']) ? '<span class="address">' . $event['address'] . '</span>' : '';
-										
+										$tickets = !empty($event['tickets']) ? $event['tickets'] : '';
+										if (!empty($tickets))
+										{
+											echo '<div class="meta-info">';
+											echo '<span class="tickets">Tickets</span>';
+											echo '<span class="tickets-count">' . $tickets . '</span>';
+											echo '</div>';
+										}
 										$tickets_link = !empty($event['tickets_link']) ? $event['tickets_link'] : '';
 										$tickets_text = !empty($event['tickets_text']) ? $event['tickets_text'] : '';
 										echo ($tickets_link) ? '<a class="tickets_link button red" href="' . esc_url($tickets_link) . '" target="_blank">' . (!empty($tickets_text) ? $tickets_text : 'Get Tickets') . '</a>' : '';

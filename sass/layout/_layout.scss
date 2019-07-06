@@ -1458,7 +1458,8 @@ body.peach-scheme {
 
 					.event-dates {
 						margin-left: 0;
-						padding-left: 20px;
+						padding-left: 0;
+						list-style: none;
 
 						li {
 							&.past-event {
@@ -2849,11 +2850,12 @@ body.blog {
 	}
 
 	.team_item {
-		flex: 0 1 25%;
-		margin-bottom: 60px;
-		padding: 0 10px;
+		flex: 0 1 calc(25% - 10px);
+		margin: 0 10px 60px 10px;
 
 		.team_meta {
+			font-size: 12px;
+
 			.team_meta_head {
 				margin-bottom: 30px;
 

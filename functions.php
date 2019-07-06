@@ -854,10 +854,11 @@ function get_all_events_dates($eventid = -1)
 		}
 		
 		//var_dump($all_event_dates[$event->ID]);
-		usort($all_event_dates[$eventid], function ($a, $b)
-		{
-			return $a['when_order'] - $b['when_order'];
-		});
+		if (!empty($all_event_dates[$eventid]))
+			usort($all_event_dates[$eventid], function ($a, $b)
+			{
+				return $a['when_order'] - $b['when_order'];
+			});
 	}
 	
 	//var_dump($all_event_dates);
