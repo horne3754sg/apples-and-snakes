@@ -8,7 +8,7 @@
  */
 
 define('DEV', false);
-define('AAS_VERSION', 1.25);
+define('AAS_VERSION', 1.30);
 define('OPTYPE', (!empty(DEV) ? 31 : 62)); // opportunities type archive cat
 define('ECTYPE', (!empty(DEV) ? 30 : 57)); // event category type archive cat
 define('ELTYPE', (!empty(DEV) ? 26 : 52)); // event location type archive cat

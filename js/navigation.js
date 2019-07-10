@@ -169,7 +169,7 @@ if (primaryMenu) {
 	}(container));
 })();
 
-if (typeof slick == 'function') {
+try {
 	jQuery('#slider').slick({
 		autoplay: true,
 		arrows: false,
@@ -177,4 +177,6 @@ if (typeof slick == 'function') {
 		autoplaySpeed: 5000,
 		speed: 1000
 	});
+} catch(e) {
+
 }
