@@ -23,7 +23,6 @@ $header_image = !empty($header_image) ? $header_image : '';
 		}
 	}
 </style>
-?>
 <div class="section">
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
