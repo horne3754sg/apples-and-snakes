@@ -1,7 +1,7 @@
 
-###Apples and Snakes
+### Apples and Snakes
 
-####Setup & Info
+#### Setup & Info
 
 To being run `npm install` to install the node_modules
 
