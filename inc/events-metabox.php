@@ -88,7 +88,9 @@ function aas_events_location()
 			
 			// Get the when data if it's already been enteredCase Study Meta
 			$when_order = !empty($events['event'][$i]['dates'][$j]['when_order']) ? $events['event'][$i]['dates'][$j]['when_order'] : '';
-			$when_order = !empty($when_order) ? date('Y-m-d', $when_order) : date('Y-m-d');
+			//$when_order = get_post_meta($post->ID, 'when_order', true);
+			$when_order = !empty($when_order) ? date('Y-m-d', $when_order) : get_post_meta($post->ID, 'when_order', true);
+			
 			echo '<div class="option_row option_cols">';
 			echo '<div class="option_col">';
 			echo '<label>When</label>';
@@ -97,6 +99,7 @@ function aas_events_location()
 			
 			// Get the time data if it's already been entered
 			$time = !empty($events['event'][$i]['dates'][$j]['time']) ? $events['event'][$i]['dates'][$j]['time'] : '';
+			//$time = get_post_meta($post->ID, 'time', true);
 			echo '<div class="option_col">';
 			echo '<label>Time</label>';
 			echo '<input type="text" name="events[event][' . $i . '][dates][' . $j . '][time]" value="' . esc_textarea($time) . '" class="widefat" placeholder="time">';

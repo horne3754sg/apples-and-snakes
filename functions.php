@@ -7,8 +7,8 @@
  * @package apples-and-snakes
  */
 
-define('DEV', true);
-define('AAS_VERSION', 1.22);
+define('DEV', false);
+define('AAS_VERSION', 1.25);
 define('OPTYPE', (!empty(DEV) ? 31 : 62)); // opportunities type archive cat
 define('ECTYPE', (!empty(DEV) ? 30 : 57)); // event category type archive cat
 define('ELTYPE', (!empty(DEV) ? 26 : 52)); // event location type archive cat
@@ -335,7 +335,7 @@ add_action('widgets_init', 'aas_widgets_init');
  */
 function aas_scripts()
 {
-	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', '1.1.96');
+	wp_enqueue_style('aas-style', get_stylesheet_uri(), '', AAS_VERSION);
 	
 	if (is_front_page())
 	{
