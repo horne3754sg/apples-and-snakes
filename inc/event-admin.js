@@ -85,12 +85,12 @@ var EventAdmin = (function($) {
 		eventContent.innerHTML =
 			
 			'<div class="event_dates">' + // event dates
+			'<div class="option_row"><input id="ranged_' + i + '" type="checkbox" name="events[event][' + i + '][ranged]" value="' + i + '"><label for="ranged_' + i + '">Ranged Dates</label></div>' +
 			'<h4>Event Dates</h4>' +
 			'<ul id="event_dates_' + i + '" class="event_dates_list">' +  // date/time lists
 			'<li class="event_date_item">' + // date/time list item
 			
 			'<div class="option_row option_cols">' +  // option cols
-			
 			'<div class="option_col">' +
 			'<label>When</label>' +
 			'<input type="date" name="events[event][' + i + '][dates][' + j + '][when_order]" value="" class="widefat" placeholder="When? format: dd/mm/yyyy">' +
@@ -101,6 +101,7 @@ var EventAdmin = (function($) {
 			'<input type="text" name="events[event][' + i + '][dates][' + j + '][time]" value="" class="widefat" placeholder="time">' +
 			'</div>' +
 			
+			'<a class="delete" href="#" onclick="this.parentNode.remove(); return false;">remove</a>' +
 			'</div>' + // end option cols
 			
 			'</li>' +  // end date/time list item

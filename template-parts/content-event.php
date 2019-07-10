@@ -114,26 +114,37 @@ $header_image = !empty($header_image) ? $header_image : '';
 												return $a['when_order'] - $b['when_order'];
 											});
 											
-											echo '<ul class="event-dates">';
-											foreach ($event['dates'] as $dates)
+											if (count($event['dates']) > 1 && isset($event['ranged']) && 1 === $event['ranged'])
 											{
-												$class = 'past-event';
-												if ($dates['when_order'] >= strtotime($now))
-												{
-													$class = 'future-event';
-													if ($nextevent == false)
-													{
-														$class = 'next-event';
-														$nextevent = true;
-													}
-												}
+												$first_date = $event['dates'][0];
+												$last_date = $event['dates'][count($event['dates']) - 1];
 												
-												$when_order = !empty($dates['when_order']) ? (int)$dates['when_order'] : '';
-												$time = !empty($dates['time']) ? $dates['time'] : '';
-												$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
-												echo ($event_date) ? '<li class="' . $class . '"><span class="when">' . $event_date . '</span></li>' : '';
+												$event_date_range = date("l d M", $first_date['when_order']) . ' - ' . date("l d M", $last_date['when_order']);
+												echo '<span class="when">' . $event_date_range . '</span>';
 											}
-											echo '</ul>';
+											else
+											{
+												echo '<ul class="event-dates">';
+												foreach ($event['dates'] as $dates)
+												{
+													$class = 'past-event';
+													if ($dates['when_order'] >= strtotime($now))
+													{
+														$class = 'future-event';
+														if ($nextevent == false)
+														{
+															$class = 'next-event';
+															$nextevent = true;
+														}
+													}
+													
+													$when_order = !empty($dates['when_order']) ? (int)$dates['when_order'] : '';
+													$time = !empty($dates['time']) ? $dates['time'] : '';
+													$event_date = date("l d M", $when_order) . (!empty($time) ? ', ' . $time : '');
+													echo ($event_date) ? '<li class="' . $class . '"><span class="when">' . $event_date . '</span></li>' : '';
+												}
+												echo '</ul>';
+											}
 										}
 										
 										echo ($event['address']) ? '<span class="address">' . $event['address'] . '</span>' : '';

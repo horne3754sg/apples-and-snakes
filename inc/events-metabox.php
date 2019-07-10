@@ -71,6 +71,13 @@ function aas_events_location()
 		echo '<div class="event_content">';
 		
 		echo '<div class="event_dates">'; // event dates
+		// Get the where data if it's already been entered
+		$ranged = (isset($events['event'][$i]['ranged']) && 1 === $events['event'][$i]['ranged']) ? 1 : 0;
+
+		echo '<div class="option_row">';
+		echo '<label for="ranged_' . $i . '"><input id="ranged_' . $i . '" type="checkbox" name="events[event][' . $i . '][ranged]" value="1" ' . checked($ranged, 1, false) . '>Display Ranged Dates (this will display the first and last event date in the sidebar.)</label>';
+		echo '</div>';
+		
 		echo '<h4>Event Dates</h4>';
 		echo '<ul id="event_dates_' . $i . '" class="event_dates_list">'; // date/time lists
 		
@@ -94,6 +101,8 @@ function aas_events_location()
 			echo '<label>Time</label>';
 			echo '<input type="text" name="events[event][' . $i . '][dates][' . $j . '][time]" value="' . esc_textarea($time) . '" class="widefat" placeholder="time">';
 			echo '</div>';
+			
+			echo '<a class="delete" href="#" onclick="this.parentNode.remove(); return false;">remove</a>';
 			echo '</div>';
 			
 			echo '</li>';  // end date/time lists
@@ -220,6 +229,8 @@ function aas_save_events_meta($post_id, $post)
 						//$em['event'][$i]['dates'][$j]['when'] = !empty($dates['when']) ? esc_textarea($dates['when']) : '';
 					}
 				}
+				
+				$em['event'][$i]['ranged'] = (isset($event['ranged']) && '1' === $event['ranged']) ? 1 : 0;
 				
 				$em['event'][$i]['where'] = !empty($event['where']) ? esc_textarea($event['where']) : '';
 				$em['event'][$i]['address'] = !empty($event['address']) ? esc_textarea($event['address']) : '';
