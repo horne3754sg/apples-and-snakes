@@ -49,7 +49,43 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 		<div id="primary" class="content-area">
 			<main id="main" class="site-main">
 				<div class="container narrow">
-					<?php if (have_posts()) : ?>
+					<?php
+					?>
+					<div class="category-nav">
+						<?php
+						if (is_post_type_archive(array('event')) || is_tax('event_location'))
+						{
+						$event_location = get_terms('event_location', array(
+							'hide_empty' => true,
+							'orderby'    => 'id',
+							'order'      => 'ASC'
+						));
+						
+						if ($event_location)
+						{ ?>
+						<ul class="cat_nav">
+							<li>
+								<a class="<?php echo(!empty(get_queried_object()->name) && (get_queried_object()->name == 'event') ? 'active' : '') ?>" href="<?php echo get_post_type_archive_link('event'); ?>">All</a>
+							</li>
+							<?php
+							$past_events = '';
+							foreach ($event_location as $location)
+							{
+								$class = (!empty(get_queried_object()->term_id) && (get_queried_object()->term_id == $location->term_id)) ? ' class="active"' : '';
+								?>
+								<li>
+									<a <?php echo $class; ?> href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
+								</li>
+								<?php
+							}
+							echo $past_events;
+							echo '</ul>';
+							}
+						} ?>
+					</div>
+					<?php
+					
+					if (have_posts()) : ?>
 						
 						<?php if (is_post_type_archive('case_studies')) : ?>
 							<header class="page-header">
@@ -59,46 +95,11 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 							<header class="page-header">
 								<?php the_archive_description('<div class="archive-description">', '</div>'); ?>
 							</header><!-- .page-header -->
-						<?php endif
+						<?php endif;
 						
 						//$locations = wp_get_post_terms(get_the_ID(), 'event_location');
 						//var_dump($locations);
-						
-						?>
-						<div class="category-nav">
-							<?php
-							if (is_post_type_archive(array('event')) || is_tax('event_location'))
-							{
-							$event_location = get_terms('event_location', array(
-								'hide_empty' => true,
-								'orderby'    => 'id',
-								'order'      => 'ASC'
-							));
-							
-							if ($event_location)
-							{ ?>
-							<ul class="cat_nav">
-								<li>
-									<a class="<?php echo(!empty(get_queried_object()->name) && (get_queried_object()->name == 'event') ? 'active' : '') ?>" href="<?php echo get_post_type_archive_link('event'); ?>">All</a>
-								</li>
-								<?php
-								$past_events = '';
-								foreach ($event_location as $location)
-								{
-									$class = (!empty(get_queried_object()->term_id) && (get_queried_object()->term_id == $location->term_id)) ? ' class="active"' : '';
-									?>
-									<li>
-										<a <?php echo $class; ?> href="<?php echo get_term_link($location->term_id); ?>"><?php echo $location->name; ?></a>
-									</li>
-									<?php
-								}
-								echo $past_events;
-								echo '</ul>';
-								}
-								} ?>
-						</div>
-						<?php ?>
-						<?php
+					
 						$count = 0;
 						/* Start the Loop */
 						while (have_posts()) :
@@ -156,7 +157,7 @@ $header_image = get_template_directory_uri() . '/images/default-banner-image.jpg
 										get_template_part('template-parts/content', 'archive-posts');
 									endif;
 								}
-
+							
 							//elseif (is_post_type_archive(array('opportunities'))) :
 							//	get_template_part('template-parts/content', 'archive-opportunities');
 							else :
